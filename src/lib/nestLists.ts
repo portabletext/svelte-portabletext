@@ -11,14 +11,6 @@ export function assertListItem(block: PTBlock | PTCustomBlock): boolean {
   )
 }
 
-// const DEBUG_COUNT = {
-//   topCall: 0,
-//   allEntries: 0,
-//   blockOnly: 0,
-//   inListRoot: 0,
-//   nestedItem: 0
-// }
-
 /**
  * Takes a list of blocks and nests its lists for proper rendering in <BlockRenderer>.
  * The top-level list becomes of type PTList and includes all of the blocks as its children.
@@ -26,18 +18,12 @@ export function assertListItem(block: PTBlock | PTCustomBlock): boolean {
  * Refer to listTransformation.example.ts for a clear view on the transformation.
  */
 export default function nestLists(blocks: PortableTextBlocks, level = 1): NormalizedBlocks {
-  // DEBUG_COUNT.topCall += 1
-  // console.clear()
-  // console.table(DEBUG_COUNT)
   return blocks.reduce((normalizedBlocks, entry, curIndex) => {
-    // DEBUG_COUNT.allEntries += 1
-
     // Do nothing about non-list items
     if (!assertListItem(entry)) {
       return [...normalizedBlocks, entry]
     }
 
-    // DEBUG_COUNT.blockOnly += 1
     // Asserting the current entry as a non-custom block
     const curBlock = entry as PTBlock
 
@@ -66,7 +52,6 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
       // Asserting the current entry as a non-custom block
       const parentBlock = previousBlock as PTList
 
-      // DEBUG_COUNT.inListRoot += 1
       return [
         ...normalizedBlocks.slice(0, -1),
         {
@@ -76,7 +61,6 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
       ]
     }
 
-    // DEBUG_COUNT.nestedItem += 1
     return [
       ...normalizedBlocks,
       level === 1
