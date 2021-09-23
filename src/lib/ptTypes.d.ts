@@ -42,13 +42,17 @@ interface BlockChild {
   [property: string]: unknown
 }
 
+export type ListTypes = 'bullet' | 'number'
+
 export interface PTBlock {
   _type: 'block'
   _key: string
   style: string
   children: (BlockChild & BlockSpan)[]
   markDefs?: MarkDef[]
-  _childListItems?: PTBlock[]
+  level?: number
+  listItem?: ListTypes
+  '__internal_pt-listChildren'?: PTBlock[]
 }
 
 export interface PTCustomBlock {
@@ -57,4 +61,16 @@ export interface PTCustomBlock {
   [property: string]: unknown
 }
 
-export type PortableTextBlocks = (PTBlock & PTCustomBlock)[]
+export interface PTList {
+  _key: string
+  _type: '__internal_pt-list'
+  listItem?: ListTypes
+  /**
+   * Blocks / lists to render under the <ul>/<ol> tags.
+   */
+  children: PTBlock[]
+}
+
+export type PortableTextBlocks = (PTBlock | PTCustomBlock)[]
+
+export type NormalizedBlocks = (PTBlock | PTCustomBlock | PTList)[]
