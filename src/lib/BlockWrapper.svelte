@@ -1,14 +1,11 @@
 <script lang="ts">
   import {assertListItem} from './nestLists'
-
-  import type {NormalizedBlocks, PortableTextBlocks, PTBlock, PTList, Serializers} from './ptTypes'
+  import type {BlockProps} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let index: number
-  export let blocks: NormalizedBlocks
-  export let _rawBlocks: PortableTextBlocks
-  export let block: PTBlock | PTList
-  export let serializers: Serializers = undefined
+  export let portableText: BlockProps
+
+  $: block = portableText.block
 
   $: style =
     block?._type === 'block'
@@ -17,11 +14,11 @@
         : block.style || 'normal'
       : `list_${block.listItem}`
 
-  $: customStyle = serializers?.blockStyles?.[style] || undefined
+  $: customStyle = portableText.serializers?.blockStyles?.[style] || undefined
 </script>
 
 {#if customStyle}
-  <svelte:component this={customStyle} node={block} {index} {_rawBlocks} {blocks}>
+  <svelte:component this={customStyle} {portableText}>
     <slot />
   </svelte:component>
 {:else if style === 'h1'}
