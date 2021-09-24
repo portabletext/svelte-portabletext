@@ -76,10 +76,19 @@
     message="Mark of type {typeof currentMark === 'string'
       ? currentMark
       : currentMark._type} has no compatible renderer or is missing markDefs (block {block._key}, child {span._key})"
-    ignoreUnknownTypes={portableText.ignoreUnknownTypes}
+    ignoreUnknownTypes={portableText.ignoreUnknownTypes || !!serializers?.unknownMark}
   />
-  <!-- Unsupported mark _type - let's render the plain text -->
-  <svelte:self portableText={nestedProps}>
-    <slot />
-  </svelte:self>
+  {#if serializers?.unknownMark}
+    <svelte:component
+      this={serializers.unknownMark}
+      portableText={{...portableText, mark: currentMark}}
+    >
+      <slot />
+    </svelte:component>
+  {:else}
+    <!-- Unsupported mark _type - let's render the plain text -->
+    <svelte:self portableText={nestedProps}>
+      <slot />
+    </svelte:self>
+  {/if}
 {/if}

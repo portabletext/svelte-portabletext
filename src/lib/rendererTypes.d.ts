@@ -46,6 +46,16 @@ export interface Serializers {
   marks?: CustomMarks
   types?: CustomTypes
   blockStyles?: CustomStyles
+  /* eslint-disable */
+  /**
+   * Override the default serializer for blocks of unknown type, if ignoreUnknownTypes is set to false.
+   */
+  unknownType?: BlockComponent | any
+  /**
+   * Override the default serializer for marks of unknown type. Defaults to rendering its content without a container.
+   */
+  unknownMark?: MarkComponent | any
+  /* eslint-enable */
 }
 
 interface CommonProps {
@@ -64,6 +74,9 @@ export interface BlockProps extends CommonProps {
   parentBlock?: PTBlock
 }
 
+/**
+ * Used solely by BlockSpan, not exposed to end-user
+ */
 export interface SpanProps extends CommonProps {
   block: PTBlock
   span: BlockSpan

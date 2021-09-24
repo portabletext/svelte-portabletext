@@ -40,7 +40,20 @@
   {:else}
     <ReportError
       message="Block of type {block._type} has no compatible renderer (block {block._key})"
-      {ignoreUnknownTypes}
+      ignoreUnknownTypes={ignoreUnknownTypes || !!serializers?.unknownType}
     />
+    {#if serializers?.unknownType}
+      <svelte:component
+        this={serializers.unknownType}
+        portableText={{
+          _rawBlocks: blocks,
+          blocks: normalizedBlocks,
+          index,
+          block,
+          ignoreUnknownTypes,
+          serializers
+        }}
+      />
+    {/if}
   {/if}
 {/each}
