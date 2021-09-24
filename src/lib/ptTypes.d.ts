@@ -1,4 +1,4 @@
-import type {SvelteComponent} from 'svelte'
+import type {SvelteComponentTyped} from 'svelte'
 
 interface MarkDef {
   _type: string
@@ -6,22 +6,72 @@ interface MarkDef {
   [property: string]: unknown
 }
 
+export type MarkComponent = SvelteComponentTyped<{
+  block: PTBlock
+  span: BlockSpan
+  mark: string | MarkDef
+}>
+
 export interface CustomMarks {
-  [_type: string]: SvelteComponent
+  /* eslint-disable */
+  strong?: MarkComponent | any
+  em?: MarkComponent | any
+  'strike-through'?: MarkComponent | any
+  underline?: MarkComponent | any
+  code?: MarkComponent | any
+  [_type: string]: MarkComponent | any
+  /* eslint-enable */
 }
+
+export type BlockComponent = SvelteComponentTyped<{
+  index: number
+  blocks: NormalizedBlocks
+  _rawBlocks: PortableTextBlocks
+  block: PTBlock | PTList
+  serializers: Serializers
+}>
 
 export interface CustomTypes {
-  [_type: string]: SvelteComponent
+  // eslint-disable-next-line
+  [_type: string]: BlockComponent | any
 }
 
+export type NativeStyles =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'normal'
+  | 'blockquote'
+  | 'list_bullet'
+  | 'list_number'
+  | 'listItem_bullet'
+  | 'listItem_number'
+
 export interface CustomStyles {
-  [_type: string]: SvelteComponent
+  /* eslint-disable */
+  h1?: BlockComponent | any
+  h2?: BlockComponent | any
+  h3?: BlockComponent | any
+  h4?: BlockComponent | any
+  h5?: BlockComponent | any
+  h6?: BlockComponent | any
+  normal?: BlockComponent | any
+  blockquote?: BlockComponent | any
+  list_bullet?: BlockComponent | any
+  list_number?: BlockComponent | any
+  listItem_bullet?: BlockComponent | any
+  listItem_number?: BlockComponent | any
+  [_type: string]: BlockComponent | any
+  /* eslint-enable */
 }
 
 export interface Serializers {
-  marks: CustomMarks
-  types: CustomTypes
-  blockStyles: CustomStyles
+  marks?: CustomMarks
+  types?: CustomTypes
+  blockStyles?: CustomStyles
 }
 
 export type Mark = 'strong' | 'em' | 'code' | 'underline' | 'strike-through' | string
