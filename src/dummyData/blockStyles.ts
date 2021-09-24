@@ -12,7 +12,7 @@ const blocks: PortableTextBlocks = [
             _key: 'span-1',
             _type: 'span',
             marks: [],
-            text: `Text style: ${style}`
+            text: `Block style: ${style}`
           }
         ],
         markDefs: [],

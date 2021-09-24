@@ -10,11 +10,11 @@ const blocks: PortableTextBlocks = [
         _key: 'span-1',
         _type: 'span',
         marks: [],
-        text: 'Formatted paragraphs'
+        text: 'Formatting with marks'
       }
     ],
     markDefs: [],
-    style: 'h2'
+    style: 'h1'
   },
   {
     _key: 'block-1',

@@ -15,7 +15,7 @@ const blocks: PortableTextBlocks = [
       }
     ],
     markDefs: [],
-    style: 'h2'
+    style: 'h1'
   },
   {
     _key: 'block-1',
