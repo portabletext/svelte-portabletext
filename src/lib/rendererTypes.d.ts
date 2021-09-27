@@ -1,12 +1,5 @@
 import type {SvelteComponentTyped} from 'svelte'
-import type {
-  BlockSpan,
-  MarkDef,
-  NormalizedBlocks,
-  PortableTextBlocks,
-  PTBlock,
-  PTList
-} from './ptTypes'
+import type {BlockSpan, MarkDef, NormalizedBlocks, PortableTextBlocks, PTBlock} from './ptTypes'
 
 export interface CustomStyles {
   /* eslint-disable */
@@ -63,11 +56,11 @@ interface CommonProps {
   serializers?: Serializers
 }
 
-export interface BlockProps extends CommonProps {
+export interface BlockProps<BlockType = PTBlock> extends CommonProps {
   index: number
   blocks: NormalizedBlocks
   _rawBlocks: PortableTextBlocks
-  block: PTBlock | PTList
+  block: BlockType
   /**
    * Exclusive to inline blocks.
    */
@@ -82,8 +75,8 @@ export interface SpanProps extends CommonProps {
   span: BlockSpan
 }
 
-export interface MarkProps extends SpanProps {
-  mark: string | MarkDef
+export interface MarkProps<MarkType = string | MarkDef> extends SpanProps {
+  mark: MarkType
 }
 
 export type BlockComponent = SvelteComponentTyped<{

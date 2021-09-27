@@ -8,7 +8,16 @@ const config = {
 
   kit: {
     // hydrate the <div id="svelte"> element in src/app.html
-    target: '#svelte'
+    target: '#svelte',
+    package: {
+      // Only include index.ts to the package.json definitions
+      exports: (filePath) => {
+        if (filePath.includes('index')) {
+          return true
+        }
+        return false
+      }
+    }
   }
 }
 
