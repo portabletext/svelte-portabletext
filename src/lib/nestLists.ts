@@ -15,7 +15,7 @@ export function assertListItem(block: PTBlock | PTCustomBlock): boolean {
  * Takes a list of blocks and nests its lists for proper rendering in <BlockRenderer>.
  * The top-level list becomes of type PTList and includes all of the blocks as its children.
  * List items are regular blocks that can include nested items in block[BLOCK_LIST_ITEMS].
- * Refer to listTransformation.example.ts for a clear view on the transformation.
+ * Refer to nestLists.test.js for a clear view on the transformation.
  */
 export default function nestLists(blocks: PortableTextBlocks, level = 1): NormalizedBlocks {
   return blocks.reduce((normalizedBlocks, entry, curIndex) => {
@@ -41,9 +41,10 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
       // If there's none that isn't nested, include all following blocks
       firstNonNested >= 0 ? firstNonNested : undefined
     )
+    const listChildren = nestLists(nestedBlocks, level + 1) as PTBlock[]
     const parsedBlock: PTBlock = {
       ...curBlock,
-      '__internal_pt-listChildren': nestLists(nestedBlocks, level + 1) as PTBlock[]
+      ...(listChildren?.length > 0 ? {'__internal_pt-listChildren': listChildren} : {})
     }
 
     // If inside a list type, add the current block as its child
