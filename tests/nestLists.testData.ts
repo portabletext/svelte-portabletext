@@ -1,4 +1,4 @@
-import {LIST_TYPE} from '../package/nestLists'
+import {LIST_TYPE} from '../src/lib/nestLists'
 
 // File displaying an example transformation of nestLists.ts
 export const rawBlocks = [

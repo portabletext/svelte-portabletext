@@ -1,4 +1,4 @@
-import nestLists from '../package/nestLists'
+import nestLists from '../src/lib/nestLists'
 import {rawBlocks, normalizedBlocks} from './nestLists.testData'
 
 test('nested lists', () => {
