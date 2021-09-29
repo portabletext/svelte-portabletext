@@ -1,12 +1,12 @@
 # [Portable Text](https://portabletext.org) renderer for Svelte
 
-`npm i portable-text-to-svelte -D`
+`npm i svelte-portabletext -D`
 
 ## Usage
 
 ```svelte
 <script>
-  import PortableText from 'portable-text-to-svelte'
+  import PortableText from 'svelte-portabletext'
 </script>
 
 <PortableText
@@ -16,7 +16,7 @@
 />
 ```
 
-> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace, where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
+This is enough to get you set-up with basic block content with formatting and text styles. When working with images, custom styles, blocks & marks, though, you'll need to customize your renderer with **serializers**:
 
 ### Customizing rendering
 
@@ -59,9 +59,9 @@ Example components from above:
 <!-- UserInfo (block type) -->
 <script lang="ts">
   import {session} from '$app/stores'
-  import type {BlockProps} from 'portable-text-to-svelte'
+  import type {BlockProps} from 'svelte-portabletext'
 
-  // Property custom blocks receive from portable-text-to-svelte when redered
+  // Property custom blocks receive from svelte-portabletext when redered
   export let portableText: BlockProps<{bold?: boolean}>
 
   $: userName = $session?.user?.name || 'person'
@@ -78,9 +78,9 @@ Example components from above:
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
   export let mark: {url?: string; newWindow?: boolean} = {}
-  import type {MarkProps} from 'portable-text-to-svelte'
+  import type {MarkProps} from 'svelte-portabletext'
 
-  // Property custom marks receive from portable-text-to-svelte when redered
+  // Property custom marks receive from svelte-portabletext when redered
   export let portableText: MarkProps<{
     url?: string
     newWindow?: boolean
@@ -99,10 +99,12 @@ Example components from above:
 {/if}
 ```
 
+> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace, where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
+
 ```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
-  import type {BlockProps} from 'portable-text-to-svelte'
+  import type {BlockProps} from 'svelte-portabletext'
 
   export let portableText: BlockProps
 
