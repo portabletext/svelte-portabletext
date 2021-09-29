@@ -1,12 +1,12 @@
 # [Portable Text](https://portabletext.org) renderer for Svelte
 
-`npm i svelte-portabletext -D`
+`npm i @portabletext/svelte -D`
 
 ## Usage
 
 ```svelte
 <script>
-  import PortableText from 'svelte-portabletext'
+  import PortableText from '@portabletext/svelte'
 </script>
 
 <PortableText
@@ -59,9 +59,9 @@ Example components from above:
 <!-- UserInfo (block type) -->
 <script lang="ts">
   import {session} from '$app/stores'
-  import type {BlockProps} from 'svelte-portabletext'
+  import type {BlockProps} from '@portabletext/svelte'
 
-  // Property custom blocks receive from svelte-portabletext when redered
+  // Property custom blocks receive from @portabletext/svelte when redered
   export let portableText: BlockProps<{bold?: boolean}>
 
   $: userName = $session?.user?.name || 'person'
@@ -78,9 +78,9 @@ Example components from above:
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
   export let mark: {url?: string; newWindow?: boolean} = {}
-  import type {MarkProps} from 'svelte-portabletext'
+  import type {MarkProps} from '@portabletext/svelte'
 
-  // Property custom marks receive from svelte-portabletext when redered
+  // Property custom marks receive from @portabletext/svelte when redered
   export let portableText: MarkProps<{
     url?: string
     newWindow?: boolean
@@ -104,7 +104,7 @@ Example components from above:
 ```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
-  import type {BlockProps} from 'svelte-portabletext'
+  import type {BlockProps} from '@portabletext/svelte'
 
   export let portableText: BlockProps
 

@@ -1,8 +1,16 @@
 {
-  "name": "svelte-portabletext",
-  "version": "0.0.1",
+  "name": "@portabletext/svelte",
+  "version": "0.1.0-next.0",
   "author": "Sanity <hello@sanity.io>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/portabletext/svelte-portabletext.git"
+  },
+  "bugs": {
+    "url": "https://github.com/portabletext/svelte-portabletext/issues"
+  },
+  "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -38,6 +46,9 @@
     "svelte2tsx": "^0.4.6",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
+  },
+  "peerDependencies": {
+    "svelte": "^3.40.0"
   },
   "type": "module"
 }

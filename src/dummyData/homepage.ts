@@ -35,7 +35,7 @@ const blocks: PortableTextBlocks = [
         _key: 'span-1',
         _type: 'span',
         marks: ['code'],
-        text: 'npm i svelte-portabletext'
+        text: 'npm i @portabletext/svelte'
       }
     ],
     markDefs: [],
