@@ -1,3 +1,4 @@
+import assertBlockKey from './assertBlockKey'
 import type {NormalizedBlocks, PortableTextBlocks, PTBlock, PTCustomBlock, PTList} from './ptTypes'
 
 export const LIST_TYPE: PTList['_type'] = '__internal_pt-list'
@@ -21,7 +22,7 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
   return blocks.reduce((normalizedBlocks, entry, curIndex) => {
     // Do nothing about non-list items
     if (!assertListItem(entry)) {
-      return [...normalizedBlocks, entry]
+      return [...normalizedBlocks, assertBlockKey(entry)]
     }
 
     // Asserting the current entry as a non-custom block
@@ -42,10 +43,10 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
       firstNonNested >= 0 ? firstNonNested : undefined
     )
     const listChildren = nestLists(nestedBlocks, level + 1) as PTBlock[]
-    const parsedBlock: PTBlock = {
+    const parsedBlock = assertBlockKey({
       ...curBlock,
       ...(listChildren?.length > 0 ? {'__internal_pt-listChildren': listChildren} : {})
-    }
+    }) as PTBlock
 
     // If inside a list type, add the current block as its child
     const previousBlock = normalizedBlocks.slice(-1)[0]
@@ -65,12 +66,12 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
     return [
       ...normalizedBlocks,
       level === 1
-        ? {
-            _key: curBlock._key,
-            _type: LIST_TYPE,
-            listItem: curBlock.listItem,
-            children: [parsedBlock]
-          }
+        ? assertBlockKey({
+          _key: curBlock._key,
+          _type: LIST_TYPE,
+          listItem: curBlock.listItem,
+          children: [parsedBlock]
+        })
         : parsedBlock
     ]
   }, [] as NormalizedBlocks)

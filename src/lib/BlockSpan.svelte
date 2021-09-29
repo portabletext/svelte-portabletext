@@ -12,7 +12,7 @@
   // Let's start with the first mark
   $: currentMark =
     // If the mark references an entry in markDefs, use that object as the currentMark
-    block.markDefs.find((def) => def._key === allMarks[0]) || allMarks[0]
+    (block?.markDefs || []).find((def) => def._key === allMarks[0]) || allMarks[0]
 
   // If we have more marks, we'll render a nested BlockSpan with remaining marks
   $: nestedSpan = {
