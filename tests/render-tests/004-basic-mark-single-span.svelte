@@ -1,0 +1,1 @@
+<p><code>sanity</code> is the name of the CLI tool.</p>

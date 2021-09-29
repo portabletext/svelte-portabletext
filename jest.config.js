@@ -11,5 +11,6 @@ export default {
   },
   moduleFileExtensions: ['js', 'ts', 'svelte'],
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  extensionsToTreatAsEsm: ['.ts', '.svelte']
+  extensionsToTreatAsEsm: ['.ts', '.svelte'],
+  testEnvironment: 'jsdom'
 }
