@@ -151,6 +151,10 @@ The component above is also an example of how you can access blocks surrounding 
 - [ ] In example site, add examples with custom marks, blockStyles & block types
   - Include a nested PT renderer example -->
 
+## Credits
+
+Big thanks to [Emma Agering](https://github.com/emagining), [Jacob Størdahl](https://github.com/stordahl), [Ollie Taylor](https://github.com/OllieJT), [Rune](https://github.com/runeh), [Stephane Vanraes](https://github.com/stephane-vanraes) & [Toby Milner-Gulland](https://github.com/tmgulland) (alphabetical order) for working on their custom renderers while we didn't have an official one. You've helped many ship Svelte + Sanity projects!
+
 ## License
 
 MIT-licensed. See LICENSE.
