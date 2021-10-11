@@ -1,8 +1,10 @@
-# [Portable Text](https://portabletext.org) renderer for Svelte
+# Portable Text renderer for Svelte
 
-`npm i @portabletext/svelte -D`
+Render [Portable Text](https://portabletext.org) block content with [Svelte](https://svelte.dev/) components.
 
 ## Usage
+
+`npm i @portabletext/svelte -D`
 
 ```svelte
 <script>
@@ -46,6 +48,11 @@ You can use the `serializers` prop to determine how the renderer should process 
       h1: CustomHeading,
       h2: CustomHeading,
       h3: CustomHeading,
+      // Swap only the list parts you need
+      list_bullet: UnorderedListWrapper,
+      list_number: OrderedListWrapper,
+      listItem_bullet: ListItem,
+      listItem_number: ListItem,
       // Custom user-defined style
       textCenter: CentralizedText
     }
@@ -138,8 +145,12 @@ Example components from above:
 
 The component above is also an example of how you can access blocks surrounding the current one for rule-based design.
 
-## TODO
+<!-- ## TODO
 
 - [ ] If applicable, add support to `serializers.hardBreak`, similar to block-content-to-react
 - [ ] In example site, add examples with custom marks, blockStyles & block types
-  - Include a nested PT renderer example
+  - Include a nested PT renderer example -->
+
+## License
+
+MIT-licensed. See LICENSE.
