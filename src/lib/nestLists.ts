@@ -1,7 +1,10 @@
 import assertBlockKey from './assertBlockKey'
 import type {NormalizedBlocks, PortableTextBlocks, PTBlock, PTCustomBlock, PTList} from './ptTypes'
 
+/** Key for the auto-generated block type for top-level lists. */
 export const LIST_TYPE: PTList['_type'] = '__internal_pt-list'
+
+/** Key for auto-generated property of list items that contain nested children. */
 export const BLOCK_LIST_ITEMS = '__internal_pt-listChildren'
 
 export function assertListItem(block: PTBlock | PTCustomBlock): boolean {
@@ -20,22 +23,31 @@ export function assertListItem(block: PTBlock | PTCustomBlock): boolean {
  */
 export default function nestLists(blocks: PortableTextBlocks, level = 1): NormalizedBlocks {
   return blocks.reduce((normalizedBlocks, entry, curIndex) => {
-    // Do nothing about non-list items
+    // Non-list blocks don't need to be reduced, just have their keys asserted
     if (!assertListItem(entry)) {
       return [...normalizedBlocks, assertBlockKey(entry)]
     }
 
-    // Asserting the current entry as a non-custom block
+    // Asserting the current entry as a non-custom block for TS reasons™
     const curBlock = entry as PTBlock
 
     // Skip nested blocks as they'll be included in previous items
+    // (see nestedBlocks below)
     if (curBlock.level !== level) {
       return normalizedBlocks
     }
 
     const followingBlocks = blocks.slice(curIndex + 1)
-    const firstNonNested = followingBlocks.indexOf(
-      followingBlocks.find((block) => !assertListItem(block) || block.level <= curBlock.level)
+    const firstNonNested = followingBlocks.findIndex(
+      // A following block isn't nested under the current block if:
+      (block) =>
+        // 1. it isn't a list item
+        !assertListItem(block) ||
+        // 2. is of a list type different than the current one
+        // (a "bullet" after a "number", for ex.)
+        block.listItem !== curBlock.listItem ||
+        // 3. or it's in the same level or higher than the curBlock
+        block.level <= curBlock.level
     )
     const nestedBlocks = followingBlocks.slice(
       0,
@@ -45,12 +57,14 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
     const listChildren = nestLists(nestedBlocks, level + 1) as PTBlock[]
     const parsedBlock = assertBlockKey({
       ...curBlock,
-      ...(listChildren?.length > 0 ? {'__internal_pt-listChildren': listChildren} : {})
+      ...(listChildren?.length > 0 ? {[BLOCK_LIST_ITEMS]: listChildren} : {})
     }) as PTBlock
 
-    // If inside a list type, add the current block as its child
     const previousBlock = normalizedBlocks.slice(-1)[0]
-    if (previousBlock?._type === LIST_TYPE) {
+
+    // If the previous block is a list of the same type/listItem,
+    // add the current block as its child
+    if (previousBlock?._type === LIST_TYPE && previousBlock.listItem === curBlock.listItem) {
       // Asserting the current entry as a non-custom block
       const parentBlock = previousBlock as PTList
 
@@ -63,16 +77,20 @@ export default function nestLists(blocks: PortableTextBlocks, level = 1): Normal
       ]
     }
 
-    return [
-      ...normalizedBlocks,
+    // The block to be added to the non-nested blocks array.
+    const finalBlock =
       level === 1
-        ? assertBlockKey({
-          _key: curBlock._key,
-          _type: LIST_TYPE,
-          listItem: curBlock.listItem,
-          children: [parsedBlock]
-        })
-        : parsedBlock
-    ]
+        ? // If level === 1, curBlock is the first list item of a top-level list.
+          // In this case, create a new parent block of LIST_TYPE.
+          assertBlockKey({
+            _key: curBlock._key,
+            _type: LIST_TYPE,
+            listItem: curBlock.listItem,
+            children: [parsedBlock]
+          })
+        : // Else, we're in a nested list item that can keep as is
+          parsedBlock
+
+    return [...normalizedBlocks, finalBlock]
   }, [] as NormalizedBlocks)
 }
