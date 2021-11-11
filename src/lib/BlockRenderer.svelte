@@ -27,7 +27,8 @@
             block,
             serializers,
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
-            span: child
+            span: child,
+            context: portableText.context
           }}>{child.text}</BlockSpan
         >
       {:else}

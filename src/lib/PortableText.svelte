@@ -1,13 +1,14 @@
 <script lang="ts">
   import BlockRenderer from './BlockRenderer.svelte'
   import nestLists, {LIST_TYPE} from './nestLists'
-  import type {PortableTextBlocks} from './ptTypes'
+  import type {PortableTextBlocks, PTContext} from './ptTypes'
   import type {Serializers} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
   export let blocks: PortableTextBlocks = []
   export let serializers: Serializers = undefined
   export let ignoreUnknownTypes = true
+  export let context: PTContext = {}
 
   $: normalizedBlocks = nestLists(blocks)
 </script>
@@ -23,7 +24,8 @@
         index,
         block,
         ignoreUnknownTypes,
-        serializers
+        serializers,
+        context
       }}
     />
   {:else if block._type === 'block' || block._type === LIST_TYPE}
@@ -32,9 +34,11 @@
         _rawBlocks: blocks,
         blocks: normalizedBlocks,
         index,
+        /* @ts-ignore */
         block,
         ignoreUnknownTypes,
-        serializers
+        serializers,
+        context
       }}
     />
   {:else}
@@ -51,7 +55,8 @@
           index,
           block,
           ignoreUnknownTypes,
-          serializers
+          serializers,
+          context
         }}
       />
     {/if}

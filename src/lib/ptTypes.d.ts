@@ -68,3 +68,7 @@ export interface PTList {
 export type PortableTextBlocks = (PTBlock | PTCustomBlock)[]
 
 export type NormalizedBlocks = (PTBlock | PTCustomBlock | PTList)[]
+
+export interface PTContext {
+  [key: string]: unknown
+}
