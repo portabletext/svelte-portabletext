@@ -36,6 +36,9 @@
       footnote: Footnote
     }
   }}
+  context={{
+    footnotes
+  }}
 />
 
 <ol style="margin-top: 50vh">

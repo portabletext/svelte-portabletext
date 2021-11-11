@@ -84,7 +84,6 @@ Example components from above:
 ```svelte
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
-  export let mark: {url?: string; newWindow?: boolean} = {}
   import type {MarkProps} from '@portabletext/svelte'
 
   // Property custom marks receive from @portabletext/svelte when redered
@@ -136,7 +135,7 @@ Example components from above:
   {:else if style === 'h2'}
     <h2 class="text-3xl"><slot /></h2>
   {:else if style === 'h3'}
-    <h2 class="text-xl"><slot /></h2>
+    <h3 class="text-xl"><slot /></h3>
   {:else}
     <h4 class="text-lg text-gray-600"><slot /></h4>
   {/if}
@@ -144,6 +143,88 @@ Example components from above:
 ```
 
 The component above is also an example of how you can access blocks surrounding the current one for rule-based design.
+
+Finally, you can pass **`context`** to your `<PortableText>` component to have custom external data exposed to all components. This is useful in scenarios such as:
+
+- Adding different styles to the same block depending on its placement
+- Loading in data from an external source/API
+- Running expensive calculations on your `blocks` only once
+
+Here's a complete example with a `footnote` annotation, where editors focus on writing its contents, and the front-end smartly position it and define its number:
+
+```svelte
+<!-- Our page's content -->
+<script>
+  import Footnote from './Foonote.svelte'
+
+  export let blocks
+
+  // Get all footnotes from markDefs in top-level blocks
+  $: footnotes = blocks.reduce((notes, curBlock) => {
+    if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
+      return notes
+    }
+    return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
+  }, [])
+</script>
+
+<PortableText
+  {blocks}
+  serializers={{
+    marks: {
+      footnote: Footnote
+    }
+  }}
+  context={{
+    // Pass these footnotes inside the context
+    footnotes
+  }}
+/>
+
+<!-- And render them at the bottom -->
+<ol>
+  {#each footnotes as note}
+    <li id="note-{note._key}">
+      <PortableText
+        blocks={note.note}
+        serializers={{
+          marks: {
+            link: Link
+          }
+        }}
+      />
+      <a href="#src-{note._key}">👆</a>
+    </li>
+  {/each}
+</ol>
+
+
+<!-- Footnote.svelte -->
+<script lang="ts">
+  import type {MarkProps} from '@portabletext/svelte'
+
+  interface FootnoteProps {
+    _key: string
+    note: PortableTextBlocks
+  }
+
+  export let portableText: MarkProps<
+    FootnoteProps,
+    // Use the second argument to specify your context's type
+    {
+      footnotes: FootnoteProps[]
+    }
+  >
+
+  // From the context, let's figure out what's the position of this footnote
+  $: number =
+    portableText.context.footnotes.findIndex((note) => note._key === portableText.mark._key) + 1
+</script>
+
+<span id="src-{portableText.mark._key}">
+  <slot /><sup><a href={`#note-${portableText.mark._key}`}>{number}</a></sup>
+</span>
+```
 
 <!-- ## TODO
 
