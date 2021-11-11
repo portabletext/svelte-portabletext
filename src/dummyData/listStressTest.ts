@@ -2,6 +2,9 @@ import type {PortableTextBlocks} from '$lib/ptTypes'
 import {NATIVE_MARKS} from '../sharedData/marks'
 import {LIST_LEVELS} from '../sharedData/listLevels'
 
+// This data was written by hand.
+// In a real-world scenario it'd be generated from the PortableText Editor.
+// https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/portable-text-editor
 const blocks: PortableTextBlocks = [
   {
     _key: 'block-0',

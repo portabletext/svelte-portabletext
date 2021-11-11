@@ -1,23 +1,134 @@
 import type {PortableTextBlocks} from '$lib/ptTypes'
 import {NATIVE_MARKS} from '../sharedData/marks'
+import {NATIVE_STYLES} from '../sharedData/styles'
 
+// This data was written by hand.
+// In a real-world scenario it'd be generated from the PortableText Editor.
+// https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/portable-text-editor
 const blocks: PortableTextBlocks = [
+  ...Object.keys(NATIVE_STYLES).map(
+    (style, index) =>
+      ({
+        _key: `block-${3 + index}`,
+        _type: 'block',
+        children: [
+          {
+            _key: 'span-1',
+            _type: 'span',
+            marks: [],
+            text: `Block style: ${style}`
+          }
+        ],
+        markDefs: [],
+        style
+      } as any)
+  ),
   {
-    _key: 'block-0',
+    _key: 'ol-0',
     _type: 'block',
     children: [
       {
         _key: 'span-1',
         _type: 'span',
         marks: [],
-        text: 'Formatting with marks'
+        text: 'Ordered lists'
       }
     ],
     markDefs: [],
-    style: 'h1'
+    listItem: 'number',
+    level: 1
   },
   {
-    _key: 'block-1',
+    _key: 'ol-1',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'With nested children'
+      }
+    ],
+    markDefs: [],
+    listItem: 'number',
+    level: 2
+  },
+  {
+    _key: 'ol-2',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'And siblings!'
+      }
+    ],
+    markDefs: [],
+    listItem: 'number',
+    level: 1
+  },
+  {
+    _key: 'ul-0',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'Unordered lists'
+      }
+    ],
+    markDefs: [],
+    listItem: 'bullet',
+    level: 1
+  },
+  {
+    _key: 'ul-1',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'With nested children'
+      }
+    ],
+    markDefs: [],
+    listItem: 'bullet',
+    level: 2
+  },
+  {
+    _key: 'ul-2',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'And siblings!'
+      }
+    ],
+    markDefs: [],
+    listItem: 'bullet',
+    level: 1
+  },
+  {
+    _key: 'formatting-heading',
+    _type: 'block',
+    children: [
+      {
+        _key: 'span-1',
+        _type: 'span',
+        marks: [],
+        text: 'Rich-text formatting'
+      }
+    ],
+    markDefs: [],
+    style: 'h2'
+  },
+  {
+    _key: 'formatting-1',
     _type: 'block',
     children: [
       {
@@ -40,7 +151,7 @@ const blocks: PortableTextBlocks = [
     style: 'normal'
   },
   {
-    _key: 'block-2',
+    _key: 'formatting-2',
     _type: 'block',
     children: [
       {
@@ -72,7 +183,7 @@ const blocks: PortableTextBlocks = [
     style: 'normal'
   },
   {
-    _key: 'block-3',
+    _key: 'formatting-3',
     _type: 'block',
     children: [
       {
