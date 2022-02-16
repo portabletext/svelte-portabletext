@@ -43,9 +43,9 @@ export interface CustomTypes {
 }
 
 export interface PortableTextSvelteComponents {
-  marks?: CustomMarks
-  types?: CustomTypes
-  block?: CustomStyles
+  marks: CustomMarks
+  types: CustomTypes
+  block: CustomStyles
   /* eslint-disable */
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
@@ -57,6 +57,8 @@ export interface PortableTextSvelteComponents {
   unknownMark?: MarkComponent | any
   /* eslint-enable */
 }
+
+export type PortableTextComponents = Partial<PortableTextSvelteComponents>
 
 interface CommonProps {
   ignoreUnknownTypes?: boolean

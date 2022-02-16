@@ -1,14 +1,18 @@
 <script lang="ts">
   import BlockRenderer from './BlockRenderer.svelte'
+  import defaultComponents from './defaultComponents/defaultComponents'
+  import {mergeComponents} from './defaultComponents/mergeComponents'
   import nestLists, {LIST_TYPE} from './nestLists'
   import type {PortableTextBlocks, PTContext} from './ptTypes'
-  import type {PortableTextSvelteComponents} from './rendererTypes'
+  import type {PortableTextComponents} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
   export let input: PortableTextBlocks = []
-  export let components: PortableTextSvelteComponents = undefined
+  export let components: PortableTextComponents = undefined
   export let ignoreUnknownTypes = true
   export let context: PTContext = {}
+
+  $: mergedComponents = mergeComponents(defaultComponents, components)
 
   $: normalizedBlocks = nestLists(input)
 </script>
@@ -24,7 +28,7 @@
         index,
         block,
         ignoreUnknownTypes,
-        components,
+        components: mergedComponents,
         context
       }}
     />
@@ -37,7 +41,7 @@
         /* @ts-ignore */
         block,
         ignoreUnknownTypes,
-        components,
+        components: mergedComponents,
         context
       }}
     />
@@ -55,7 +59,7 @@
           index,
           block,
           ignoreUnknownTypes,
-          components,
+          components: mergedComponents,
           context
         }}
       />

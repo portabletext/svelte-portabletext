@@ -24,7 +24,7 @@
     span: nestedSpan
   }
 
-  $: customComponent = components?.marks
+  $: component = components?.marks
     ? typeof currentMark === 'string'
       ? components.marks[currentMark]
       : components.marks[currentMark?._type]
@@ -34,43 +34,13 @@
 {#if !currentMark}
   <!-- If no current mark, render only the text without wrapping elements -->
   <slot />
-{:else if customComponent}
-  <svelte:component this={customComponent} portableText={{...portableText, mark: currentMark}}>
+{:else if component}
+  <svelte:component this={component} portableText={{...portableText, mark: currentMark}}>
     <!-- Inside the custom component, render BlockSpan with remaining marks -->
     <svelte:self portableText={nestedProps}>
       <slot />
     </svelte:self>
   </svelte:component>
-{:else if currentMark === 'strong'}
-  <strong>
-    <svelte:self portableText={nestedProps}>
-      <slot />
-    </svelte:self>
-  </strong>
-{:else if currentMark === 'em'}
-  <em>
-    <svelte:self portableText={nestedProps}>
-      <slot />
-    </svelte:self>
-  </em>
-{:else if currentMark === 'code'}
-  <code>
-    <svelte:self portableText={nestedProps}>
-      <slot />
-    </svelte:self>
-  </code>
-{:else if currentMark === 'underline'}
-  <u>
-    <svelte:self portableText={nestedProps}>
-      <slot />
-    </svelte:self>
-  </u>
-{:else if currentMark === 'strike-through'}
-  <s>
-    <svelte:self portableText={nestedProps}>
-      <slot />
-    </svelte:self>
-  </s>
 {:else}
   <ReportError
     message="Mark of type {typeof currentMark === 'string'
