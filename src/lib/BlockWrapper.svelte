@@ -14,7 +14,11 @@
         : block.style || 'normal'
       : `list_${block.listItem}`
 
-  $: component = portableText.components?.block?.[style] || undefined
+  $: isSingleComponent = typeof portableText.components?.block === 'function'
+  // If `block` is a single Svelte component instead of an object of components, use it as the component to render.
+  $: component = isSingleComponent
+    ? portableText.components.block
+    : portableText.components?.block?.[style] || undefined
 </script>
 
 {#if component}

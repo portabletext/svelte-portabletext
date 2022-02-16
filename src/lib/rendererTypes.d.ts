@@ -1,60 +1,47 @@
+import {PortableTextBlockStyle} from '@portabletext/types'
 import type {SvelteComponentTyped} from 'svelte'
+
 import type {
   BlockSpan,
   MarkDef,
   NormalizedBlocks,
   PortableTextBlocks,
+  PortableTextMarkType,
   PTBlock,
   PTContext
 } from './ptTypes'
 
-export interface CustomStyles {
-  /* eslint-disable */
-  h1?: BlockComponent | any
-  h2?: BlockComponent | any
-  h3?: BlockComponent | any
-  h4?: BlockComponent | any
-  h5?: BlockComponent | any
-  h6?: BlockComponent | any
-  normal?: BlockComponent | any
-  blockquote?: BlockComponent | any
-  list_bullet?: BlockComponent | any
-  list_number?: BlockComponent | any
-  listItem_bullet?: BlockComponent | any
-  listItem_number?: BlockComponent | any
-  [_type: string]: BlockComponent | any
-  /* eslint-enable */
-}
+export type CustomStyles =
+  | Record<PortableTextBlockStyle, BlockComponent | undefined>
+  | BlockComponent
 
-export interface CustomMarks {
-  /* eslint-disable */
-  strong?: MarkComponent | any
-  em?: MarkComponent | any
-  'strike-through'?: MarkComponent | any
-  underline?: MarkComponent | any
-  code?: MarkComponent | any
-  [_type: string]: MarkComponent | any
-  /* eslint-enable */
-}
+export type CustomMarks = Record<PortableTextMarkType, MarkComponent>
 
-export interface CustomTypes {
-  // eslint-disable-next-line
-  [_type: string]: BlockComponent | any
-}
+export type CustomTypes = Record<string, BlockComponent>
 
 export interface PortableTextSvelteComponents {
   marks: CustomMarks
   types: CustomTypes
+
+  /**
+   * Object of Svelte components that renders blocks with different `style` properties.
+   *
+   * The object has the shape `{styleName: SvelteComponent}`, where `styleName` is the value set
+   * in individual `style` attributes on blocks.
+   *
+   * Can also be set to a single Svelte component, which would handle block styles of _any_ type.
+   */
   block: CustomStyles
+
   /* eslint-disable */
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
    */
-  unknownType?: BlockComponent | any
+  unknownType?: BlockComponent
   /**
    * Override the default component for marks of unknown type. Defaults to rendering its content without a container.
    */
-  unknownMark?: MarkComponent | any
+  unknownMark?: MarkComponent
   /* eslint-enable */
 }
 
@@ -91,14 +78,22 @@ export interface MarkProps<MarkType = string | MarkDef, ContextType = PTContext>
   context: ContextType
 }
 
-export type BlockComponent = SvelteComponentTyped<{
-  portableText: BlockProps
-}>
-
-export type MarkComponent = SvelteComponentTyped<{
+export type PortableTextMarkComponent = SvelteComponentTyped<{
   portableText: MarkProps
 }>
 
-export type SpanComponent = SvelteComponentTyped<{
-  portableText: SpanProps
-}>
+// Unfortunately Svelte components don't play nicely with Typescript,
+// so we need to `| any` all of these types
+export type BlockComponent =
+  | SvelteComponentTyped<{
+      portableText: BlockProps
+    }>
+  | any
+
+export type MarkComponent = PortableTextMarkComponent | any
+
+export type SpanComponent =
+  | SvelteComponentTyped<{
+      portableText: SpanProps
+    }>
+  | any

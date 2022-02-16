@@ -72,3 +72,11 @@ export type NormalizedBlocks = (PTBlock | PTCustomBlock | PTList)[]
 export interface PTContext {
   [key: string]: unknown
 }
+
+export declare type PortableTextMarkType =
+  | 'strong'
+  | 'em'
+  | 'strike-through'
+  | 'underline'
+  | 'code'
+  | string

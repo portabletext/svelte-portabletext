@@ -9,6 +9,7 @@
   import Fun from '../customComponents/Fun.svelte'
   import Link from '../customComponents/Link.svelte'
   import Footnote from '../customComponents/Footnote.svelte'
+  import SingleComponentBlock from '../customComponents/SingleComponentBlock.svelte'
 
   $: footnotes = blocks.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
@@ -47,6 +48,7 @@
       <PortableText
         input={note.note}
         components={{
+          block: SingleComponentBlock,
           marks: {
             link: Link
           }
