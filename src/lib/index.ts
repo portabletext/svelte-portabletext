@@ -1,3 +1,4 @@
+export {toPlainText} from '@portabletext/toolkit'
 import PortableText from './PortableText.svelte'
 import type {BlockProps, MarkProps, Serializers} from './rendererTypes'
 

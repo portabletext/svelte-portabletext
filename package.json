@@ -50,5 +50,8 @@
   "peerDependencies": {
     "svelte": "^3.40.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@portabletext/toolkit": "^1.0.4"
+  }
 }
