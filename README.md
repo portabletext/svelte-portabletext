@@ -105,7 +105,7 @@ Example components from above:
 {/if}
 ```
 
-> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace, where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
+> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
 
 ```svelte
 <!-- CustomHeading (blockStyle) -->
