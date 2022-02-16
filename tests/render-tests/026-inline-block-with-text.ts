@@ -1,28 +1,27 @@
-
-import Rendered from "./026-inline-block-with-text.svelte"
+import Rendered from './026-inline-block-with-text.svelte'
 
 export default {
-  name: "026-inline-block-with-text",
+  name: '026-inline-block-with-text',
   rendered: Rendered,
-  blocks: [
-  {
-    "_type": "block",
-    "_key": "foo",
-    "style": "normal",
-    "children": [
-      {
-        "_type": "span",
-        "text": "Men, "
-      },
-      {
-        "_type": "button",
-        "text": "bli med du også"
-      },
-      {
-        "_type": "span",
-        "text": ", da!"
-      }
-    ]
-  }
-]
+  input: [
+    {
+      _type: 'block',
+      _key: 'foo',
+      style: 'normal',
+      children: [
+        {
+          _type: 'span',
+          text: 'Men, '
+        },
+        {
+          _type: 'button',
+          text: 'bli med du også'
+        },
+        {
+          _type: 'span',
+          text: ', da!'
+        }
+      ]
+    }
+  ]
 }

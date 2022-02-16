@@ -3,4 +3,4 @@
   import blocks from '../dummyData/listStressTest'
 </script>
 
-<PortableText {blocks} />
+<PortableText input={blocks} />

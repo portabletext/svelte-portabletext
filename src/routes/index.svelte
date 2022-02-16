@@ -3,4 +3,4 @@
   import homepage from '../dummyData/homepage'
 </script>
 
-<PortableText blocks={homepage} />
+<PortableText input={homepage} />

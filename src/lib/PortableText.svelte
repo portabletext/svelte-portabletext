@@ -5,12 +5,12 @@
   import type {Serializers} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let blocks: PortableTextBlocks = []
+  export let input: PortableTextBlocks = []
   export let serializers: Serializers = undefined
   export let ignoreUnknownTypes = true
   export let context: PTContext = {}
 
-  $: normalizedBlocks = nestLists(blocks)
+  $: normalizedBlocks = nestLists(input)
 </script>
 
 {#each normalizedBlocks as block, index (block._key)}
@@ -19,7 +19,7 @@
     <svelte:component
       this={serializers.types[block._type]}
       portableText={{
-        _rawBlocks: blocks,
+        _rawBlocks: input,
         blocks: normalizedBlocks,
         index,
         block,
@@ -31,7 +31,7 @@
   {:else if block._type === 'block' || block._type === LIST_TYPE}
     <BlockRenderer
       portableText={{
-        _rawBlocks: blocks,
+        _rawBlocks: input,
         blocks: normalizedBlocks,
         index,
         /* @ts-ignore */
@@ -50,7 +50,7 @@
       <svelte:component
         this={serializers.unknownType}
         portableText={{
-          _rawBlocks: blocks,
+          _rawBlocks: input,
           blocks: normalizedBlocks,
           index,
           block,

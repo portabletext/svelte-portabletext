@@ -8,7 +8,7 @@ import allTests from './render-tests'
 
 for (const renderTest of allTests) {
   test(renderTest.name, () => {
-    const renderedByPackage = render(PortableText, {blocks: renderTest.blocks})
+    const renderedByPackage = render(PortableText, {input: renderTest.input})
     const expectedRender = render(renderTest.rendered)
 
     expect(renderedByPackage.container.children[0].innerHTML).toBe(

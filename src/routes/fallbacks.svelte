@@ -7,6 +7,6 @@
 </script>
 
 <PortableText
-  blocks={fallbacks}
+  input={fallbacks}
   serializers={{unknownType: UnknownType, unknownMark: UnknownMark}}
 />

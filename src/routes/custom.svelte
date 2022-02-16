@@ -21,7 +21,7 @@
 </script>
 
 <PortableText
-  {blocks}
+  input={blocks}
   serializers={{
     types: {
       image: Image,
@@ -45,7 +45,7 @@
   {#each footnotes as note}
     <li id="note-{note._key}">
       <PortableText
-        blocks={note.note}
+        input={note.note}
         serializers={{
           marks: {
             link: Link

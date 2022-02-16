@@ -1,5 +1,7 @@
 # Migrating to @portabletext/svelte v1
 
+## `blocks` renamed to `input`
+
 ## `PortableText` is now a named import
 
 ```svelte
