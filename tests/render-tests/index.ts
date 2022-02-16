@@ -1,4 +1,4 @@
-import type {PortableTextBlocks} from '../../src/lib/ptTypes'
+import type {InputValue} from '../../src/lib/ptTypes'
 
 import test001 from './001-empty-block'
 import test002 from './002-single-span'
@@ -28,7 +28,7 @@ import test060 from './060-list-issue'
 import test061 from './061-missing-mark-serializer'
 
 interface RenderTestFile {
-  input: PortableTextBlocks
+  input: InputValue
   rendered: any
   name: string
 }

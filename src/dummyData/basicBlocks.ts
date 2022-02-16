@@ -1,11 +1,11 @@
-import type {PortableTextBlocks} from '$lib/ptTypes'
+import type {InputValue} from '$lib/ptTypes'
 import {NATIVE_MARKS} from '../sharedData/marks'
 import {NATIVE_STYLES} from '../sharedData/styles'
 
 // This data was written by hand.
 // In a real-world scenario it'd be generated from the PortableText Editor.
 // https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/portable-text-editor
-const blocks: PortableTextBlocks = [
+const blocks: InputValue = [
   ...Object.keys(NATIVE_STYLES).map(
     (style, index) =>
       ({

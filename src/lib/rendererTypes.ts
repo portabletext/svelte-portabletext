@@ -1,11 +1,10 @@
-import {PortableTextBlockStyle} from '@portabletext/types'
+import type {PortableTextBlockStyle} from '@portabletext/types'
 import type {SvelteComponentTyped} from 'svelte'
-
 import type {
   BlockSpan,
+  InputValue,
   MarkDef,
   NormalizedBlocks,
-  PortableTextBlocks,
   PortableTextMarkType,
   PTBlock,
   PTContext
@@ -56,7 +55,7 @@ interface CommonProps {
 export interface BlockProps<BlockType = PTBlock, ContextType = PTContext> extends CommonProps {
   index: number
   blocks: NormalizedBlocks
-  _rawInput: PortableTextBlocks
+  _rawInput: InputValue
   block: BlockType
   context: ContextType
   /**

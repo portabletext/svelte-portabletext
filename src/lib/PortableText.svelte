@@ -3,11 +3,11 @@
   import defaultComponents from './defaultComponents/defaultComponents'
   import {mergeComponents} from './defaultComponents/mergeComponents'
   import nestLists, {LIST_TYPE} from './nestLists'
-  import type {PortableTextBlocks, PTContext} from './ptTypes'
+  import type {InputValue, PTContext} from './ptTypes'
   import type {PortableTextComponents} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let input: PortableTextBlocks = []
+  export let input: InputValue = []
   export let components: PortableTextComponents = undefined
   export let ignoreUnknownTypes = true
   export let context: PTContext = {}

@@ -1,3 +1,6 @@
+import type {nestLists} from '@portabletext/toolkit'
+import type {PortableTextBlock} from '@portabletext/types'
+
 interface MarkDef {
   _type: string
   _key: string
@@ -65,10 +68,6 @@ export interface PTList {
   children: PTBlock[]
 }
 
-export type PortableTextBlocks = (PTBlock | PTCustomBlock)[]
-
-export type NormalizedBlocks = (PTBlock | PTCustomBlock | PTList)[]
-
 export interface PTContext {
   [key: string]: unknown
 }
@@ -80,3 +79,7 @@ export declare type PortableTextMarkType =
   | 'underline'
   | 'code'
   | string
+
+export type InputValue = PortableTextBlock | PortableTextBlock[]
+
+export type NormalizedBlocks = ReturnType<typeof nestLists>

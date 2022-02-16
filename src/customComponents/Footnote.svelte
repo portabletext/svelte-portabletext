@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {PortableTextBlocks} from '$lib/ptTypes'
+  import type {InputValue} from '$lib/ptTypes'
 
   import type {MarkProps} from '$lib/rendererTypes'
 
   interface FootnoteProps {
     _key: string
-    note: PortableTextBlocks
+    note: InputValue
   }
 
   export let portableText: MarkProps<
