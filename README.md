@@ -94,7 +94,7 @@ Example components from above:
 
   // Remember to make your variables reactive so that they can reflect prop changes
   // See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
-  $: mark = portableText.mark
+  $: ({mark} = portableText)
   $: newWindow = mark.newWindow || false
 </script>
 
@@ -114,11 +114,9 @@ Example components from above:
 
   export let portableText: BlockProps
 
-  $: index = portableText.index
-  $: blocks = portableText.blocks
-  $: block = portableText.block
+  $: ({index, blocks, block} = portableText)
+  $: ({style} = block)
 
-  $: style = block.style
   $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(blocks[index - 1]?.style)
 
   $: anchorId = `heading-${block._key}`

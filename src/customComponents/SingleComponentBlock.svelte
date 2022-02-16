@@ -3,9 +3,8 @@
 
   export let portableText: BlockProps
 
-  $: block = portableText.block
-
-  $: style = block.style || 'normal'
+  $: ({block} = portableText)
+  $: ({style = 'normal'} = block)
 </script>
 
 <div style:background="papayawhip">

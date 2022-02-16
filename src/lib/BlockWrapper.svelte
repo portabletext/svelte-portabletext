@@ -5,7 +5,7 @@
 
   export let portableText: BlockProps
 
-  $: block = portableText.block
+  $: ({block} = portableText)
 
   $: style =
     block?._type === 'block'

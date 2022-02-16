@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {PortableTextBlocks} from '$lib/ptTypes'
+  import type {PortableTextBlock} from '@portabletext/types'
   import PortableText from '$lib/PortableText.svelte'
 
   import type {BlockProps} from '$lib/rendererTypes'
@@ -7,7 +7,7 @@
 
   export let portableText: BlockProps<{
     title: string
-    subtitle: PortableTextBlocks
+    subtitle: PortableTextBlock[]
     image: {
       extension: string
       url: string
@@ -15,7 +15,7 @@
     }
   }>
 
-  $: block = portableText.block
+  $: ({block} = portableText)
 </script>
 
 <section>

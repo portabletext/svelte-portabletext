@@ -9,10 +9,14 @@
 
   <pre>
     <code>
-      {JSON.stringify({
-        block: portableText.block,
-        index: portableText.index,
-      }, null, 2)}
+      {JSON.stringify(
+        {
+          block: portableText.block,
+          index: portableText.index
+        },
+        null,
+        2
+      )}
     </code>
   </pre>
 </div>

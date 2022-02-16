@@ -10,7 +10,7 @@
     caption: string
   }>
 
-  $: block = portableText.block
+  $: ({block} = portableText)
 </script>
 
 <figure>

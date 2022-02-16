@@ -6,7 +6,7 @@
     language: string
   }>
 
-  $: block = portableText.block
+  $: ({block} = portableText)
 </script>
 
 <pre>
