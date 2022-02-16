@@ -5,7 +5,7 @@
   export let portableText: SpanProps
   $: span = portableText.span
   $: block = portableText.block
-  $: serializers = portableText.serializers
+  $: components = portableText.components
 
   $: allMarks = span.marks || []
 
@@ -24,10 +24,10 @@
     span: nestedSpan
   }
 
-  $: customComponent = serializers?.marks
+  $: customComponent = components?.marks
     ? typeof currentMark === 'string'
-      ? serializers.marks[currentMark]
-      : serializers.marks[currentMark?._type]
+      ? components.marks[currentMark]
+      : components.marks[currentMark?._type]
     : undefined
 </script>
 
@@ -76,11 +76,11 @@
     message="Mark of type {typeof currentMark === 'string'
       ? currentMark
       : currentMark._type} has no compatible renderer or is missing markDefs (block {block._key}, child {span._key})"
-    ignoreUnknownTypes={portableText.ignoreUnknownTypes || !!serializers?.unknownMark}
+    ignoreUnknownTypes={portableText.ignoreUnknownTypes || !!components?.unknownMark}
   />
-  {#if serializers?.unknownMark}
+  {#if components?.unknownMark}
     <svelte:component
-      this={serializers.unknownMark}
+      this={components.unknownMark}
       portableText={{...portableText, mark: currentMark}}
     >
       <slot />

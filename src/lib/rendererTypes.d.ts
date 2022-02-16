@@ -42,17 +42,17 @@ export interface CustomTypes {
   [_type: string]: BlockComponent | any
 }
 
-export interface Serializers {
+export interface PortableTextSvelteComponents {
   marks?: CustomMarks
   types?: CustomTypes
   blockStyles?: CustomStyles
   /* eslint-disable */
   /**
-   * Override the default serializer for blocks of unknown type, if ignoreUnknownTypes is set to false.
+   * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
    */
   unknownType?: BlockComponent | any
   /**
-   * Override the default serializer for marks of unknown type. Defaults to rendering its content without a container.
+   * Override the default component for marks of unknown type. Defaults to rendering its content without a container.
    */
   unknownMark?: MarkComponent | any
   /* eslint-enable */
@@ -60,7 +60,7 @@ export interface Serializers {
 
 interface CommonProps {
   ignoreUnknownTypes?: boolean
-  serializers?: Serializers
+  components?: PortableTextSvelteComponents
   context: PTContext
 }
 

@@ -22,7 +22,7 @@
 
 <PortableText
   input={blocks}
-  serializers={{
+  components={{
     types: {
       image: Image,
       code: Code,
@@ -46,7 +46,7 @@
     <li id="note-{note._key}">
       <PortableText
         input={note.note}
-        serializers={{
+        components={{
           marks: {
             link: Link
           }

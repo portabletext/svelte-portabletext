@@ -14,7 +14,7 @@
         : block.style || 'normal'
       : `list_${block.listItem}`
 
-  $: customStyle = portableText.serializers?.blockStyles?.[style] || undefined
+  $: customStyle = portableText.components?.blockStyles?.[style] || undefined
 </script>
 
 {#if customStyle}

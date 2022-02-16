@@ -8,16 +8,16 @@
   export let portableText: BlockProps
 
   $: block = portableText.block
-  $: serializers = portableText.serializers
+  $: components = portableText.components
 </script>
 
 <BlockWrapper {portableText}>
   {#if block._type === 'block'}
     {#each block.children as child (child._key)}
-      {#if serializers?.types?.[child._type]}
+      {#if components?.types?.[child._type]}
         <!-- Custom inline element -->
         <svelte:component
-          this={serializers.types[child._type]}
+          this={components.types[child._type]}
           portableText={{...portableText, parentBlock: block, block: child}}
         />
       {:else if child._type === 'span'}
@@ -25,7 +25,7 @@
         <BlockSpan
           portableText={{
             block,
-            serializers,
+            components,
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
             span: child,
             context: portableText.context

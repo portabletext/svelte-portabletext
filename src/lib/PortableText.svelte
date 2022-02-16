@@ -2,11 +2,11 @@
   import BlockRenderer from './BlockRenderer.svelte'
   import nestLists, {LIST_TYPE} from './nestLists'
   import type {PortableTextBlocks, PTContext} from './ptTypes'
-  import type {Serializers} from './rendererTypes'
+  import type {PortableTextSvelteComponents} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
   export let input: PortableTextBlocks = []
-  export let serializers: Serializers = undefined
+  export let components: PortableTextSvelteComponents = undefined
   export let ignoreUnknownTypes = true
   export let context: PTContext = {}
 
@@ -14,17 +14,17 @@
 </script>
 
 {#each normalizedBlocks as block, index (block._key)}
-  {#if serializers?.types?.[block._type]}
+  {#if components?.types?.[block._type]}
     <!-- Custom block-level element -->
     <svelte:component
-      this={serializers.types[block._type]}
+      this={components.types[block._type]}
       portableText={{
         _rawBlocks: input,
         blocks: normalizedBlocks,
         index,
         block,
         ignoreUnknownTypes,
-        serializers,
+        components,
         context
       }}
     />
@@ -37,25 +37,25 @@
         /* @ts-ignore */
         block,
         ignoreUnknownTypes,
-        serializers,
+        components,
         context
       }}
     />
   {:else}
     <ReportError
       message="Block of type {block._type} has no compatible renderer (block {block._key})"
-      ignoreUnknownTypes={ignoreUnknownTypes || !!serializers?.unknownType}
+      ignoreUnknownTypes={ignoreUnknownTypes || !!components?.unknownType}
     />
-    {#if serializers?.unknownType}
+    {#if components?.unknownType}
       <svelte:component
-        this={serializers.unknownType}
+        this={components.unknownType}
         portableText={{
           _rawBlocks: input,
           blocks: normalizedBlocks,
           index,
           block,
           ignoreUnknownTypes,
-          serializers,
+          components,
           context
         }}
       />

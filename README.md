@@ -18,18 +18,18 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 />
 ```
 
-This is enough to get you set-up with basic block content with formatting and text styles. When working with images, custom styles, blocks & marks, though, you'll need to customize your renderer with **serializers**:
+This is enough to get you set-up with basic block content with formatting and text styles. When working with images, custom styles, blocks & marks, though, you'll need to customize your renderer with **components**:
 
 ### Customizing rendering
 
-You can use the `serializers` prop to determine how the renderer should process each block, mark or style type.
+You can use the `components` prop to determine how the renderer should process each block, mark or style type.
 
 ```svelte
 <PortableText
   input={[
     // Portable Text array ...
   ]}
-  serializers={{
+  components={{
     types: {
       // block-level components
       callout: Callout,
@@ -170,7 +170,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
 <PortableText
   input={input}
-  serializers={{
+  components={{
     marks: {
       footnote: Footnote
     }
@@ -187,7 +187,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
     <li id="note-{note._key}">
       <PortableText
         input={note.note}
-        serializers={{
+        components={{
           marks: {
             link: Link
           }
@@ -228,7 +228,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
 <!-- ## TODO
 
-- [ ] If applicable, add support to `serializers.hardBreak`, similar to block-content-to-react
+- [ ] If applicable, add support to `components.hardBreak`, similar to block-content-to-react
 - [ ] In example site, add examples with custom marks, blockStyles & block types
   - Include a nested PT renderer example -->
 
