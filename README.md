@@ -41,7 +41,7 @@ You can use the `components` prop to determine how the renderer should process e
       // Overwrite default mark renderers
       strong: CustomStrong
     },
-    blockStyles: {
+    block: {
       normal: CustomParagraph,
       blockquote: Quote,
       // Re-using the same component across multiple styles
@@ -229,7 +229,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <!-- ## TODO
 
 - [ ] If applicable, add support to `components.hardBreak`, similar to block-content-to-react
-- [ ] In example site, add examples with custom marks, blockStyles & block types
+- [ ] In example site, add examples with custom marks, block & block types
   - Include a nested PT renderer example -->
 
 ## Credits

@@ -2,6 +2,8 @@
 
 ## `serializers` renamed to `components`
 
+## `blockStyles` renamed to `block`
+
 ## `blocks` renamed to `input`
 
 ## `PortableText` is now a named import
