@@ -67,7 +67,7 @@ interface CommonProps {
 export interface BlockProps<BlockType = PTBlock, ContextType = PTContext> extends CommonProps {
   index: number
   blocks: NormalizedBlocks
-  _rawBlocks: PortableTextBlocks
+  _rawInput: PortableTextBlocks
   block: BlockType
   /**
    * Exclusive to inline blocks.

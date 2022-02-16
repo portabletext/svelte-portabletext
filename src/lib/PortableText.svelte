@@ -19,7 +19,7 @@
     <svelte:component
       this={components.types[block._type]}
       portableText={{
-        _rawBlocks: input,
+        _rawInput: input,
         blocks: normalizedBlocks,
         index,
         block,
@@ -31,7 +31,7 @@
   {:else if block._type === 'block' || block._type === LIST_TYPE}
     <BlockRenderer
       portableText={{
-        _rawBlocks: input,
+        _rawInput: input,
         blocks: normalizedBlocks,
         index,
         /* @ts-ignore */
@@ -50,7 +50,7 @@
       <svelte:component
         this={components.unknownType}
         portableText={{
-          _rawBlocks: input,
+          _rawInput: input,
           blocks: normalizedBlocks,
           index,
           block,
