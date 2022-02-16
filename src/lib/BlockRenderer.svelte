@@ -7,8 +7,7 @@
 
   export let portableText: BlockProps
 
-  $: block = portableText.block
-  $: components = portableText.components
+  $: ({block, components} = portableText)
 </script>
 
 <BlockWrapper {portableText}>
@@ -24,7 +23,7 @@
         <!-- Regular span / text child -->
         <BlockSpan
           portableText={{
-            block,
+            parentBlock: block,
             components,
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
             span: child,

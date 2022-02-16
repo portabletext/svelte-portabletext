@@ -58,18 +58,18 @@ export interface BlockProps<BlockType = PTBlock, ContextType = PTContext> extend
   blocks: NormalizedBlocks
   _rawInput: PortableTextBlocks
   block: BlockType
+  context: ContextType
   /**
    * Exclusive to inline blocks.
    */
   parentBlock?: PTBlock
-  context: ContextType
 }
 
 /**
  * Used solely by BlockSpan, not exposed to end-user
  */
 export interface SpanProps extends CommonProps {
-  block: PTBlock
+  parentBlock: PTBlock
   span: BlockSpan
 }
 

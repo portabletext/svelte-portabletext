@@ -5,7 +5,7 @@
   $: console.log('Unkown mark: ', {
     mark: portableText.mark,
     span: portableText.span,
-    block: portableText.block
+    parentBlock: portableText.parentBlock
   })
 </script>
 

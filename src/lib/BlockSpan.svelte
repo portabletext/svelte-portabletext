@@ -3,16 +3,14 @@
   import ReportError from './ReportError.svelte'
 
   export let portableText: SpanProps
-  $: span = portableText.span
-  $: block = portableText.block
-  $: components = portableText.components
+  $: ({span, parentBlock, components} = portableText)
 
   $: allMarks = span.marks || []
 
   // Let's start with the first mark
   $: currentMark =
     // If the mark references an entry in markDefs, use that object as the currentMark
-    (block?.markDefs || []).find((def) => def._key === allMarks[0]) || allMarks[0]
+    (parentBlock?.markDefs || []).find((def) => def._key === allMarks[0]) || allMarks[0]
 
   // If we have more marks, we'll render a nested BlockSpan with remaining marks
   $: nestedSpan = {
@@ -45,7 +43,7 @@
   <ReportError
     message="Mark of type {typeof currentMark === 'string'
       ? currentMark
-      : currentMark._type} has no compatible renderer or is missing markDefs (block {block._key}, child {span._key})"
+      : currentMark._type} has no compatible renderer or is missing markDefs (block {parentBlock._key}, child {span._key})"
     ignoreUnknownTypes={portableText.ignoreUnknownTypes || !!components?.unknownMark}
   />
   {#if components?.unknownMark}

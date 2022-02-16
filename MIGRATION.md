@@ -6,6 +6,10 @@
 
 ## `blocks` renamed to `input`
 
+## SpanProps['block'] renamed to SpanProps['parentBlock']
+
+To align with `BlockProps`
+
 ## `PortableText` is now a named import
 
 ```svelte
