@@ -8,7 +8,7 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 
 ```svelte
 <script>
-  import PortableText from '@portabletext/svelte'
+  import {PortableText} from '@portabletext/svelte'
 </script>
 
 <PortableText
