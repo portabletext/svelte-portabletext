@@ -2,32 +2,29 @@ import type {PortableTextComponents, PortableTextSvelteComponents} from '$lib/re
 
 export function mergeComponents(
   parent: PortableTextSvelteComponents,
-  overrides: PortableTextComponents
+  overrides: PortableTextComponents = {}
 ): PortableTextSvelteComponents {
   return {
     ...parent,
     ...overrides,
-    block: mergeBlock(parent, overrides),
-    marks: {
-      ...parent.marks,
-      ...(overrides?.marks || {})
-    },
-    types: {
-      ...parent.types,
-      ...(overrides?.types || {})
-    }
+    block: mergeDeeply(parent, overrides, 'block'),
+    list: mergeDeeply(parent, overrides, 'list'),
+    listItem: mergeDeeply(parent, overrides, 'listItem'),
+    marks: mergeDeeply(parent, overrides, 'marks'),
+    types: mergeDeeply(parent, overrides, 'types')
   }
 }
 
 /**
- * As blocks can be single functions, we can't simply spread them as objects
+ * As some components can be single functions, we can't simply spread them as objects
  */
-function mergeBlock(
+function mergeDeeply(
   parent: PortableTextSvelteComponents,
-  overrides: PortableTextComponents
-): PortableTextSvelteComponents['block'] {
-  const override = overrides?.block
-  const parentVal = parent.block
+  overrides: PortableTextComponents,
+  key: 'block' | 'list' | 'listItem' | 'marks' | 'types'
+): PortableTextSvelteComponents[typeof key] {
+  const override = overrides[key]
+  const parentVal = parent[key]
 
   if (typeof override === 'function') {
     return override
@@ -38,7 +35,7 @@ function mergeBlock(
   }
 
   if (override) {
-    return {...parentVal, ...override}
+    return {...parentVal, ...override} as PortableTextSvelteComponents[typeof key]
   }
 
   return parentVal

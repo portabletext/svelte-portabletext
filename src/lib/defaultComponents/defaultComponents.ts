@@ -1,6 +1,8 @@
 import type {PortableTextSvelteComponents} from '$lib/rendererTypes'
 import DefaultMark from './DefaultMark.svelte'
 import DefaultBlock from './DefaultBlock.svelte'
+import DefaultList from './DefaultList.svelte'
+import DefaultListItem from './DefaultListItem.svelte'
 
 const defaultComponents: PortableTextSvelteComponents = {
   marks: {
@@ -20,6 +22,14 @@ const defaultComponents: PortableTextSvelteComponents = {
     h5: DefaultBlock,
     h6: DefaultBlock,
     normal: DefaultBlock
+  },
+  list: {
+    bullet: DefaultList,
+    number: DefaultList
+  },
+  listItem: {
+    bullet: DefaultListItem,
+    number: DefaultListItem
   },
   types: {}
 }
