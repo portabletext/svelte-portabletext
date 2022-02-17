@@ -19,7 +19,7 @@
         <!-- Custom inline element -->
         <svelte:component
           this={components.types[child._type]}
-          portableText={{...portableText, parentBlock: block, block: child}}
+          portableText={{...portableText, parentBlock: block, isInline: true, block: child}}
         />
       {:else if child._type === 'span'}
         <!-- Regular span / text child -->

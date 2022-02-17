@@ -115,6 +115,7 @@ export interface BlockComponentProps<
    * Exclusive to inline blocks.
    */
   parentBlock?: PortableTextBlock
+  isInline: true
 }
 
 export type ListItemComponentProps<ContextType = PortableTextSvelteContext> = BlockComponentProps<
