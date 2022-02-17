@@ -3,7 +3,7 @@ import Rendered from './014-nested-lists.svelte'
 export default {
   name: '014-nested-lists',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       _key: 'a',

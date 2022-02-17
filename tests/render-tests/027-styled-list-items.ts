@@ -3,7 +3,7 @@ import Rendered from './027-styled-list-items.svelte'
 export default {
   name: '027-styled-list-items',
   rendered: Rendered,
-  input: [
+  value: [
     {
       style: 'normal',
       _type: 'block',

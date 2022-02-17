@@ -3,7 +3,7 @@ import Rendered from './004-basic-mark-single-span.svelte'
 export default {
   name: '004-basic-mark-single-span',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

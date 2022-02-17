@@ -3,7 +3,7 @@ import Rendered from './009-messy-link-text.svelte'
 export default {
   name: '009-messy-link-text',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

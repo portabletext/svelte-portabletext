@@ -3,4 +3,4 @@
   import homepage from '../dummyData/homepage'
 </script>
 
-<PortableText input={homepage} />
+<PortableText value={homepage} />

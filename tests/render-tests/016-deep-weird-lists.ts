@@ -3,7 +3,7 @@ import Rendered from './016-deep-weird-lists.svelte'
 export default {
   name: '016-deep-weird-lists',
   rendered: Rendered,
-  input: [
+  value: [
     {
       listItem: 'bullet',
       style: 'normal',

@@ -3,7 +3,7 @@ import Rendered from './005-basic-mark-multiple-adjacent-spans.svelte'
 export default {
   name: '005-basic-mark-multiple-adjacent-spans',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

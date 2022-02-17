@@ -3,7 +3,7 @@ import Rendered from './007-link-mark-def.svelte'
 export default {
   name: '007-link-mark-def',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

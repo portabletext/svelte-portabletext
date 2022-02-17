@@ -3,7 +3,7 @@ import Rendered from './017-all-default-block-styles.svelte'
 export default {
   name: '017-all-default-block-styles',
   rendered: Rendered,
-  input: [
+  value: [
     {
       style: 'h1',
       _type: 'block',

@@ -3,7 +3,7 @@ import Rendered from './021-list-without-level.svelte'
 export default {
   name: '021-list-without-level',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'e3ac53b5b339',
       _type: 'block',

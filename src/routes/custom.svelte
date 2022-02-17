@@ -22,7 +22,7 @@
 </script>
 
 <PortableText
-  input={blocks}
+  value={blocks}
   components={{
     types: {
       image: Image,
@@ -46,7 +46,7 @@
   {#each footnotes as note}
     <li id="note-{note._key}">
       <PortableText
-        input={note.note}
+        value={note.note}
         components={{
           block: SingleComponentBlock,
           marks: {

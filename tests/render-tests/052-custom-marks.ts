@@ -3,7 +3,7 @@ import Rendered from './052-custom-marks.svelte'
 export default {
   name: '052-custom-marks',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

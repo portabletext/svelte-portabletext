@@ -3,7 +3,7 @@ import Rendered from './053-override-default-marks.svelte'
 export default {
   name: '053-override-default-marks',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

@@ -22,7 +22,7 @@
   <div>
     <h1>{block.title}</h1>
     <div>
-      <PortableText input={block.subtitle} components={{marks: {link: Link}}} />
+      <PortableText value={block.subtitle} components={{marks: {link: Link}}} />
     </div>
   </div>
 

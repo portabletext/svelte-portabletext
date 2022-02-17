@@ -3,7 +3,7 @@ import Rendered from './008-plain-header-block.svelte'
 export default {
   name: '008-plain-header-block',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

@@ -6,7 +6,7 @@
 </script>
 
 <PortableText
-  input={blocks}
+  value={blocks}
   components={{
     list: {
       customList: CustomList

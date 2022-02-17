@@ -6,4 +6,4 @@
   import fallbacks from '../dummyData/fallbacks'
 </script>
 
-<PortableText input={fallbacks} components={{unknownType: UnknownType, unknownMark: UnknownMark}} />
+<PortableText value={fallbacks} components={{unknownType: UnknownType, unknownMark: UnknownMark}} />

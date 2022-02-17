@@ -3,7 +3,7 @@ import Rendered from './006-basic-mark-nested-marks.svelte'
 export default {
   name: '006-basic-mark-nested-marks',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

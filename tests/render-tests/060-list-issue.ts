@@ -3,7 +3,7 @@ import Rendered from './060-list-issue.svelte'
 export default {
   name: '060-list-issue',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: '68e32a42bc86',
       _type: 'block',

@@ -3,7 +3,7 @@ import Rendered from './018-marks-all-the-way-down.svelte'
 export default {
   name: '018-marks-all-the-way-down',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

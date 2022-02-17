@@ -3,4 +3,4 @@
   import blocksLists from '../dummyData/basicBlocks'
 </script>
 
-<PortableText input={blocksLists} />
+<PortableText value={blocksLists} />

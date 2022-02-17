@@ -3,7 +3,7 @@ import Rendered from './050-custom-block-type.svelte'
 export default {
   name: '050-custom-block-type',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'code',
       _key: '9a15ea2ed8a2',

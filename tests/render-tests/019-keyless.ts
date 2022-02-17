@@ -3,7 +3,7 @@ import Rendered from './019-keyless.svelte'
 export default {
   name: '019-keyless',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

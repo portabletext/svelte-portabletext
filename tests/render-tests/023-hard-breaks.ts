@@ -3,7 +3,7 @@ import Rendered from './023-hard-breaks.svelte'
 export default {
   name: '023-hard-breaks',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       _key: 'bd73ec5f61a1',

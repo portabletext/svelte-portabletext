@@ -28,7 +28,7 @@ import test060 from './060-list-issue'
 import test061 from './061-missing-mark-serializer'
 
 interface RenderTestFile {
-  input: InputValue
+  value: InputValue
   rendered: any
   name: string
 }

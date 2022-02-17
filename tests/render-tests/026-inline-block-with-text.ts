@@ -3,7 +3,7 @@ import Rendered from './026-inline-block-with-text.svelte'
 export default {
   name: '026-inline-block-with-text',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       _key: 'foo',

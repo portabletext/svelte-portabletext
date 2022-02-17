@@ -3,7 +3,7 @@ import Rendered from './010-basic-bullet-list.svelte'
 export default {
   name: '010-basic-bullet-list',
   rendered: Rendered,
-  input: [
+  value: [
     {
       style: 'normal',
       _type: 'block',

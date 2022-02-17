@@ -3,7 +3,7 @@ import Rendered from './011-basic-numbered-list.svelte'
 export default {
   name: '011-basic-numbered-list',
   rendered: Rendered,
-  input: [
+  value: [
     {
       style: 'normal',
       _type: 'block',

@@ -3,7 +3,7 @@ import Rendered from './015-all-basic-marks.svelte'
 export default {
   name: '015-all-basic-marks',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

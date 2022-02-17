@@ -3,7 +3,7 @@ import Rendered from './003-multiple-spans.svelte'
 export default {
   name: '003-multiple-spans',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _key: 'R5FvMrjo',
       _type: 'block',

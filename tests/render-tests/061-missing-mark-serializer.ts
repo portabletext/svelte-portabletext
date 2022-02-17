@@ -3,7 +3,7 @@ import Rendered from './061-missing-mark-serializer.svelte'
 export default {
   name: '061-missing-mark-serializer',
   rendered: Rendered,
-  input: [
+  value: [
     {
       _type: 'block',
       children: [

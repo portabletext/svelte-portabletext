@@ -12,7 +12,7 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 </script>
 
 <PortableText
-  input={[
+  value={[
     // Portable Text array ...
   ]}
 />
@@ -26,7 +26,7 @@ You can use the `components` prop to determine how the renderer should process e
 
 ```svelte
 <PortableText
-  input={[
+  value={[
     // Portable Text array ...
   ]}
   components={{
@@ -146,7 +146,7 @@ Finally, you can pass **`context`** to your `<PortableText>` component to have c
 
 - Adding different styles to the same block depending on its placement
 - Loading in data from an external source/API
-- Running expensive calculations on your `input` only once
+- Running expensive calculations on your `value` only once
 
 Here's a complete example with a `footnote` annotation, where editors focus on writing its contents, and the front-end smartly position it and define its number:
 
@@ -155,10 +155,10 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <script>
   import Footnote from './Foonote.svelte'
 
-  export let input
+  export let value
 
-  // Get all footnotes from markDefs in top-level input
-  $: footnotes = input.reduce((notes, curBlock) => {
+  // Get all footnotes from markDefs in top-level value
+  $: footnotes = value.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
       return notes
     }
@@ -167,7 +167,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 </script>
 
 <PortableText
-  input={input}
+  value={value}
   components={{
     marks: {
       footnote: Footnote
@@ -184,7 +184,7 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
   {#each footnotes as note}
     <li id="note-{note._key}">
       <PortableText
-        input={note.note}
+        value={note.note}
         components={{
           marks: {
             link: Link
