@@ -23,9 +23,9 @@
     <slot />
   </u>
 {:else if mark === 'strike-through'}
-  <s>
+  <del>
     <slot />
-  </s>
+  </del>
 {:else if typeof mark !== 'string' && mark._type === 'link' && typeof mark.href === 'string'}
   <a href={mark.href}><slot /></a>
 {:else}
