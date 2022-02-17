@@ -1,9 +1,10 @@
 <script lang="ts">
-  import type {MarkProps} from '../rendererTypes'
+  import type {MarkComponentProps} from '../rendererTypes'
+  import DefaultLink from './DefaultLink.svelte'
 
-  export let portableText: MarkProps
+  export let portableText: MarkComponentProps
 
-  $: mark = portableText.mark
+  $: ({mark} = portableText)
 </script>
 
 {#if mark === 'strong'}
@@ -26,8 +27,6 @@
   <del>
     <slot />
   </del>
-{:else if typeof mark !== 'string' && mark._type === 'link' && typeof mark.href === 'string'}
-  <a href={mark.href}><slot /></a>
 {:else}
   <slot />
 {/if}
