@@ -12,12 +12,9 @@
   export let ignoreUnknownTypes = true
   export let context: PortableTextSvelteContext = {}
 
-  // @TODO: consider exposing to users
-  let listNestingMode: ToolkitListNestMode = LIST_NEST_MODE_HTML
-
   $: mergedComponents = mergeComponents(defaultComponents, components)
   $: keyedBlocks = (Array.isArray(input) ? input : [input]).map(assertBlockKey)
-  $: blocks = nestLists(keyedBlocks, listNestingMode)
+  $: blocks = nestLists(keyedBlocks, LIST_NEST_MODE_HTML)
 </script>
 
 <EntriesRenderer
