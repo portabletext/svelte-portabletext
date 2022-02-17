@@ -1,17 +1,17 @@
 <script lang="ts">
-  import type {BlockProps} from '$lib/rendererTypes'
+  import type {BlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 </script>
 
 <div style="font-size: 0.8em;">
-  <h2>I'm an unkown block type! (<code>{portableText.block._type}</code>)</h2>
+  <h2>I'm an unkown block type! (<code>{portableText.value._type}</code>)</h2>
 
   <pre>
     <code>
       {JSON.stringify(
         {
-          block: portableText.block,
+          value: portableText.value,
           index: portableText.index
         },
         null,

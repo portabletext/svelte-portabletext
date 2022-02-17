@@ -3,9 +3,9 @@
 
   export let portableText: BlockComponentProps
 
-  $: ({block} = portableText)
+  $: ({value} = portableText)
 
-  $: style = block.style || 'normal'
+  $: style = value.style || 'normal'
 </script>
 
 {#if style === 'h1'}

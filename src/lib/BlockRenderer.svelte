@@ -9,23 +9,23 @@
 
   export let portableText: BlockComponentProps
 
-  $: ({block, components} = portableText)
+  $: ({value, components} = portableText)
 </script>
 
 <BlockWrapper {portableText}>
-  {#if block._type === 'block'}
-    {#each block.children as child (child._key)}
+  {#if value._type === 'block'}
+    {#each value.children as child (child._key)}
       {#if components?.types?.[child._type]}
         <!-- Custom inline element -->
         <svelte:component
           this={components.types[child._type]}
-          portableText={{...portableText, parentBlock: block, isInline: true, block: child}}
+          portableText={{...portableText, parentBlock: value, isInline: true, block: child}}
         />
       {:else if child._type === 'span'}
         <!-- Regular span / text child -->
         <BlockSpan
           portableText={{
-            parentBlock: block,
+            parentBlock: value,
             components,
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
             span: child,
@@ -44,7 +44,7 @@
         />
       {:else}
         <ReportError
-          message="Block child of type {child._type} has no compatible renderer (child {child._key} in block {block._key})"
+          message="Block child of type {child._type} has no compatible renderer (child {child._key} in block {value._key})"
         />
       {/if}
     {/each}

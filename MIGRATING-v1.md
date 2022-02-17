@@ -157,21 +157,34 @@ You can now use the provided `toPlainText` utility function to render PortableTe
 
 Previously, you'd use `BlockProps` and `MarkProps` for custom components in `types` and `blockStyles` ([now named `blocks`](#blockstyles-renamed-to-block)). Now, we have 4 new prop types exposed:
 
-````svelte
+```svelte
 <script>
   // From:
-  import { BlockProps, MarkProps } from '@portabletext/svelte'
+  import {BlockProps, MarkProps} from '@portabletext/svelte'
 
   // ✅ To:
   import {
     BlockComponentProps,
     MarkComponentProps,
     ListComponentProps,
-    ListItemComponentProps,
-  } from "@portabletext/svelte";
+    ListItemComponentProps
+  } from '@portabletext/svelte'
 
   // Example usage:
   export let portableText: BlockComponentProps
+</script>
+```
+
+## Components' `block|mark` properties renamed to `value`.
+
+Also extends to new `list` and `listItem` components.
+
+```svelte
+<script>
+  // All component types now receive `value` in portableText
+  // you can always safely access `value`
+  export let portableText
+  $: ({value} = portableText)
 </script>
 ```
 
@@ -183,24 +196,23 @@ Marks keep receiving their parent block as a prop, but now under the `parentBloc
 <!-- Example mark: internal link -->
 <script>
   // From:
-  import { MarkProps } from '@portabletext/svelte'
+  import {MarkProps} from '@portabletext/svelte'
 
-  export let portableText: MarkProps<{ linkedPageSlug: string }>
-  $: ({ block } = portableText)
+  export let portableText: MarkProps<{linkedPageSlug: string}>
+  $: ({block} = portableText)
 
   // ✅ To:
-  import {
-    MarkComponentProps,
-  } from "@portabletext/svelte";
+  import {MarkComponentProps} from '@portabletext/svelte'
 
-  export let portableText: MarkComponentProps<{ linkedPageSlug: string }>
-  $: ({ parentBlock } = portableText)
+  export let portableText: MarkComponentProps<{linkedPageSlug: string}>
+  $: ({parentBlock} = portableText)
 
   // Example usage:
-  $: siblingLinks = parentBlock.markDefs.filter(def => def._type == "internalLink" && def._key !== portableText.mark._key)
+  $: siblingLinks = parentBlock.markDefs.filter(
+    (def) => def._type == 'internalLink' && def._key !== portableText.mark._key
+  )
   $: isSoleLinkInBlock = siblingLinks.length <= 0
 </script>
 ```
 
 This library now uses [@portabletext/toolkit](https://github.com/portabletext/toolkit) to handle its internals. One of the benefits of the toolkit is having
-````

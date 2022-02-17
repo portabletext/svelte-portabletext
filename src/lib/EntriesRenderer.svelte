@@ -35,7 +35,7 @@
         _rawInput,
         blocks,
         index,
-        block: entry,
+        value: entry,
         ignoreUnknownTypes,
         components,
         context
@@ -48,7 +48,7 @@
         blocks,
         index,
         /* @ts-ignore */
-        block: entry,
+        value: entry,
         ignoreUnknownTypes,
         components,
         context
@@ -66,7 +66,7 @@
           _rawInput,
           blocks,
           index,
-          block: entry,
+          value: entry,
           ignoreUnknownTypes,
           components,
           context

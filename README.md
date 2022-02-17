@@ -79,7 +79,7 @@ Example components from above:
   $: userName = $session?.user?.name || 'person'
 </script>
 
-{#if portableText.block.bold}
+{#if portableText.value.bold}
   <strong>{userName}</strong>
 {:else}
   {userName}
@@ -119,12 +119,12 @@ Example components from above:
 
   export let portableText: BlockComponentProps
 
-  $: ({index, blocks, block} = portableText)
+  $: ({index, blocks, value} = portableText)
   $: ({style} = block)
 
   $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(blocks[index - 1]?.style)
 
-  $: anchorId = `heading-${block._key}`
+  $: anchorId = `heading-${value._key}`
 </script>
 
 <!-- If preceded by heading, have a higher margin top -->

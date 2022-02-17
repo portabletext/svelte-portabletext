@@ -1,14 +1,14 @@
 <script lang="ts">
   import {isPortableTextListItemBlock} from '@portabletext/toolkit'
-  import type {BlockProps} from './rendererTypes'
+  import type {BlockComponentProps} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 
-  $: ({block, components} = portableText)
+  $: ({value, components} = portableText)
 
-  $: isListItem = isPortableTextListItemBlock(block)
-  $: style = isListItem ? block.listItem : block.style || 'normal'
+  $: isListItem = isPortableTextListItemBlock(value)
+  $: style = isListItem ? value.listItem : value.style || 'normal'
   $: componentsObject = isListItem ? components.listItem : components.block
 
   $: isSingleComponent = typeof componentsObject === 'function'
@@ -21,5 +21,5 @@
     <slot />
   </svelte:component>
 {:else}
-  <ReportError message="Style {style} has no compatible renderer (block {block._key})" />
+  <ReportError message="Style {style} has no compatible renderer (block {value._key})" />
 {/if}

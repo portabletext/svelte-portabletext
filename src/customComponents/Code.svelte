@@ -1,17 +1,17 @@
 <script lang="ts">
-  import type {BlockProps} from '$lib/rendererTypes'
+  import type {BlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockProps<{
+  export let portableText: BlockComponentProps<{
     code: string
     language: string
   }>
 
-  $: ({block} = portableText)
+  $: ({value} = portableText)
 </script>
 
 <pre>
-  <p>{block.language}</p>
-  <code>{block.code}</code>
+  <p>{value.language}</p>
+  <code>{value.code}</code>
 </pre>
 
 <style>

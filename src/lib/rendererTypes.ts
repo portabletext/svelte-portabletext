@@ -110,7 +110,7 @@ export interface BlockComponentProps<
   index: number
   blocks: NormalizedBlocks
   _rawInput: InputValue
-  block: BlockType
+  value: BlockType
   /**
    * Exclusive to inline blocks.
    */

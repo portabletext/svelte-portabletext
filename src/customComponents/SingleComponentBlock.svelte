@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type {BlockProps} from '$lib/rendererTypes'
+  import type {BlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 
-  $: ({block} = portableText)
-  $: ({style = 'normal'} = block)
+  $: ({value} = portableText)
+  $: ({style = 'normal'} = value)
 </script>
 
 <div style:background="papayawhip">
