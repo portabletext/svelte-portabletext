@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {ListProps} from '$lib/rendererTypes'
+  import type {ListComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: ListProps
+  export let portableText: ListComponentProps
 
-  $: ({list} = portableText)
+  $: ({value} = portableText)
 </script>
 
 <ul style="list-style-type: a">
-  I'm a list with {list.children.length} direct children.
+  I'm a list with {value.children.length} direct children.
   <slot />
 </ul>

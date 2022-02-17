@@ -21,7 +21,7 @@
         blocks,
         index,
         /* @ts-ignore */
-        list: entry,
+        value: entry,
         ignoreUnknownTypes,
         components,
         context

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type {ListProps} from './rendererTypes'
+  import type {ListComponentProps} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let portableText: ListProps
+  export let portableText: ListComponentProps
 
-  $: ({list, components} = portableText)
+  $: ({value, components} = portableText)
 
   $: isSingleComponent = typeof components?.list === 'function'
   // If `list` is a single Svelte component instead of an object of components, use it as the component to render.
   $: component = isSingleComponent
     ? components.list
-    : components?.list?.[list?.listItem] || undefined
+    : components?.list?.[value?.listItem] || undefined
 </script>
 
 {#if component}
@@ -18,5 +18,5 @@
     <slot />
   </svelte:component>
 {:else}
-  <ReportError message="List {list?.listItem} has no compatible renderer (block {list._key})" />
+  <ReportError message="List {value?.listItem} has no compatible renderer (block {value._key})" />
 {/if}

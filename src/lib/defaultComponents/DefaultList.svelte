@@ -3,9 +3,9 @@
 
   export let portableText: ListComponentProps
 
-  $: ({list} = portableText)
+  $: ({value} = portableText)
 
-  $: ({listItem} = list)
+  $: ({listItem} = value)
 </script>
 
 {#if listItem === 'number'}

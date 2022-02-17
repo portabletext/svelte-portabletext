@@ -124,7 +124,7 @@ export type ListItemComponentProps<ContextType = PortableTextSvelteContext> = Bl
 >
 export interface ListComponentProps<ContextType = PortableTextSvelteContext>
   extends Omit<BlockComponentProps<ToolkitPortableTextList, ContextType>, 'block'> {
-  list: ToolkitPortableTextList & {
+  value: ToolkitPortableTextList & {
     listItem: PortableTextListItemType
   }
 }
