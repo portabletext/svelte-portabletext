@@ -39,7 +39,8 @@
         <ListRenderer
           portableText={{
             ...portableText,
-            list: child
+            // @ts-expect-error
+            value: child
           }}
         />
       {:else}
