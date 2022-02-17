@@ -77,6 +77,12 @@ export interface PortableTextSvelteComponents {
    */
   listItem: Record<PortableTextListItemType, ListItemComponent | undefined> | ListItemComponent
 
+  /**
+   * Component to use for rendering "hard breaks", eg `\n` inside of text spans
+   * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
+   */
+  hardBreak: SvelteComponentTyped<never> | any | false
+
   /* eslint-disable */
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.

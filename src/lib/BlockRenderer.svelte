@@ -3,10 +3,11 @@
   import BlockWrapper from './BlockWrapper.svelte'
   import {LIST_TYPE} from './constants'
   import ListRenderer from './ListRenderer.svelte'
-  import type {BlockProps} from './rendererTypes'
+  import type {BlockComponentProps} from './rendererTypes'
   import ReportError from './ReportError.svelte'
+  import TextRenderer from './TextRenderer.svelte'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 
   $: ({block, components} = portableText)
 </script>
@@ -29,14 +30,15 @@
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
             span: child,
             context: portableText.context
-          }}>{child.text}</BlockSpan
+          }}
         >
+          <TextRenderer {components} text={child.text} />
+        </BlockSpan>
       {:else if child._type === LIST_TYPE}
         <!-- `listItem` block with nested `@list` -->
         <ListRenderer
           portableText={{
             ...portableText,
-            // @ts-expect-error
             list: child
           }}
         />
@@ -45,10 +47,6 @@
           message="Block child of type {child._type} has no compatible renderer (child {child._key} in block {block._key})"
         />
       {/if}
-    {/each}
-  {:else if block._type === LIST_TYPE}
-    {#each block.children as child, nestedIndex (child._key)}
-      <svelte:self portableText={{...portableText, index: nestedIndex, block: child}} />
     {/each}
   {/if}
 </BlockWrapper>
