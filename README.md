@@ -48,13 +48,18 @@ You can use the `components` prop to determine how the renderer should process e
       h1: CustomHeading,
       h2: CustomHeading,
       h3: CustomHeading,
-      // Swap only the list parts you need
-      list_bullet: UnorderedListWrapper,
-      list_number: OrderedListWrapper,
-      listItem_bullet: ListItem,
-      listItem_number: ListItem,
       // Custom user-defined style
       textCenter: CentralizedText
+    },
+    list: {
+      // Swap only the list parts you need
+      bullet: UnorderedListWrapper,
+      // Custom user-defined list type
+      checklist: ChecklistWrapper
+    },
+    listItem: {
+      bullet: ListItem,
+      checklist: ChecklistItem
     }
   }}
 />
@@ -66,10 +71,10 @@ Example components from above:
 <!-- UserInfo (block type) -->
 <script lang="ts">
   import {session} from '$app/stores'
-  import type {BlockProps} from '@portabletext/svelte'
+  import type {BlockComponentProps} from '@portabletext/svelte'
 
   // Property custom blocks receive from @portabletext/svelte when redered
-  export let portableText: BlockProps<{bold?: boolean}>
+  export let portableText: BlockComponentProps<{bold?: boolean}>
 
   $: userName = $session?.user?.name || 'person'
 </script>
@@ -84,10 +89,10 @@ Example components from above:
 ```svelte
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
-  import type {MarkProps} from '@portabletext/svelte'
+  import type {MarkComponentProps} from '@portabletext/svelte'
 
   // Property custom marks receive from @portabletext/svelte when redered
-  export let portableText: MarkProps<{
+  export let portableText: MarkComponentProps<{
     url?: string
     newWindow?: boolean
   }>
@@ -110,9 +115,9 @@ Example components from above:
 ```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
-  import type {BlockProps} from '@portabletext/svelte'
+  import type {BlockComponentProps} from '@portabletext/svelte'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 
   $: ({index, blocks, block} = portableText)
   $: ({style} = block)
@@ -199,14 +204,14 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
 <!-- Footnote.svelte -->
 <script lang="ts">
-  import type {MarkProps} from '@portabletext/svelte'
+  import type {MarkComponentProps} from '@portabletext/svelte'
 
   interface FootnoteProps {
     _key: string
     note: PortableTextBlocks
   }
 
-  export let portableText: MarkProps<
+  export let portableText: MarkComponentProps<
     FootnoteProps,
     // Use the second argument to specify your context's type
     {
@@ -222,6 +227,22 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <span id="src-{portableText.mark._key}">
   <slot /><sup><a href={`#note-${portableText.mark._key}`}>{number}</a></sup>
 </span>
+```
+
+## Rendering Plain Text
+
+This module also exports a function (`toPlainText()`) that will render one or more Portable Text blocks as plain text. This is helpful in cases where formatted text is not supported, or you need to process the raw text value.
+
+For instance, to render an OpenGraph meta description for a page:
+
+```svelte
+<script>
+  import {toPlainText} from '@portabletext/svelte'
+</script>
+
+<svelte:head>
+  <meta name="og:description" value={toPlainText(myPortableTextData)} />
+</svelte:head>
 ```
 
 <!-- ## TODO
