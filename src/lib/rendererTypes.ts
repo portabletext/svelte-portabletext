@@ -25,8 +25,25 @@ export type CustomMarks = Record<PortableTextMarkType, MarkComponent>
 export type CustomTypes = Record<string, BlockComponent>
 
 export interface PortableTextSvelteComponents {
-  marks: CustomMarks
+  /**
+   * Object of Svelte components that renders different types of objects that might appear
+   * both as part of the blocks array, or as inline objects _inside_ of a block,
+   * alongside text spans.
+   *
+   * Use the `parentBlock` property to check whether or not this is an inline object or a block
+   *
+   * The object has the shape `{typeName: SvelteComponent}`, where `typeName` is the value set
+   * in individual `_type` attributes.
+   */
   types: CustomTypes
+
+  /**
+   * Object of Svelte components that renders different types of marks that might appear in spans.
+   *
+   * The object has the shape `{markName: SvelteComponent}`, where `markName` is the value set
+   * in individual `_type` attributes, values being stored in the parent blocks `markDefs`.
+   */
+  marks: CustomMarks
 
   /**
    * Object of Svelte components that renders blocks with different `style` properties.
@@ -80,8 +97,10 @@ interface CommonProps<ContextType = PortableTextSvelteContext> {
   context: ContextType
 }
 
-export interface BlockProps<BlockType = PortableTextBlock, ContextType = PortableTextSvelteContext>
-  extends CommonProps<ContextType> {
+export interface BlockComponentProps<
+  BlockType = PortableTextBlock,
+  ContextType = PortableTextSvelteContext
+> extends CommonProps<ContextType> {
   index: number
   blocks: NormalizedBlocks
   _rawInput: InputValue
@@ -92,12 +111,12 @@ export interface BlockProps<BlockType = PortableTextBlock, ContextType = Portabl
   parentBlock?: PortableTextBlock
 }
 
-export type ListItemProps<ContextType = PortableTextSvelteContext> = BlockProps<
+export type ListItemComponentProps<ContextType = PortableTextSvelteContext> = BlockComponentProps<
   PortableTextListItemBlock,
   ContextType
 >
-export interface ListProps<ContextType = PortableTextSvelteContext>
-  extends Omit<BlockProps<ToolkitPortableTextList, ContextType>, 'block'> {
+export interface ListComponentProps<ContextType = PortableTextSvelteContext>
+  extends Omit<BlockComponentProps<ToolkitPortableTextList, ContextType>, 'block'> {
   list: ToolkitPortableTextList & {
     listItem: PortableTextListItemType
   }
@@ -106,47 +125,44 @@ export interface ListProps<ContextType = PortableTextSvelteContext>
 /**
  * Used solely by BlockSpan, not exposed to end-user
  */
-export interface SpanProps<ContextType = PortableTextSvelteContext>
+export interface SpanComponentProps<ContextType = PortableTextSvelteContext>
   extends CommonProps<ContextType> {
   parentBlock: PortableTextBlock
   span: ArbitraryTypedObject | PortableTextSpan
 }
 
-export interface MarkProps<
+/**
+ * Values passed under the `portableText` prop to components rendering marks.
+ */
+export interface MarkComponentProps<
   MarkType = string | PortableTextMarkDefinition,
   ContextType = PortableTextSvelteContext
-> extends SpanProps<ContextType> {
+> extends SpanComponentProps<ContextType> {
   mark: MarkType
 }
 
-export type PortableTextMarkComponent = SvelteComponentTyped<{
-  portableText: MarkProps
-}>
-
 // Unfortunately Svelte components don't play nicely with Typescript,
 // so we need to `| any` all of these types
-export type BlockComponent =
+type BlockComponent =
   | SvelteComponentTyped<{
-      portableText: BlockProps
+      portableText: BlockComponentProps
     }>
   | any
 
-export type MarkComponent = PortableTextMarkComponent | any
-
-export type SpanComponent =
+type MarkComponent =
   | SvelteComponentTyped<{
-      portableText: SpanProps
+      portableText: MarkComponentProps
     }>
   | any
 
-export type ListComponent =
+type ListComponent =
   | SvelteComponentTyped<{
-      portableText: ListProps
+      portableText: ListComponentProps
     }>
   | any
 
-export type ListItemComponent =
+type ListItemComponent =
   | SvelteComponentTyped<{
-      portableText: ListItemProps
+      portableText: ListItemComponentProps
     }>
   | any

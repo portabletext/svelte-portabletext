@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {ListProps} from '../rendererTypes'
+  import type {ListComponentProps} from '../rendererTypes'
 
-  export let portableText: ListProps
+  export let portableText: ListComponentProps
 
   $: ({list} = portableText)
 

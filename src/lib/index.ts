@@ -11,4 +11,10 @@ export {default as DefaultListItem} from './defaultComponents/DefaultListItem.sv
 export {default as DefaultMark} from './defaultComponents/DefaultMark.svelte'
 
 // Types
-export type {BlockProps, MarkProps, PortableTextComponents} from './rendererTypes'
+export type {
+  BlockComponentProps,
+  MarkComponentProps,
+  ListComponentProps,
+  ListItemComponentProps,
+  PortableTextComponents
+} from './rendererTypes'
