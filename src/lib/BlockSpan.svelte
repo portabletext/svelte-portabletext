@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type {SpanProps} from './rendererTypes'
+  import type {SpanComponentProps} from './rendererTypes'
   import ReportError from './ReportError.svelte'
 
-  export let portableText: SpanProps
+  export let portableText: SpanComponentProps
   $: ({span, parentBlock, components} = portableText)
 
   $: allMarks = span.marks || []
