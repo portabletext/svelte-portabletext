@@ -3,9 +3,9 @@
   import assertBlockKey from './assertBlockKey'
   import defaultComponents from './defaultComponents/defaultComponents'
   import {mergeComponents} from './defaultComponents/mergeComponents'
-  import EntriesRenderer from './EntriesRenderer.svelte'
   import type {InputValue, PortableTextSvelteContext} from './ptTypes'
   import type {PortableTextComponents} from './rendererTypes'
+  import RenderNode from './RenderNode.svelte'
 
   export let value: InputValue = []
   export let components: PortableTextComponents = undefined
@@ -17,10 +17,17 @@
   $: blocks = nestLists(keyedBlocks, LIST_NEST_MODE_HTML)
 </script>
 
-<EntriesRenderer
-  components={mergedComponents}
-  _rawInput={value}
-  {blocks}
-  {ignoreUnknownTypes}
-  {context}
-/>
+{#each blocks as node, index (node._key)}
+  <RenderNode
+    options={{
+      node,
+      components: mergedComponents,
+      ignoreUnknownTypes,
+      context,
+      blocks,
+      _rawPtValue: value,
+      isInline: false,
+      nodeIndex: index
+    }}
+  />
+{/each}
