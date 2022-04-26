@@ -1,8 +1,14 @@
 import Rendered from './053-override-default-marks.svelte'
+import Link from '../test-components/Link.svelte'
 
 export default {
   name: '053-override-default-marks',
   rendered: Rendered,
+  components: {
+    marks: {
+      link: Link
+    }
+  },
   value: [
     {
       _type: 'block',

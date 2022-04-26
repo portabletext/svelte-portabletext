@@ -1,4 +1,5 @@
 import type {InputValue} from '../../src/lib/ptTypes'
+import type {PortableTextComponents} from '../../src/lib/rendererTypes'
 
 import test001 from './001-empty-block'
 import test002 from './002-single-span'
@@ -31,6 +32,7 @@ interface RenderTestFile {
   value: InputValue
   rendered: any
   name: string
+  components?: PortableTextComponents
 }
 
 export default [
