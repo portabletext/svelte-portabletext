@@ -139,6 +139,18 @@ With the change above, you can also define components for custom lists:
 
 For simple `link` mark annotations with an `href`, `link` or `url` value, the renderer now provides a simplified default renderer.
 
+## Underline marks are now rendered as styled spans
+
+Before, we were rendering them as [`u` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u), which have a different semantic meaning attached to them.
+
+```html
+<!-- From: -->
+<u>My rendered underline</u>
+
+<!-- ✅ To: -->
+<span style="text-decoration:underline;">My rendered underline</span>
+```
+
 ## Access to `toPlainText` utility
 
 You can now use the provided `toPlainText` utility function to render PortableText in plain strings:
