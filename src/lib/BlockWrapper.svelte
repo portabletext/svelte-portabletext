@@ -18,7 +18,21 @@
 
 {#if component}
   <svelte:component this={component} {portableText}>
-    <slot />
+    <!-- Styled lists: wrap any other style in whatever the block serializer says to use -->
+    {#if isListItem && value.style && value.style !== 'normal' && components.block[value.style]}
+      <svelte:component
+        this={components.block[value.style]}
+        portableText={{
+          ...portableText,
+          isInline: false,
+          listItem: undefined
+        }}
+      >
+        <slot />
+      </svelte:component>
+    {:else}
+      <slot />
+    {/if}
   </svelte:component>
 {:else}
   <ReportError message="Style {style} has no compatible renderer (block {value._key})" />
