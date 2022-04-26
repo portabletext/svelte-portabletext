@@ -1,6 +1,6 @@
 import type {InputValue} from '$lib/ptTypes'
-import {NATIVE_MARKS} from '../sharedData/marks'
-import {LIST_LEVELS} from '../sharedData/listLevels'
+import {NATIVE_MARKS} from './sharedData/marks'
+import {LIST_LEVELS} from './sharedData/listLevels'
 
 // This data was written by hand.
 // In a real-world scenario it'd be generated from the PortableText Editor.

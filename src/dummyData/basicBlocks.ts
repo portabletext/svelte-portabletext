@@ -1,6 +1,6 @@
 import type {InputValue} from '$lib/ptTypes'
-import {NATIVE_MARKS} from '../sharedData/marks'
-import {NATIVE_STYLES} from '../sharedData/styles'
+import {NATIVE_MARKS} from './sharedData/marks'
+import {NATIVE_STYLES} from './sharedData/styles'
 
 // This data was written by hand.
 // In a real-world scenario it'd be generated from the PortableText Editor.
