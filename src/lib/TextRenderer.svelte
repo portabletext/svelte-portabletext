@@ -9,8 +9,7 @@
 
 {#if typeof text === 'string'}
   {#each lines as line, index}
-    {line}
-    {#if index < lines.length - 1 && components.hardBreak !== false}
+    {line}{#if index < lines.length - 1 && components.hardBreak !== false}
       {#if typeof components.hardBreak === 'function'}
         <svelte:component this={components.hardBreak} />
       {:else}

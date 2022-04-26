@@ -30,10 +30,8 @@
             ignoreUnknownTypes: portableText.ignoreUnknownTypes,
             span: child,
             context: portableText.context
-          }}
+          }}><TextRenderer {components} text={child.text} /></BlockSpan
         >
-          <TextRenderer {components} text={child.text} />
-        </BlockSpan>
       {:else if child._type === LIST_TYPE}
         <!-- `listItem` block with nested `@list` -->
         <ListRenderer
