@@ -45,8 +45,7 @@
       ? currentMark
       : currentMark._type} has no compatible renderer or is missing markDefs (block {parentBlock._key}, child {span._key})"
     ignoreUnknownTypes={portableText.ignoreUnknownTypes || !!components?.unknownMark}
-  />
-  {#if components?.unknownMark}
+  />{#if components?.unknownMark}
     <svelte:component
       this={components.unknownMark}
       portableText={{...portableText, mark: currentMark}}
