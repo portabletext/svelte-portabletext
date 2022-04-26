@@ -1,6 +1,7 @@
 /* eslint-disable */
 import '@testing-library/jest-dom'
 import {cleanup, render} from '@testing-library/svelte'
+import {format} from 'prettier'
 
 import PortableText from '../src/lib/PortableText.svelte'
 
@@ -15,6 +16,8 @@ for (const renderTest of allTests) {
     cleanup()
     const expectedRender = render(renderTest.rendered).container.innerHTML
 
-    expect(renderedByPackage).toBe(expectedRender)
+    expect(format(renderedByPackage, {parser: 'html'})).toBe(
+      format(expectedRender, {parser: 'html'})
+    )
   })
 }
