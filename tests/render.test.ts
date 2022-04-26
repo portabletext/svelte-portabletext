@@ -1,5 +1,5 @@
 /* eslint-disable */
-import '@testing-library/jest-dom'
+// @ts-nocheck
 import {cleanup, render} from '@testing-library/svelte'
 import {format} from 'prettier'
 
