@@ -32,7 +32,8 @@ const defaultComponents: PortableTextSvelteComponents = {
     bullet: DefaultListItem,
     number: DefaultListItem
   },
-  types: {}
+  types: {},
+  hardBreak: true
 }
 
 export default defaultComponents
