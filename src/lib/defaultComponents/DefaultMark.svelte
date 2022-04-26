@@ -20,9 +20,9 @@
     <slot />
   </code>
 {:else if mark === 'underline'}
-  <u>
+  <span style="text-decoration:underline;">
     <slot />
-  </u>
+  </span>
 {:else if mark === 'strike-through'}
   <del>
     <slot />
