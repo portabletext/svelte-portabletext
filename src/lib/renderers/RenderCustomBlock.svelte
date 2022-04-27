@@ -1,9 +1,11 @@
 <script lang="ts">
-  import type {TypedObject} from '@portabletext/types'
-  import type {PortableTextSvelteComponents} from '../rendererTypes'
+  import type {ArbitraryTypedObject} from '@portabletext/types'
+  import type {GlobalProps, PortableTextSvelteComponents} from '../rendererTypes'
 
-  export let node: TypedObject
-  export let components: PortableTextSvelteComponents
+  export let global: GlobalProps
+  $: ({components} = global)
+
+  export let node: ArbitraryTypedObject
 
   $: ({_type} = node)
   $: customComponent = typeof components.types[_type]

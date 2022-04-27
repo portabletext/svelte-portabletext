@@ -7,87 +7,89 @@
     isPortableTextToolkitSpan,
     isPortableTextToolkitTextNode
   } from '@portabletext/toolkit'
-  import type {InputValue, NormalizedBlocks, PortableTextSvelteContext} from './ptTypes'
-  import type {PortableTextSvelteComponents} from './rendererTypes'
-  import RenderText from './renderers/RenderText.svelte'
+  import type {PortableTextBlock} from '@portabletext/types'
+  import type {GenericNode} from './ptTypes'
   import RenderBlock from './renderers/RenderBlock.svelte'
-  import RenderSpan from './renderers/RenderSpan.svelte'
-  import RenderListItem from './renderers/RenderListItem.svelte'
-  import RenderList from './renderers/RenderList.svelte'
   import RenderCustomBlock from './renderers/RenderCustomBlock.svelte'
+  import RenderList from './renderers/RenderList.svelte'
+  import RenderListItem from './renderers/RenderListItem.svelte'
+  import RenderSpan from './renderers/RenderSpan.svelte'
+  import RenderText from './renderers/RenderText.svelte'
+  import type {GlobalProps} from './rendererTypes'
 
+  export let global: GlobalProps
   export let options: {
-    // Global Context
-    components: PortableTextSvelteComponents
-    _rawPtValue: InputValue
-    context: PortableTextSvelteContext
-    ignoreUnknownTypes?: boolean
-
-    // Undecided
-    blocks: NormalizedBlocks
+    indexInParent: number
+    node: GenericNode
+    parentBlock?: PortableTextBlock
     isInline?: boolean
-
-    // Specific
-    node: NormalizedBlocks[0]
-    nodeIndex: number
   }
-  $: ({node, components} = options)
+  $: ({node, parentBlock} = options)
 </script>
 
 {#if isPortableTextToolkitList(node)}
-  <RenderList {node} {components}>
+  <RenderList {node} {global}>
     {#each node.children as child, childIndex}
       <svelte:self
         options={{
-          ...options,
+          // @TODO: pass the current list as a parentBlock?
+          parentBlock,
           node: child,
-          isInline: false,
-          index: childIndex
+          // @TODO: is this the right isInline? What are we rendering as children here?
+          isInline: undefined,
+          indexInParent: childIndex
         }}
+        {global}
       />
     {/each}
   </RenderList>
 {:else if isPortableTextListItemBlock(node)}
-  <RenderListItem {node} {components}>
+  <RenderListItem {node} {global}>
     {#each buildMarksTree(node) as child, childIndex}
       <svelte:self
         options={{
-          ...options,
+          // @TODO: pass the current listItem as a parentBlock?
+          parentBlock,
           node: child,
-          isInline: false,
-          index: childIndex
+          // @TODO: is this the right isInline? What are we rendering as children here?
+          isInline: undefined,
+          indexInParent: childIndex
         }}
+        {global}
       />
     {/each}
   </RenderListItem>
 {:else if isPortableTextToolkitSpan(node)}
-  <RenderSpan {node} {components}>
+  <RenderSpan {node} {global} {parentBlock}>
     {#each node.children as child, childIndex}
       <svelte:self
         options={{
-          ...options,
+          parentBlock,
           node: child,
-          isInline: false,
-          index: childIndex
+          // @TODO: is this the right isInline? What are we rendering as children here?
+          isInline: undefined,
+          indexInParent: childIndex
         }}
+        {global}
       />
     {/each}
   </RenderSpan>
 {:else if isPortableTextBlock(node)}
-  <RenderBlock {node} {components}>
+  <RenderBlock {node} {global}>
     {#each buildMarksTree(node) as child, childIndex}
       <svelte:self
         options={{
-          ...options,
+          parentBlock: node,
           node: child,
-          isInline: false,
-          index: childIndex
+          isInline: true,
+          indexInParent: childIndex
         }}
+        {global}
       />
     {/each}
   </RenderBlock>
 {:else if isPortableTextToolkitTextNode(node)}
-  <RenderText {node} {components} />
+  <RenderText {node} {global} />
 {:else}
-  <RenderCustomBlock {node} {components} />
+  <RenderCustomBlock {node} {global} />
 {/if}

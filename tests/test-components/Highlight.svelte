@@ -1,8 +1,10 @@
 <!-- Used by 052, 018 -->
-<script>
-  export let portableText
+<script lang="ts">
+  import type {MarkComponentProps} from '../../src/lib/rendererTypes'
 
-  $: ({thickness} = portableText.mark || {})
+  export let portableText: MarkComponentProps<{thickness: number}>
+
+  $: ({thickness} = portableText.markDef || {})
 </script>
 
 <span style="border:{thickness}px solid;">

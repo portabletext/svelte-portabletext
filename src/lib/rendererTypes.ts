@@ -1,12 +1,14 @@
-import type {ToolkitPortableTextList} from '@portabletext/toolkit'
 import type {
+  ToolkitNestedPortableTextSpan,
+  ToolkitPortableTextList,
+  ToolkitPortableTextListItem
+} from '@portabletext/toolkit'
+import type {
+  ArbitraryTypedObject,
   PortableTextBlock,
   PortableTextBlockStyle,
-  PortableTextListItemBlock,
   PortableTextListItemType,
-  PortableTextSpan,
-  PortableTextMarkDefinition,
-  ArbitraryTypedObject
+  PortableTextMarkDefinition
 } from '@portabletext/types'
 import type {SvelteComponentTyped} from 'svelte'
 import type {
@@ -16,13 +18,72 @@ import type {
   PortableTextSvelteContext
 } from './ptTypes'
 
+export interface GlobalProps<ContextType = PortableTextSvelteContext> {
+  ignoreUnknownTypes?: boolean
+  components: PortableTextSvelteComponents
+  context: ContextType
+  // @TODO: should we pass the blocks & raw input to elements?
+  blocks: NormalizedBlocks
+  _rawInputValue: InputValue
+}
+
+export interface CommonComponentProps<ContextType = PortableTextSvelteContext>
+  extends GlobalProps<ContextType> {
+  // @TODO: should we pass the node index to user-facing components?
+  indexInParent: number
+}
+
+export interface CustomBlockComponentProps<
+  BlockType extends Partial<ArbitraryTypedObject> = ArbitraryTypedObject,
+  ContextType = PortableTextSvelteContext
+> extends CommonComponentProps<ContextType> {
+  value: BlockType
+  isInline: boolean
+  /**
+   * Exclusive to inline blocks.
+   */
+  parentBlock?: PortableTextBlock
+}
+
+export interface BlockComponentProps<ContextType = PortableTextSvelteContext>
+  extends CommonComponentProps<ContextType>,
+    Pick<CustomBlockComponentProps, 'isInline' | 'parentBlock'> {
+  value: PortableTextBlock
+}
+
+export interface ListItemComponentProps<ContextType = PortableTextSvelteContext>
+  extends CommonComponentProps<ContextType> {
+  value: ToolkitPortableTextListItem
+  // @TODO: can we expose parentListBlock or similar here?
+}
+
+export interface ListComponentProps<ContextType = PortableTextSvelteContext>
+  extends CommonComponentProps<ContextType> {
+  value: ToolkitPortableTextList
+}
+
+/**
+ * Values passed under the `portableText` prop to components rendering marks.
+ */
+export interface MarkComponentProps<
+  MarkType extends Partial<PortableTextMarkDefinition> = PortableTextMarkDefinition,
+  ContextType = PortableTextSvelteContext
+> extends CommonComponentProps<ContextType>,
+    Pick<ToolkitNestedPortableTextSpan<MarkType>, 'markDef' | 'markKey' | 'markType'>,
+    Pick<CustomBlockComponentProps, 'parentBlock'> {
+  plainTextContent: string
+
+  // @TODO: Can we pass the raw parent span here, and not the toolkit version? Would it even be useful?
+  // parentSpan: ArbitraryTypedObject | PortableTextSpan
+}
+
 export type CustomStyles =
   | Record<PortableTextBlockStyle, BlockComponent | undefined>
   | BlockComponent
 
 export type CustomMarks = Record<PortableTextMarkType, MarkComponent>
 
-export type CustomTypes = Record<string, BlockComponent>
+export type CustomTypes = Record<string, CustomBlockComponent>
 
 export interface PortableTextSvelteComponents {
   /**
@@ -81,7 +142,7 @@ export interface PortableTextSvelteComponents {
    * Component to use for rendering "hard breaks", eg `\n` inside of text spans
    * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
    */
-  hardBreak: SvelteComponentTyped<never> | any | false
+  hardBreak: SvelteComponentTyped<never> | false
 
   /* eslint-disable */
   /**
@@ -97,62 +158,17 @@ export interface PortableTextSvelteComponents {
 
 export type PortableTextComponents = Partial<PortableTextSvelteComponents>
 
-interface CommonProps<ContextType = PortableTextSvelteContext> {
-  ignoreUnknownTypes?: boolean
-  components: PortableTextSvelteComponents
-  context: ContextType
-}
-
-export interface BlockComponentProps<
-  BlockType = PortableTextBlock,
-  ContextType = PortableTextSvelteContext
-> extends CommonProps<ContextType> {
-  index: number
-  blocks: NormalizedBlocks
-  _rawInput: InputValue
-  value: BlockType
-  /**
-   * Exclusive to inline blocks.
-   */
-  parentBlock?: PortableTextBlock
-  isInline: true
-}
-
-export type ListItemComponentProps<ContextType = PortableTextSvelteContext> = BlockComponentProps<
-  PortableTextListItemBlock,
-  ContextType
->
-export interface ListComponentProps<ContextType = PortableTextSvelteContext>
-  extends Omit<BlockComponentProps<ToolkitPortableTextList, ContextType>, 'block'> {
-  value: ToolkitPortableTextList & {
-    listItem: PortableTextListItemType
-  }
-}
-
-/**
- * Used solely by BlockSpan, not exposed to end-user
- */
-export interface SpanComponentProps<ContextType = PortableTextSvelteContext>
-  extends CommonProps<ContextType> {
-  parentBlock: PortableTextBlock
-  span: ArbitraryTypedObject | PortableTextSpan
-}
-
-/**
- * Values passed under the `portableText` prop to components rendering marks.
- */
-export interface MarkComponentProps<
-  MarkType = string | PortableTextMarkDefinition,
-  ContextType = PortableTextSvelteContext
-> extends SpanComponentProps<ContextType> {
-  mark: MarkType
-}
-
 // Unfortunately Svelte components don't play nicely with Typescript,
 // so we need to `| any` all of these types
 type BlockComponent =
   | SvelteComponentTyped<{
       portableText: BlockComponentProps
+    }>
+  | any
+
+type CustomBlockComponent =
+  | SvelteComponentTyped<{
+      portableText: CustomBlockComponentProps
     }>
   | any
 

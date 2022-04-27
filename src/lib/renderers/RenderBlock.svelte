@@ -1,10 +1,12 @@
 <script lang="ts">
-  import defaultComponents from '../defaultComponents/defaultComponents'
   import type {PortableTextBlock} from '@portabletext/types'
-  import type {PortableTextSvelteComponents} from '../rendererTypes'
+  import defaultComponents from '../defaultComponents/defaultComponents'
+  import type {GlobalProps} from '../rendererTypes'
+
+  export let global: GlobalProps
+  $: ({components} = global)
 
   export let node: PortableTextBlock
-  export let components: PortableTextSvelteComponents
 
   $: ({style = 'normal'} = node)
   $: handler = typeof components.block === 'function' ? components.block : components.block[style]

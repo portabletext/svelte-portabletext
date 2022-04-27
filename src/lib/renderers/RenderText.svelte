@@ -1,11 +1,11 @@
 <script lang="ts">
   import type {ToolkitTextNode} from '@portabletext/toolkit'
+  import type {GlobalProps} from '../rendererTypes'
 
-  import type {PortableTextSvelteComponents} from '../rendererTypes'
+  export let global: GlobalProps
+  $: ({components} = global)
 
   export let node: ToolkitTextNode
-  export let components: PortableTextSvelteComponents
-
   $: ({text} = node)
 </script>
 

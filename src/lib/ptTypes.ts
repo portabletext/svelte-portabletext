@@ -16,3 +16,5 @@ export declare type PortableTextMarkType =
 export type InputValue = PortableTextBlock | PortableTextBlock[]
 
 export type NormalizedBlocks = ReturnType<typeof nestLists>
+
+export type GenericNode = NormalizedBlocks[0]

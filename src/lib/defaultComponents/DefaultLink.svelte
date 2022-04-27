@@ -3,8 +3,8 @@
 
   export let portableText: MarkComponentProps
 
-  $: ({mark} = portableText)
-  $: href = typeof mark !== 'string' && (mark?.href || mark?.url || mark?.link || mark?.value)
+  $: ({markDef} = portableText)
+  $: href = markDef?.href || markDef?.url || markDef?.link || markDef?.value
 </script>
 
 {#if typeof href === 'string'}

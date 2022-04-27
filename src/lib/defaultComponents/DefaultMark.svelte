@@ -1,29 +1,28 @@
 <script lang="ts">
   import type {MarkComponentProps} from '../rendererTypes'
-  import DefaultLink from './DefaultLink.svelte'
 
   export let portableText: MarkComponentProps
 
-  $: ({mark} = portableText)
+  $: ({markType} = portableText)
 </script>
 
-{#if mark === 'strong'}
+{#if markType === 'strong'}
   <strong>
     <slot />
   </strong>
-{:else if mark === 'em'}
+{:else if markType === 'em'}
   <em>
     <slot />
   </em>
-{:else if mark === 'code'}
+{:else if markType === 'code'}
   <code>
     <slot />
   </code>
-{:else if mark === 'underline'}
+{:else if markType === 'underline'}
   <span style="text-decoration:underline;">
     <slot />
   </span>
-{:else if mark === 'strike-through'}
+{:else if markType === 'strike-through'}
   <del>
     <slot />
   </del>

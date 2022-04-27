@@ -1,27 +1,33 @@
 <script lang="ts">
   import {spanToPlainText, ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
+  import type {PortableTextBlock} from '@portabletext/types'
   import defaultComponents from '../defaultComponents/defaultComponents'
-  import type {PortableTextSvelteComponents} from '../rendererTypes'
+  import type {GlobalProps, MarkComponentProps} from '../rendererTypes'
+
+  export let global: GlobalProps
+  $: ({components} = global)
 
   export let node: ToolkitNestedPortableTextSpan
-  export let components: PortableTextSvelteComponents
+  export let parentBlock: PortableTextBlock
 
-  $: ({markType, markDef, markKey} = node)
+  $: ({markType} = node)
   $: markComponent = components.marks[markType] || defaultComponents.marks[markType]
+
+  // Using a function is the only way to use TS in Svelte reactive assignments
+  $: markProps = (() => {
+    return {
+      ...global,
+      parentBlock,
+      markType,
+      markDef: node.markDef,
+      markKey: node.markKey,
+      plainTextContent: spanToPlainText(node)
+    } as MarkComponentProps
+  })()
 </script>
 
 {#if markComponent}
-  <!-- @TODO: Work on passing the right props -->
-  <svelte:component
-    this={markComponent}
-    portableText={{
-      mark: markDef || markType,
-      plainText: spanToPlainText(node),
-      markDef,
-      markKey,
-      markType
-    }}
-  >
+  <svelte:component this={markComponent} portableText={markProps}>
     <slot />
   </svelte:component>
 {:else}

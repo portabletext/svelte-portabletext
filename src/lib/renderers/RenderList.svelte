@@ -1,10 +1,12 @@
 <script lang="ts">
   import type {ToolkitPortableTextList} from '@portabletext/toolkit'
   import defaultComponents from '../defaultComponents/defaultComponents'
-  import type {PortableTextSvelteComponents} from '../rendererTypes'
+  import type {GlobalProps} from '../rendererTypes'
+
+  export let global: GlobalProps
+  $: ({components} = global)
 
   export let node: ToolkitPortableTextList
-  export let components: PortableTextSvelteComponents
 
   $: ({listItem} = node)
   $: handler = typeof components.list === 'function' ? components.list : components.list[listItem]

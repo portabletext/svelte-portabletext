@@ -19,13 +19,15 @@
 
 {#each blocks as node, index (node._key)}
   <RenderNode
-    options={{
-      node,
+    global={{
       components: mergedComponents,
       ignoreUnknownTypes,
       context,
       blocks,
-      _rawPtValue: value,
+      _rawInputValue: value
+    }}
+    options={{
+      node,
       isInline: false,
       nodeIndex: index
     }}
