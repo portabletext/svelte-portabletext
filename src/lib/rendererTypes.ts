@@ -68,8 +68,7 @@ export interface CustomBlockComponentProps<
 }
 
 export interface BlockComponentProps<ContextType = PortableTextSvelteContext>
-  extends CommonComponentProps<ContextType>,
-    Pick<CustomBlockComponentProps, 'isInline' | 'parentBlock'> {
+  extends CommonComponentProps<ContextType> {
   value: PortableTextBlock
 }
 

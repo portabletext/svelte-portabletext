@@ -40,7 +40,7 @@
         options={{
           node: child,
           indexInParent: childIndex,
-          // The list's children will be parsed as PortableTextBlocks, which will pass the proper parentBlock & isInline
+          // The list's children will be parsed as PortableTextListItem, which will pass the proper parentBlock & isInline
           parentBlock: undefined,
           isInline: undefined
         }}
@@ -49,15 +49,20 @@
     {/each}
   </RenderList>
 {:else if isPortableTextListItemBlock(node)}
-  <RenderListItem {node} {global}>
+  <RenderListItem
+    options={{
+      node,
+      indexInParent
+    }}
+    {global}
+  >
     {#each buildMarksTree(node) as child, childIndex}
       <svelte:self
         options={{
-          // @TODO: pass the current listItem as a parentBlock?
-          parentBlock,
+          // Pass the current listItem as a parentBlock
+          parentBlock: node,
           node: child,
-          // @TODO: is this the right isInline? What are we rendering as children here?
-          isInline: undefined,
+          isInline: true,
           indexInParent: childIndex
         }}
         {global}

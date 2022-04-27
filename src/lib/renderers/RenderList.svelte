@@ -10,9 +10,9 @@
     indexInParent: number
     node: ToolkitPortableTextList
   }
-
   $: ({node, indexInParent} = options)
   $: ({listItem} = node)
+
   $: handler = typeof components.list === 'function' ? components.list : components.list[listItem]
   $: listComponent = handler || defaultComponents.list.bullet
 
