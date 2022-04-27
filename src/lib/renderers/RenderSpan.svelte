@@ -16,7 +16,7 @@
   // Using a function is the only way to use TS in Svelte reactive assignments
   $: markProps = (() => {
     return {
-      ...global,
+      global,
       parentBlock,
       markType,
       markDef: node.markDef,

@@ -19,7 +19,7 @@
   // Using a function is the only way to use TS in Svelte reactive assignments
   $: listProps = (() => {
     return {
-      ...global,
+      global,
       value: node,
       indexInParent
     } as ListComponentProps

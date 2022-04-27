@@ -19,18 +19,40 @@ import type {
 } from './ptTypes'
 
 export interface GlobalProps<ContextType = PortableTextSvelteContext> {
+  /**
+   * The configuration passed to the `<PortableText>` component.
+   */
   ignoreUnknownTypes?: boolean
+
+  /**
+   * Svelte components used to render portable text.
+   * This is an object with user-defined components merged with native ones.
+   */
   components: PortableTextSvelteComponents
+
+  /**
+   * User-defined data context, as passed to the `<PortableText>` component.
+   */
   context: ContextType
-  // @TODO: should we pass the blocks & raw input to elements?
-  blocks: NormalizedBlocks
-  _rawInputValue: InputValue
+
+  /**
+   * Raw portable text value passed to the `<PortableText>` component.
+   */
+  ptRawValue: InputValue
+
+  /**
+   * Parsed portable text value. Extracted from ptRawValue.
+   */
+  ptBlocks: NormalizedBlocks
 }
 
-export interface CommonComponentProps<ContextType = PortableTextSvelteContext>
-  extends GlobalProps<ContextType> {
-  // @TODO: should we pass the node index to user-facing components?
+export interface CommonComponentProps<ContextType = PortableTextSvelteContext> {
+  /**
+   * Refers to the index of the given node in its parent's children array.
+   * If a top-level block, this will be its index in the original portable text `value`.
+   */
   indexInParent: number
+  global: GlobalProps<ContextType>
 }
 
 export interface CustomBlockComponentProps<
