@@ -24,7 +24,7 @@
     parentBlock?: PortableTextBlock
     isInline?: boolean
   }
-  $: ({node, indexInParent, parentBlock} = options)
+  $: ({node, indexInParent, parentBlock, isInline} = options)
 </script>
 
 {#if isPortableTextToolkitList(node)}
@@ -88,6 +88,6 @@
   </RenderBlock>
 {:else if isPortableTextToolkitTextNode(node)}
   <RenderText {node} {global} />
-{:else}
-  <RenderCustomBlock {node} {global} />
+{:else if node}
+  <RenderCustomBlock {node} {parentBlock} {indexInParent} {isInline} {global} />
 {/if}

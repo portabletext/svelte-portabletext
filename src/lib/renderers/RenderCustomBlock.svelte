@@ -1,21 +1,30 @@
 <script lang="ts">
-  import type {ArbitraryTypedObject} from '@portabletext/types'
-  import type {GlobalProps, PortableTextSvelteComponents} from '../rendererTypes'
+  import type {ArbitraryTypedObject, PortableTextBlock} from '@portabletext/types'
+  import type {CustomBlockComponentProps, GlobalProps} from '../rendererTypes'
 
   export let global: GlobalProps
   $: ({components} = global)
 
   export let node: ArbitraryTypedObject
+  export let parentBlock: PortableTextBlock
+  export let indexInParent: number
+  export let isInline = false
 
   $: ({_type} = node)
-  $: customComponent = typeof components.types[_type]
+  $: customComponent = components.types[_type]
+
+  // Using a function is the only way to use TS in Svelte reactive assignments
+  $: componentProps = (() => {
+    return {
+      global,
+      value: node,
+      indexInParent,
+      parentBlock,
+      isInline
+    } as CustomBlockComponentProps
+  })()
 </script>
 
-{#if customComponent}
-  <!-- @TODO: Work on passing the right props -->
-  <svelte:component this={customComponent} portableText={{value: node}}>
-    <slot />
-  </svelte:component>
-{:else}
-  <slot />
+{#if typeof customComponent === 'function'}
+  <svelte:component this={customComponent} portableText={componentProps} />
 {/if}
