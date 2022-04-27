@@ -6,11 +6,8 @@
   export let global: GlobalProps
   $: ({components} = global)
 
-  export let options: {
-    indexInParent: number
-    node: ToolkitPortableTextListItem
-  }
-  $: ({node, indexInParent} = options)
+  export let indexInParent: number
+  export let node: ToolkitPortableTextListItem
   $: ({style = 'normal'} = node)
 
   $: handler =

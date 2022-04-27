@@ -6,11 +6,8 @@
   export let global: GlobalProps
   $: ({components} = global)
 
-  export let options: {
-    indexInParent: number
-    node: ToolkitPortableTextList
-  }
-  $: ({node, indexInParent} = options)
+  export let indexInParent: number
+  export let node: ToolkitPortableTextList
   $: ({listItem} = node)
 
   $: handler = typeof components.list === 'function' ? components.list : components.list[listItem]

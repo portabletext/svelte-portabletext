@@ -28,13 +28,7 @@
 </script>
 
 {#if isPortableTextToolkitList(node)}
-  <RenderList
-    options={{
-      node,
-      indexInParent
-    }}
-    {global}
-  >
+  <RenderList {node} {indexInParent} {global}>
     {#each node.children as child, childIndex}
       <svelte:self
         options={{
@@ -49,13 +43,7 @@
     {/each}
   </RenderList>
 {:else if isPortableTextListItemBlock(node)}
-  <RenderListItem
-    options={{
-      node,
-      indexInParent
-    }}
-    {global}
-  >
+  <RenderListItem {node} {indexInParent} {global}>
     {#each buildMarksTree(node) as child, childIndex}
       <svelte:self
         options={{
@@ -70,7 +58,7 @@
     {/each}
   </RenderListItem>
 {:else if isPortableTextToolkitSpan(node)}
-  <RenderSpan {node} {global} {parentBlock}>
+  <RenderSpan {node} {parentBlock} {global}>
     {#each node.children as child, childIndex}
       <svelte:self
         options={{
