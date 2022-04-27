@@ -6,6 +6,8 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 
 `npm i @portabletext/svelte -D`
 
+⚠️ Svelte 3.47.0 or higher is required.
+
 ```svelte
 <script>
   import {PortableText} from '@portabletext/svelte'
@@ -68,13 +70,13 @@ You can use the `components` prop to determine how the renderer should process e
 Example components from above:
 
 ```svelte
-<!-- UserInfo (block type) -->
+<!-- UserInfo (custom block type) -->
 <script lang="ts">
   import {session} from '$app/stores'
-  import type {BlockComponentProps} from '@portabletext/svelte'
+  import type {CustomBlockComponentProps} from '@portabletext/svelte'
 
   // Property custom blocks receive from @portabletext/svelte when redered
-  export let portableText: BlockComponentProps<{bold?: boolean}>
+  export let portableText: CustomBlockComponentProps<{bold?: boolean}>
 
   $: userName = $session?.user?.name || 'person'
 </script>
@@ -99,18 +101,18 @@ Example components from above:
 
   // Remember to make your variables reactive so that they can reflect prop changes
   // See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
-  $: ({mark} = portableText)
-  $: newWindow = mark.newWindow || false
+  $: ({value} = portableText)
+  $: newWindow = value.newWindow || false
 </script>
 
-{#if mark.url}
-  <a href={mark.url} target={newWindow ? '_blank' : undefined}><slot /></a>
+{#if value.url}
+  <a href={value.url} target={newWindow ? '_blank' : undefined}><slot /></a>
 {:else}
   <slot />
 {/if}
 ```
 
-> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
+> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly. We're tracking this in [#1](https://github.com/portabletext/svelte-portabletext/issues/1).
 
 ```svelte
 <!-- CustomHeading (blockStyle) -->
@@ -221,11 +223,11 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
   // From the context, let's figure out what's the position of this footnote
   $: number =
-    portableText.context.footnotes.findIndex((note) => note._key === portableText.mark._key) + 1
+    portableText.global.context.footnotes.findIndex((note) => note._key === portableText.value._key) + 1
 </script>
 
-<span id="src-{portableText.mark._key}">
-  <slot /><sup><a href={`#note-${portableText.mark._key}`}>{number}</a></sup>
+<span id="src-{portableText.value._key}">
+  <slot /><sup><a href={`#note-${portableText.value._key}`}>{number}</a></sup>
 </span>
 ```
 
