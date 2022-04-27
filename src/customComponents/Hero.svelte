@@ -2,10 +2,10 @@
   import type {PortableTextBlock} from '@portabletext/types'
   import PortableText from '$lib/PortableText.svelte'
 
-  import type {BlockComponentProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
   import Link from './Link.svelte'
 
-  export let portableText: BlockComponentProps<{
+  export let portableText: CustomBlockComponentProps<{
     title: string
     subtitle: PortableTextBlock[]
     image: {

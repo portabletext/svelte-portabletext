@@ -1,10 +1,9 @@
 <script lang="ts">
-  import type {MarkProps} from '$lib/rendererTypes'
+  import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: MarkProps
+  export let portableText: MarkComponentProps
   $: console.log('Unkown mark: ', {
-    mark: portableText.mark,
-    span: portableText.span,
+    mark: portableText.markDef,
     parentBlock: portableText.parentBlock
   })
 </script>

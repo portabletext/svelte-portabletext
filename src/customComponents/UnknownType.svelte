@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {BlockComponentProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockComponentProps
+  export let portableText: CustomBlockComponentProps
 </script>
 
 <div style="font-size: 0.8em;">
@@ -12,7 +12,7 @@
       {JSON.stringify(
         {
           value: portableText.value,
-          index: portableText.index
+          index: portableText.indexInParent
         },
         null,
         2

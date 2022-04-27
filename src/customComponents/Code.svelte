@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {BlockComponentProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockComponentProps<{
+  export let portableText: CustomBlockComponentProps<{
     code: string
     language: string
   }>

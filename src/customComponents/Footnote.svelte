@@ -1,14 +1,14 @@
 <script lang="ts">
   import type {InputValue} from '$lib/ptTypes'
 
-  import type {MarkProps} from '$lib/rendererTypes'
+  import type {MarkComponentProps} from '$lib/rendererTypes'
 
   interface FootnoteProps {
     _key: string
     note: InputValue
   }
 
-  export let portableText: MarkProps<
+  export let portableText: MarkComponentProps<
     FootnoteProps,
     // Use the second argument to specify your context's type
     {
@@ -17,9 +17,11 @@
   >
 
   $: number =
-    portableText.context.footnotes.findIndex((note) => note._key === portableText.mark._key) + 1
+    portableText.global.context.footnotes.findIndex(
+      (note) => note._key === portableText.markDef._key
+    ) + 1
 </script>
 
-<span id="src-{portableText.mark._key}">
-  <slot /><sup><a href={`#note-${portableText.mark._key}`}>{number}</a></sup>
+<span id="src-{portableText.markDef._key}">
+  <slot /><sup><a href={`#note-${portableText.markDef._key}`}>{number}</a></sup>
 </span>
