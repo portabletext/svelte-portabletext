@@ -1,8 +1,10 @@
 <!-- Used by 053 -->
-<script>
-  export let portableText
+<script lang="ts">
+  import type {MarkComponentProps} from '../../src/lib/rendererTypes'
 
-  $: ({href} = portableText.mark || {})
+  export let portableText: MarkComponentProps<{href?: string}>
+
+  $: ({href} = portableText.markDef || {})
 </script>
 
 <a class="mahlink" {href}>

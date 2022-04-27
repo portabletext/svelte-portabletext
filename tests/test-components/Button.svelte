@@ -1,8 +1,10 @@
 <!-- Used by 026 -->
-<script>
-  export let portableText
+<script lang="ts">
+  import type {CustomBlockComponentProps} from '../../src/lib/rendererTypes'
 
-  $: ({text} = portableText.block)
+  export let portableText: CustomBlockComponentProps<{text?: string}>
+
+  $: ({text} = portableText.value || {})
 </script>
 
 <button>
