@@ -21,8 +21,9 @@ import type {
 export interface GlobalProps<ContextType = PortableTextSvelteContext> {
   /**
    * The configuration passed to the `<PortableText>` component.
+   * @TODO: implement missing component handler
    */
-  ignoreUnknownTypes?: boolean
+  // ignoreUnknownTypes?: boolean
 
   /**
    * Svelte components used to render portable text.

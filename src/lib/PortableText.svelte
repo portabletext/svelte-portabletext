@@ -9,7 +9,8 @@
 
   export let value: InputValue = []
   export let components: PortableTextComponents = undefined
-  export let ignoreUnknownTypes = true
+  // @TODO: implement missing component handler
+  // export let ignoreUnknownTypes = true
   export let context: PortableTextSvelteContext = {}
 
   $: mergedComponents = mergeComponents(defaultComponents, components)
@@ -21,15 +22,15 @@
   <RenderNode
     global={{
       components: mergedComponents,
-      ignoreUnknownTypes,
+      // ignoreUnknownTypes,
       context,
-      blocks,
-      _rawInputValue: value
+      ptBlocks: blocks,
+      ptRawValue: value
     }}
     options={{
       node,
       isInline: false,
-      nodeIndex: index
+      indexInParent: index
     }}
   />
 {/each}

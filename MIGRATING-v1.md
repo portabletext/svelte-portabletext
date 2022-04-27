@@ -4,6 +4,10 @@ This document outlines the breaking changes in @portabletext/svelte `v1.0.0` wit
 
 The goal of the changes is to make the module more ergonomic to use and better aligned with [@portabletext/react](https://www.npmjs.com/package/@portabletext/react). With a shared API and better portability between frameworks, we hope to get closer to PortableText's mission of being extremely portable and presentation-agnostic.
 
+## Minimum Svelte version: **3.47.0**
+
+This package makes usage of the [`svelte:element` tag introduced in 3.47.0](https://github.com/sveltejs/svelte/blob/master/CHANGELOG.md#3470). It won't work with prior versions of Svelte.
+
 ## `PortableText` is now a named import
 
 ```js
@@ -177,15 +181,32 @@ Previously, you'd use `BlockProps` and `MarkProps` for custom components in `typ
   // ✅ To:
   import {
     BlockComponentProps,
+    CustomBlockComponentProps,
     MarkComponentProps,
     ListComponentProps,
     ListItemComponentProps
   } from '@portabletext/svelte'
 
   // Example usage:
-  export let portableText: BlockComponentProps
+  export let portableText: CustomBlockComponentProps<{title: string; subtitle?: string}>
 </script>
 ```
+
+## `context` and other properties shared across all components are now nested under `global`.
+
+```svelte
+<script>
+  // From:
+  $: ({context} = portableText)
+
+  // ✅ To:
+  $: ({
+    global: {context}
+  } = portableText)
+</script>
+```
+
+Refer to the [example Footnote mark component](src/customComponents/Footnote.svelte) for a reference of how it can be used.
 
 ## Components' `block|mark` properties renamed to `value`.
 
@@ -193,12 +214,13 @@ Also extends to new `list` and `listItem` components.
 
 ```svelte
 <script>
-  // All component types now receive `value` in portableText
-  // you can always safely access `value`
+  // Marks, Blocks & CustomBlocks now receive `value` in portableText
   export let portableText
   $: ({value} = portableText)
 </script>
 ```
+
+Keep in mind that [decorators](https://www.sanity.io/docs/customization#e6401a8fe843) - purely visual marks without an attached `markDef` for custom data - won't have a value. Only [annotations](https://www.sanity.io/docs/customization#f924645007e1) - marks with `markDef` - will.
 
 ## Mark components' `block` property renamed to `parentBlock`.
 
@@ -228,3 +250,5 @@ Marks keep receiving their parent block as a prop, but now under the `parentBloc
 ```
 
 This library now uses [@portabletext/toolkit](https://github.com/portabletext/toolkit) to handle its internals. One of the benefits of the toolkit is having
+
+## Mark components now have access to `plainTextContent`
