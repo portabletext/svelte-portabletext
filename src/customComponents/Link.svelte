@@ -6,6 +6,6 @@
   }>
 </script>
 
-<a href={portableText.markDef.href} target="_blank">
+<a href={portableText.value.href} target="_blank">
   <slot />
 </a>

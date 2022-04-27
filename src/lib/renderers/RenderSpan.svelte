@@ -19,7 +19,7 @@
       global,
       parentBlock,
       markType,
-      markDef: node.markDef,
+      value: node.markDef,
       markKey: node.markKey,
       plainTextContent: spanToPlainText(node)
     } as MarkComponentProps

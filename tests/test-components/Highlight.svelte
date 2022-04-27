@@ -4,7 +4,7 @@
 
   export let portableText: MarkComponentProps<{thickness: number}>
 
-  $: ({thickness} = portableText.markDef || {})
+  $: ({thickness} = portableText.value)
 </script>
 
 <span style="border:{thickness}px solid;">

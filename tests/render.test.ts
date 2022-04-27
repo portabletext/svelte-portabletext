@@ -21,3 +21,5 @@ for (const renderTest of allTests) {
     )
   })
 }
+
+// @TODO: add tests for props each type of block should be receiving

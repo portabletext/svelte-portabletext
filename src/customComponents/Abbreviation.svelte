@@ -6,6 +6,6 @@
   }>
 </script>
 
-<abbr title={portableText.markDef.full}>
+<abbr title={portableText.value.full}>
   <slot />
 </abbr>

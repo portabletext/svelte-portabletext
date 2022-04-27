@@ -13,6 +13,7 @@ export {default as DefaultMark} from './defaultComponents/DefaultMark.svelte'
 // Types
 export type {
   BlockComponentProps,
+  CustomBlockComponentProps,
   MarkComponentProps,
   ListComponentProps,
   ListItemComponentProps,

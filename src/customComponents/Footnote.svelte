@@ -18,10 +18,10 @@
 
   $: number =
     portableText.global.context.footnotes.findIndex(
-      (note) => note._key === portableText.markDef._key
+      (note) => note._key === portableText.value._key
     ) + 1
 </script>
 
-<span id="src-{portableText.markDef._key}">
-  <slot /><sup><a href={`#note-${portableText.markDef._key}`}>{number}</a></sup>
+<span id="src-{portableText.value._key}">
+  <slot /><sup><a href={`#note-${portableText.value._key}`}>{number}</a></sup>
 </span>

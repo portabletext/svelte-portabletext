@@ -2,9 +2,9 @@
 <script lang="ts">
   import type {MarkComponentProps} from '../../src/lib/rendererTypes'
 
-  export let portableText: MarkComponentProps<{href?: string}>
+  export let portableText: MarkComponentProps<{href: string}>
 
-  $: ({href} = portableText.markDef || {})
+  $: ({href} = portableText.value)
 </script>
 
 <a class="mahlink" {href}>

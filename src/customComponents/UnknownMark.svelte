@@ -3,7 +3,7 @@
 
   export let portableText: MarkComponentProps
   $: console.log('Unkown mark: ', {
-    mark: portableText.markDef,
+    mark: portableText.value,
     parentBlock: portableText.parentBlock
   })
 </script>

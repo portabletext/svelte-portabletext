@@ -89,9 +89,10 @@ export interface MarkComponentProps<
   MarkType = PortableTextMarkDefinition,
   ContextType = PortableTextSvelteContext
 > extends CommonComponentProps<ContextType>,
-    Pick<ToolkitNestedPortableTextSpan<MarkType>, 'markDef' | 'markKey' | 'markType'>,
+    Pick<ToolkitNestedPortableTextSpan, 'markKey' | 'markType'>,
     Pick<CustomBlockComponentProps, 'parentBlock'> {
   plainTextContent: string
+  value: MarkType extends string ? undefined : MarkType
 }
 
 export type CustomStyles =
