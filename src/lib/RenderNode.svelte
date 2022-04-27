@@ -24,20 +24,25 @@
     parentBlock?: PortableTextBlock
     isInline?: boolean
   }
-  $: ({node, parentBlock} = options)
+  $: ({node, indexInParent, parentBlock} = options)
 </script>
 
 {#if isPortableTextToolkitList(node)}
-  <RenderList {node} {global}>
+  <RenderList
+    options={{
+      node,
+      indexInParent
+    }}
+    {global}
+  >
     {#each node.children as child, childIndex}
       <svelte:self
         options={{
-          // @TODO: pass the current list as a parentBlock?
-          parentBlock,
           node: child,
-          // @TODO: is this the right isInline? What are we rendering as children here?
-          isInline: undefined,
-          indexInParent: childIndex
+          indexInParent: childIndex,
+          // The list's children will be parsed as PortableTextBlocks, which will pass the proper parentBlock & isInline
+          parentBlock: undefined,
+          isInline: undefined
         }}
         {global}
       />
