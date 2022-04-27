@@ -72,7 +72,7 @@
     {/each}
   </RenderSpan>
 {:else if isPortableTextBlock(node)}
-  <RenderBlock {node} {global}>
+  <RenderBlock {node} {indexInParent} {global}>
     {#each buildMarksTree(node) as child, childIndex}
       <svelte:self
         options={{

@@ -75,7 +75,6 @@ export interface BlockComponentProps<ContextType = PortableTextSvelteContext>
 export interface ListItemComponentProps<ContextType = PortableTextSvelteContext>
   extends CommonComponentProps<ContextType> {
   value: ToolkitPortableTextListItem
-  // @TODO: can we expose parentListBlock or similar here?
 }
 
 export interface ListComponentProps<ContextType = PortableTextSvelteContext>
@@ -93,9 +92,6 @@ export interface MarkComponentProps<
     Pick<ToolkitNestedPortableTextSpan<MarkType>, 'markDef' | 'markKey' | 'markType'>,
     Pick<CustomBlockComponentProps, 'parentBlock'> {
   plainTextContent: string
-
-  // @TODO: Can we pass the raw parent span here, and not the toolkit version? Would it even be useful?
-  // parentSpan: ArbitraryTypedObject | PortableTextSpan
 }
 
 export type CustomStyles =
