@@ -87,7 +87,7 @@ export interface ListComponentProps<ContextType = PortableTextSvelteContext>
  * Values passed under the `portableText` prop to components rendering marks.
  */
 export interface MarkComponentProps<
-  MarkType extends Partial<PortableTextMarkDefinition> = PortableTextMarkDefinition,
+  MarkType = PortableTextMarkDefinition,
   ContextType = PortableTextSvelteContext
 > extends CommonComponentProps<ContextType>,
     Pick<ToolkitNestedPortableTextSpan<MarkType>, 'markDef' | 'markKey' | 'markType'>,

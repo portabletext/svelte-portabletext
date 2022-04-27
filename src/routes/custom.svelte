@@ -17,8 +17,6 @@
     }
     return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
   }, [])
-
-  $: console.log(footnotes)
 </script>
 
 <PortableText

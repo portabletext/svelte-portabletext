@@ -64,8 +64,7 @@
         options={{
           parentBlock,
           node: child,
-          // @TODO: is this the right isInline? What are we rendering as children here?
-          isInline: undefined,
+          isInline: true,
           indexInParent: childIndex
         }}
         {global}
