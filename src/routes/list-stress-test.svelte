@@ -15,4 +15,5 @@
       customList: CustomListItem
     }
   }}
+  onMissingComponent={false}
 />
