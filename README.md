@@ -235,6 +235,36 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 </span>
 ```
 
+## Disabling warnings / handling unknown types
+
+When the library encounters a block, mark, list or list item with a type that is not known (eg it has no corresponding component in the `components` property), it will by default print a console warning.
+
+To disable this behavior, you can either pass `false` to the `onMissingComponent` property, or give it a custom function you want to use to report the error. For instance:
+
+```jsx
+import {PortableText} from '@portabletext/svelte'
+
+<PortableText
+  value={[/* array of portable text blocks */]}
+  onMissingComponent={false}
+/>
+
+// or, pass it a function:
+
+<PortableText
+  value={[/* array of portable text blocks */]}
+  onMissingComponent={(message, options) => {
+    myErrorLogger.report(message, {
+      // eg `someUnknownType`
+      type: options.type,
+
+      // 'block' | 'mark' | 'blockStyle' | 'listStyle' | 'listItemStyle'
+      nodeType: options.nodeType
+    })
+  }}
+/>
+```
+
 ## Rendering Plain Text
 
 This module also exports a function (`toPlainText()`) that will render one or more Portable Text blocks as plain text. This is helpful in cases where formatted text is not supported, or you need to process the raw text value.

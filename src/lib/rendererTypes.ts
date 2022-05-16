@@ -10,7 +10,7 @@ import type {
   PortableTextListItemType,
   PortableTextMarkDefinition
 } from '@portabletext/types'
-import type {SvelteComponentTyped} from 'svelte'
+import type {SvelteComponent, SvelteComponentTyped} from 'svelte'
 import type {
   InputValue,
   NormalizedBlocks,
@@ -18,12 +18,18 @@ import type {
   PortableTextSvelteContext
 } from './ptTypes'
 
+export type NodeType = 'block' | 'mark' | 'blockStyle' | 'listStyle' | 'listItemStyle'
+
+export type MissingComponentHandler = (
+  message: string,
+  options: {type: string; nodeType: NodeType}
+) => void
+
 export interface GlobalProps<ContextType = PortableTextSvelteContext> {
   /**
-   * The configuration passed to the `<PortableText>` component.
-   * @TODO: implement missing component handler
+   * Calls user-defined onMissingComponent.
    */
-  // ignoreUnknownTypes?: boolean
+  missingComponentHandler?: (type: string, nodeType: NodeType) => void
 
   /**
    * Svelte components used to render portable text.
@@ -161,17 +167,36 @@ export interface PortableTextSvelteComponents {
    * Component to use for rendering "hard breaks", eg `\n` inside of text spans
    * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
    */
-  hardBreak: SvelteComponentTyped<never> | false
+  hardBreak: SvelteComponentTyped<never> | typeof SvelteComponent | false
 
   /* eslint-disable */
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
    */
   unknownType?: BlockComponent
+
   /**
    * Override the default component for marks of unknown type. Defaults to rendering its content without a container.
    */
   unknownMark?: MarkComponent
+
+  /**
+   * Svelte component used when encountering a block style there is no registered component for
+   * in the `components.block` prop. Only used if `components.block` is an object.
+   */
+  unknownBlockStyle: BlockComponent
+
+  /**
+   * Svelte component used when encountering a list style there is no registered component for
+   * in the `components.list` prop. Only used if `components.list` is an object.
+   */
+  unknownList: ListComponent
+
+  /**
+   * Svelte component used when encountering a list item style there is no registered component for
+   * in the `components.listItem` prop. Only used if `components.listItem` is an object.
+   */
+  unknownListItem: ListItemComponent
   /* eslint-enable */
 }
 
@@ -183,28 +208,28 @@ type BlockComponent =
   | SvelteComponentTyped<{
       portableText: BlockComponentProps
     }>
-  | any
+  | typeof SvelteComponent
 
 type CustomBlockComponent =
   | SvelteComponentTyped<{
       portableText: CustomBlockComponentProps
     }>
-  | any
+  | typeof SvelteComponent
 
 type MarkComponent =
   | SvelteComponentTyped<{
       portableText: MarkComponentProps
     }>
-  | any
+  | typeof SvelteComponent
 
 type ListComponent =
   | SvelteComponentTyped<{
       portableText: ListComponentProps
     }>
-  | any
+  | typeof SvelteComponent
 
 type ListItemComponent =
   | SvelteComponentTyped<{
       portableText: ListItemComponentProps
     }>
-  | any
+  | typeof SvelteComponent
