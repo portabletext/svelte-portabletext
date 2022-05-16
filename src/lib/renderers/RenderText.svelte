@@ -12,8 +12,6 @@
 {#if text === '\n'}
   {#if typeof components.hardBreak === 'function'}
     <svelte:component this={components.hardBreak} />
-  {:else if components.hardBreak !== false}
-    <br />
   {:else}
     {text}
   {/if}

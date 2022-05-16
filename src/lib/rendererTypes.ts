@@ -22,7 +22,7 @@ export type NodeType = 'block' | 'mark' | 'blockStyle' | 'listStyle' | 'listItem
 
 export type MissingComponentHandler = (
   message: string,
-  options: {type: string; nodeType: NodeType}
+  context: {type: string; nodeType: NodeType}
 ) => void
 
 export interface GlobalProps<ContextType = PortableTextSvelteContext> {
@@ -173,12 +173,12 @@ export interface PortableTextSvelteComponents {
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
    */
-  unknownType?: BlockComponent
+  unknownType: BlockComponent
 
   /**
    * Override the default component for marks of unknown type. Defaults to rendering its content without a container.
    */
-  unknownMark?: MarkComponent
+  unknownMark: MarkComponent
 
   /**
    * Svelte component used when encountering a block style there is no registered component for

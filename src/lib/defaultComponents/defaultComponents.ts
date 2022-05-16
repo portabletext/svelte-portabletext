@@ -4,6 +4,8 @@ import DefaultLink from './DefaultLink.svelte'
 import DefaultBlock from './DefaultBlock.svelte'
 import DefaultList from './DefaultList.svelte'
 import DefaultListItem from './DefaultListItem.svelte'
+import DefaultHardBreak from './DefaultHardBreak.svelte'
+import UnknownType from './UnknownType.svelte'
 
 const defaultComponents: PortableTextSvelteComponents = {
   marks: {
@@ -33,7 +35,12 @@ const defaultComponents: PortableTextSvelteComponents = {
     number: DefaultListItem
   },
   types: {},
-  hardBreak: true
+  hardBreak: DefaultHardBreak,
+  unknownBlockStyle: DefaultBlock,
+  unknownList: DefaultList,
+  unknownListItem: DefaultListItem,
+  unknownMark: DefaultMark,
+  unknownType: UnknownType
 }
 
 export default defaultComponents

@@ -12,6 +12,9 @@
 
   $: ({_type} = node)
   $: customComponent = components.types[_type]
+  $: if (!customComponent) {
+    global.missingComponentHandler(_type, 'block')
+  }
 
   // Using a function is the only way to use TS in Svelte reactive assignments
   $: componentProps = (() => {
@@ -25,6 +28,4 @@
   })()
 </script>
 
-{#if typeof customComponent === 'function'}
-  <svelte:component this={customComponent} portableText={componentProps} />
-{/if}
+<svelte:component this={customComponent || components.unknownType} portableText={componentProps} />

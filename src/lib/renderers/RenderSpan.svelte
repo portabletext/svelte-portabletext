@@ -1,7 +1,6 @@
 <script lang="ts">
   import {spanToPlainText, ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
   import type {PortableTextBlock} from '@portabletext/types'
-  import defaultComponents from '../defaultComponents/defaultComponents'
   import type {GlobalProps, MarkComponentProps} from '../rendererTypes'
 
   export let global: GlobalProps
@@ -11,7 +10,10 @@
   export let parentBlock: PortableTextBlock
 
   $: ({markType} = node)
-  $: markComponent = components.marks[markType] || defaultComponents.marks[markType]
+  $: markComponent = components.marks[markType]
+  $: if (!markComponent) {
+    global.missingComponentHandler(markType, 'mark')
+  }
 
   // Using a function is the only way to use TS in Svelte reactive assignments
   $: markProps = (() => {
@@ -26,10 +28,6 @@
   })()
 </script>
 
-{#if markComponent}
-  <svelte:component this={markComponent} portableText={markProps}>
-    <slot />
-  </svelte:component>
-{:else}
+<svelte:component this={markComponent || components.unknownMark} portableText={markProps}>
   <slot />
-{/if}
+</svelte:component>
