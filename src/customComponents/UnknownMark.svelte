@@ -2,7 +2,7 @@
   import type {MarkComponentProps} from '$lib/rendererTypes'
 
   export let portableText: MarkComponentProps
-  $: console.log('Unkown mark: ', {
+  $: console.log('Unknown mark: ', {
     mark: portableText.value,
     parentBlock: portableText.parentBlock
   })
