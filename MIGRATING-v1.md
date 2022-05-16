@@ -252,3 +252,23 @@ Marks keep receiving their parent block as a prop, but now under the `parentBloc
 This library now uses [@portabletext/toolkit](https://github.com/portabletext/toolkit) to handle its internals. One of the benefits of the toolkit is having
 
 ## Mark components now have access to `plainTextContent`
+
+Useful when you need to use the mark's text content for accessibility, custom displays, etc.
+
+```svelte
+<!-- Example usage: link w/ custom accessibility title -->
+<script>
+  import {MarkComponentProps} from '@portabletext/svelte'
+
+  export let portableText: MarkComponentProps<{linkedPageSlug: string}>
+  $: ({value, plainTextContent} = portableText)
+</script>
+
+<a href={value.href} title={`Open "${plainTextContent}"`}>
+  <slot />
+</a>
+```
+
+---
+
+These are all of the changes introduced by v1. If you have questions, suggestions or bug reports, please [open a new issue in this repository](https://github.com/portabletext/svelte-portabletext/issues/new).
