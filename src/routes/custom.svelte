@@ -9,6 +9,7 @@
   import Fun from '../customComponents/Fun.svelte'
   import Link from '../customComponents/Link.svelte'
   import Footnote from '../customComponents/Footnote.svelte'
+  import SingleComponentBlock from '../customComponents/SingleComponentBlock.svelte'
 
   $: footnotes = blocks.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
@@ -16,13 +17,11 @@
     }
     return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
   }, [])
-
-  $: console.log(footnotes)
 </script>
 
 <PortableText
-  {blocks}
-  serializers={{
+  value={blocks}
+  components={{
     types: {
       image: Image,
       code: Code,
@@ -45,8 +44,9 @@
   {#each footnotes as note}
     <li id="note-{note._key}">
       <PortableText
-        blocks={note.note}
-        serializers={{
+        value={note.note}
+        components={{
+          block: SingleComponentBlock,
           marks: {
             link: Link
           }

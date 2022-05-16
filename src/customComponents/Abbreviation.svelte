@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {MarkProps} from '$lib/rendererTypes'
+  import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: MarkProps<{
+  export let portableText: MarkComponentProps<{
     full: string
   }>
 </script>
 
-<abbr title={portableText.mark.full}>
+<abbr title={portableText.value.full}>
   <slot />
 </abbr>

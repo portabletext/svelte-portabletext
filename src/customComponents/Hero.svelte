@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {PortableTextBlocks} from '$lib/ptTypes'
+  import type {PortableTextBlock} from '@portabletext/types'
   import PortableText from '$lib/PortableText.svelte'
 
-  import type {BlockProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
   import Link from './Link.svelte'
 
-  export let portableText: BlockProps<{
+  export let portableText: CustomBlockComponentProps<{
     title: string
-    subtitle: PortableTextBlocks
+    subtitle: PortableTextBlock[]
     image: {
       extension: string
       url: string
@@ -15,18 +15,18 @@
     }
   }>
 
-  $: block = portableText.block
+  $: ({value} = portableText)
 </script>
 
 <section>
   <div>
-    <h1>{block.title}</h1>
+    <h1>{value.title}</h1>
     <div>
-      <PortableText blocks={block.subtitle} serializers={{marks: {link: Link}}} />
+      <PortableText value={value.subtitle} components={{marks: {link: Link}}} />
     </div>
   </div>
 
-  <img src={block.image.url} alt={' '} />
+  <img src={value.image.url} alt={' '} />
 </section>
 
 <style>

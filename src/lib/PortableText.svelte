@@ -1,64 +1,66 @@
 <script lang="ts">
-  import BlockRenderer from './BlockRenderer.svelte'
-  import nestLists, {LIST_TYPE} from './nestLists'
-  import type {PortableTextBlocks, PTContext} from './ptTypes'
-  import type {Serializers} from './rendererTypes'
-  import ReportError from './ReportError.svelte'
+  import {LIST_NEST_MODE_HTML, nestLists} from '@portabletext/toolkit'
+  import assertBlockKey from './assertBlockKey'
+  import defaultComponents from './defaultComponents/defaultComponents'
+  import {mergeComponents} from './defaultComponents/mergeComponents'
+  import type {InputValue, PortableTextSvelteContext} from './ptTypes'
+  import type {MissingComponentHandler, NodeType, PortableTextComponents} from './rendererTypes'
+  import RenderNode from './RenderNode.svelte'
+  import {getWarningMessage, printWarning} from './warnings'
 
-  export let blocks: PortableTextBlocks = []
-  export let serializers: Serializers = undefined
-  export let ignoreUnknownTypes = true
-  export let context: PTContext = {}
+  export let value: InputValue = []
 
-  $: normalizedBlocks = nestLists(blocks)
+  /**
+   * Svelte components used to render portable text.
+   * This is an object with user-defined components merged with native ones.
+   */
+  export let components: PortableTextComponents = undefined
+
+  /**
+   * User-defined data context, as passed to the `<PortableText>` component.
+   */
+  export let context: PortableTextSvelteContext = {}
+
+  /**
+   * Function to call when encountering unknown unknown types, eg blocks, marks,
+   * block style, list styles without an associated Svelte component.
+   *
+   * Will print a warning message to the console by default.
+   * Pass `false` to disable.
+   */
+  export let onMissingComponent: MissingComponentHandler | boolean = true
+
+  $: mergedComponents = mergeComponents(defaultComponents, components)
+  $: keyedBlocks = (Array.isArray(value) ? value : [value]).map(assertBlockKey)
+  $: blocks = nestLists(keyedBlocks, LIST_NEST_MODE_HTML)
+  $: missingComponentHandler = (type: string, nodeType: NodeType) => {
+    if (onMissingComponent === false) {
+      return
+    }
+
+    const message = getWarningMessage(type, nodeType)
+    if (typeof onMissingComponent === 'function') {
+      onMissingComponent(message, {type, nodeType})
+      return
+    }
+
+    printWarning(message)
+  }
 </script>
 
-{#each normalizedBlocks as block, index (block._key)}
-  {#if serializers?.types?.[block._type]}
-    <!-- Custom block-level element -->
-    <svelte:component
-      this={serializers.types[block._type]}
-      portableText={{
-        _rawBlocks: blocks,
-        blocks: normalizedBlocks,
-        index,
-        block,
-        ignoreUnknownTypes,
-        serializers,
-        context
-      }}
-    />
-  {:else if block._type === 'block' || block._type === LIST_TYPE}
-    <BlockRenderer
-      portableText={{
-        _rawBlocks: blocks,
-        blocks: normalizedBlocks,
-        index,
-        /* @ts-ignore */
-        block,
-        ignoreUnknownTypes,
-        serializers,
-        context
-      }}
-    />
-  {:else}
-    <ReportError
-      message="Block of type {block._type} has no compatible renderer (block {block._key})"
-      ignoreUnknownTypes={ignoreUnknownTypes || !!serializers?.unknownType}
-    />
-    {#if serializers?.unknownType}
-      <svelte:component
-        this={serializers.unknownType}
-        portableText={{
-          _rawBlocks: blocks,
-          blocks: normalizedBlocks,
-          index,
-          block,
-          ignoreUnknownTypes,
-          serializers,
-          context
-        }}
-      />
-    {/if}
-  {/if}
+{#each blocks as node, index (node._key)}
+  <RenderNode
+    global={{
+      components: mergedComponents,
+      missingComponentHandler,
+      context,
+      ptBlocks: blocks,
+      ptRawValue: value
+    }}
+    options={{
+      node,
+      isInline: false,
+      indexInParent: index
+    }}
+  />
 {/each}

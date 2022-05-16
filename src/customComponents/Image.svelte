@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {BlockProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockProps<{
+  export let portableText: CustomBlockComponentProps<{
     image: {
       extension: string
       url: string
@@ -10,11 +10,11 @@
     caption: string
   }>
 
-  $: block = portableText.block
+  $: ({value} = portableText)
 </script>
 
 <figure>
-  <img src={block.image.url} alt={block.caption} />
+  <img src={value.image.url} alt={value.caption} />
 
-  <figcaption>{block.caption}</figcaption>
+  <figcaption>{value.caption}</figcaption>
 </figure>

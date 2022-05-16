@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {MarkProps} from '$lib/rendererTypes'
+  import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: MarkProps<{
+  export let portableText: MarkComponentProps<{
     href: string
   }>
 </script>
 
-<a href={portableText.mark.href} target="_blank">
+<a href={portableText.value.href} target="_blank">
   <slot />
 </a>

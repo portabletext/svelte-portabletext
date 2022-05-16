@@ -1,6 +1,21 @@
-import PortableText from './PortableText.svelte'
-import type {BlockProps, MarkProps, Serializers} from './rendererTypes'
+// Main module users interact with
+export {default as PortableText} from './PortableText.svelte'
 
-export default PortableText
+// Utilities
+export {toPlainText} from '@portabletext/toolkit'
 
-export type {BlockProps, MarkProps, Serializers}
+// Default components for edge cases of overwriting components in a specific way
+export {default as DefaultBlock} from './defaultComponents/DefaultBlock.svelte'
+export {default as DefaultList} from './defaultComponents/DefaultList.svelte'
+export {default as DefaultListItem} from './defaultComponents/DefaultListItem.svelte'
+export {default as DefaultMark} from './defaultComponents/DefaultMark.svelte'
+
+// Types
+export type {
+  BlockComponentProps,
+  CustomBlockComponentProps,
+  MarkComponentProps,
+  ListComponentProps,
+  ListItemComponentProps,
+  PortableTextComponents
+} from './rendererTypes'

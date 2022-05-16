@@ -1,9 +1,9 @@
-import type {PortableTextBlocks} from '$lib/ptTypes'
+import type {InputValue} from '$lib/ptTypes'
 
 // This data was written by hand.
 // In a real-world scenario it'd be generated from the PortableText Editor.
 // https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/portable-text-editor
-const blocks: PortableTextBlocks = [
+const blocks: InputValue = [
   {
     _key: 'block-0',
     _type: 'block',
@@ -26,7 +26,7 @@ const blocks: PortableTextBlocks = [
         _key: 'span-1',
         _type: 'span',
         marks: ['code'],
-        text: 'serializers.unknownType'
+        text: 'components.unknownType'
       }
     ],
     markDefs: [],
@@ -36,7 +36,7 @@ const blocks: PortableTextBlocks = [
     _key: 'block-3',
     _type: 'myCustomType',
     customProperty: true,
-    title: "I'm not rendered as no one added a proper serializer for me 😟"
+    title: "I'm not rendered as no one added a proper component for me 😟"
   },
   {
     _key: 'block-4',
@@ -46,7 +46,7 @@ const blocks: PortableTextBlocks = [
         _key: 'span-1',
         _type: 'span',
         marks: ['code'],
-        text: 'serializers.unknownMark'
+        text: 'components.unknownMark'
       }
     ],
     markDefs: [],

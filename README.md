@@ -6,30 +6,32 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 
 `npm i @portabletext/svelte -D`
 
+⚠️ Svelte 3.47.0 or higher is required.
+
 ```svelte
 <script>
-  import PortableText from '@portabletext/svelte'
+  import {PortableText} from '@portabletext/svelte'
 </script>
 
 <PortableText
-  blocks={[
+  value={[
     // Portable Text array ...
   ]}
 />
 ```
 
-This is enough to get you set-up with basic block content with formatting and text styles. When working with images, custom styles, blocks & marks, though, you'll need to customize your renderer with **serializers**:
+This is enough to get you set-up with basic block content with formatting and text styles. When working with images, custom styles, blocks & marks, though, you'll need to customize your renderer with **components**:
 
 ### Customizing rendering
 
-You can use the `serializers` prop to determine how the renderer should process each block, mark or style type.
+You can use the `components` prop to determine how the renderer should process each block, mark or style type.
 
 ```svelte
 <PortableText
-  blocks={[
+  value={[
     // Portable Text array ...
   ]}
-  serializers={{
+  components={{
     types: {
       // block-level components
       callout: Callout,
@@ -41,20 +43,25 @@ You can use the `serializers` prop to determine how the renderer should process 
       // Overwrite default mark renderers
       strong: CustomStrong
     },
-    blockStyles: {
+    block: {
       normal: CustomParagraph,
       blockquote: Quote,
       // Re-using the same component across multiple styles
       h1: CustomHeading,
       h2: CustomHeading,
       h3: CustomHeading,
-      // Swap only the list parts you need
-      list_bullet: UnorderedListWrapper,
-      list_number: OrderedListWrapper,
-      listItem_bullet: ListItem,
-      listItem_number: ListItem,
       // Custom user-defined style
       textCenter: CentralizedText
+    },
+    list: {
+      // Swap only the list parts you need
+      bullet: UnorderedListWrapper,
+      // Custom user-defined list type
+      checklist: ChecklistWrapper
+    },
+    listItem: {
+      bullet: ListItem,
+      checklist: ChecklistItem
     }
   }}
 />
@@ -63,18 +70,18 @@ You can use the `serializers` prop to determine how the renderer should process 
 Example components from above:
 
 ```svelte
-<!-- UserInfo (block type) -->
+<!-- UserInfo (custom block type) -->
 <script lang="ts">
   import {session} from '$app/stores'
-  import type {BlockProps} from '@portabletext/svelte'
+  import type {CustomBlockComponentProps} from '@portabletext/svelte'
 
   // Property custom blocks receive from @portabletext/svelte when redered
-  export let portableText: BlockProps<{bold?: boolean}>
+  export let portableText: CustomBlockComponentProps<{bold?: boolean}>
 
   $: userName = $session?.user?.name || 'person'
 </script>
 
-{#if portableText.block.bold}
+{#if portableText.value.bold}
   <strong>{userName}</strong>
 {:else}
   {userName}
@@ -84,44 +91,46 @@ Example components from above:
 ```svelte
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
-  import type {MarkProps} from '@portabletext/svelte'
+  import type {MarkComponentProps} from '@portabletext/svelte'
 
   // Property custom marks receive from @portabletext/svelte when redered
-  export let portableText: MarkProps<{
+  export let portableText: MarkComponentProps<{
     url?: string
     newWindow?: boolean
   }>
 
   // Remember to make your variables reactive so that they can reflect prop changes
   // See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
-  $: mark = portableText.mark
-  $: newWindow = mark.newWindow || false
+  $: ({value} = portableText)
+  $: newWindow = value.newWindow || false
 </script>
 
-{#if mark.url}
-  <a href={mark.url} target={newWindow ? '_blank' : undefined}><slot /></a>
+{#if value.url}
+  <a href={value.url} target={newWindow ? '_blank' : undefined}>
+    <!-- Marks receive children which you can render with Svelte's slots -->
+    <slot />
+  </a>
 {:else}
+  <!-- If no valid URL, render only the contents of the mark -->
   <slot />
 {/if}
 ```
 
-> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly.
+> 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly. We're tracking this in [#1](https://github.com/portabletext/svelte-portabletext/issues/1).
 
 ```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
-  import type {BlockProps} from '@portabletext/svelte'
+  import type {BlockComponentProps} from '@portabletext/svelte'
 
-  export let portableText: BlockProps
+  export let portableText: BlockComponentProps
 
-  $: index = portableText.index
-  $: blocks = portableText.blocks
-  $: block = portableText.block
+  $: ({index, blocks, value} = portableText)
+  $: ({style} = block)
 
-  $: style = block.style
   $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(blocks[index - 1]?.style)
 
-  $: anchorId = `heading-${block._key}`
+  $: anchorId = `heading-${value._key}`
 </script>
 
 <!-- If preceded by heading, have a higher margin top -->
@@ -148,7 +157,7 @@ Finally, you can pass **`context`** to your `<PortableText>` component to have c
 
 - Adding different styles to the same block depending on its placement
 - Loading in data from an external source/API
-- Running expensive calculations on your `blocks` only once
+- Running expensive calculations on your `value` only once
 
 Here's a complete example with a `footnote` annotation, where editors focus on writing its contents, and the front-end smartly position it and define its number:
 
@@ -157,10 +166,10 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <script>
   import Footnote from './Foonote.svelte'
 
-  export let blocks
+  export let value
 
-  // Get all footnotes from markDefs in top-level blocks
-  $: footnotes = blocks.reduce((notes, curBlock) => {
+  // Get all footnotes from markDefs in top-level value
+  $: footnotes = value.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
       return notes
     }
@@ -169,8 +178,8 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 </script>
 
 <PortableText
-  {blocks}
-  serializers={{
+  value={value}
+  components={{
     marks: {
       footnote: Footnote
     }
@@ -186,8 +195,8 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
   {#each footnotes as note}
     <li id="note-{note._key}">
       <PortableText
-        blocks={note.note}
-        serializers={{
+        value={note.note}
+        components={{
           marks: {
             link: Link
           }
@@ -201,14 +210,14 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
 <!-- Footnote.svelte -->
 <script lang="ts">
-  import type {MarkProps} from '@portabletext/svelte'
+  import type {MarkComponentProps} from '@portabletext/svelte'
 
   interface FootnoteProps {
     _key: string
     note: PortableTextBlocks
   }
 
-  export let portableText: MarkProps<
+  export let portableText: MarkComponentProps<
     FootnoteProps,
     // Use the second argument to specify your context's type
     {
@@ -218,18 +227,64 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 
   // From the context, let's figure out what's the position of this footnote
   $: number =
-    portableText.context.footnotes.findIndex((note) => note._key === portableText.mark._key) + 1
+    portableText.global.context.footnotes.findIndex((note) => note._key === portableText.value._key) + 1
 </script>
 
-<span id="src-{portableText.mark._key}">
-  <slot /><sup><a href={`#note-${portableText.mark._key}`}>{number}</a></sup>
+<span id="src-{portableText.value._key}">
+  <slot /><sup><a href={`#note-${portableText.value._key}`}>{number}</a></sup>
 </span>
+```
+
+## Disabling warnings / handling unknown types
+
+When the library encounters a block, mark, list or list item with a type that is not known (eg it has no corresponding component in the `components` property), it will by default print a console warning.
+
+To disable this behavior, you can either pass `false` to the `onMissingComponent` property, or give it a custom function you want to use to report the error. For instance:
+
+```jsx
+import {PortableText} from '@portabletext/svelte'
+
+<PortableText
+  value={[/* array of portable text blocks */]}
+  onMissingComponent={false}
+/>
+
+// or, pass it a function:
+
+<PortableText
+  value={[/* array of portable text blocks */]}
+  onMissingComponent={(message, options) => {
+    myErrorLogger.report(message, {
+      // eg `someUnknownType`
+      type: options.type,
+
+      // 'block' | 'mark' | 'blockStyle' | 'listStyle' | 'listItemStyle'
+      nodeType: options.nodeType
+    })
+  }}
+/>
+```
+
+## Rendering Plain Text
+
+This module also exports a function (`toPlainText()`) that will render one or more Portable Text blocks as plain text. This is helpful in cases where formatted text is not supported, or you need to process the raw text value.
+
+For instance, to render an OpenGraph meta description for a page:
+
+```svelte
+<script>
+  import {toPlainText} from '@portabletext/svelte'
+</script>
+
+<svelte:head>
+  <meta name="og:description" value={toPlainText(myPortableTextData)} />
+</svelte:head>
 ```
 
 <!-- ## TODO
 
-- [ ] If applicable, add support to `serializers.hardBreak`, similar to block-content-to-react
-- [ ] In example site, add examples with custom marks, blockStyles & block types
+- [ ] If applicable, add support to `components.hardBreak`, similar to block-content-to-react
+- [ ] In example site, add examples with custom marks, block & block types
   - Include a nested PT renderer example -->
 
 ## Credits
