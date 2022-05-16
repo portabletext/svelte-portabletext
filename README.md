@@ -106,8 +106,12 @@ Example components from above:
 </script>
 
 {#if value.url}
-  <a href={value.url} target={newWindow ? '_blank' : undefined}><slot /></a>
+  <a href={value.url} target={newWindow ? '_blank' : undefined}>
+    <!-- Marks receive children which you can render with Svelte's slots -->
+    <slot />
+  </a>
 {:else}
+  <!-- If no valid URL, render only the contents of the mark -->
   <slot />
 {/if}
 ```
