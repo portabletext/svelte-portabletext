@@ -1,5 +1,6 @@
 <script lang="ts">
-  import {spanToPlainText, ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
+  import {spanToPlainText} from '@portabletext/toolkit'
+  import type {ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
   import type {PortableTextBlock} from '@portabletext/types'
   import type {GlobalProps, MarkComponentProps} from '../rendererTypes'
 
