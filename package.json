@@ -12,10 +12,10 @@
   },
   "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build:site": "svelte-kit build",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
+    "dev": "vite dev",
+    "build:site": "vite build",
+    "package": "vite package",
+    "preview": "vite preview",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "prepublish": "npm run package && cd package",
@@ -25,8 +25,6 @@
   "devDependencies": {
     "@portabletext/types": "^1.0.3",
     "@sveltejs/adapter-auto": "^1.0.0-next.43",
-    "@sveltejs/kit": "^1.0.0-next.334",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.44",
     "@testing-library/svelte": "^3.1.1",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
@@ -35,6 +33,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-sanity": "^6.0.0",
     "eslint-plugin-svelte3": "^4.0.0",
+    "jsdom": "^20.0.0",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
     "svelte": "^3.49.0",
@@ -48,6 +47,9 @@
   },
   "type": "module",
   "dependencies": {
-    "@portabletext/toolkit": "^1.0.5"
+    "@portabletext/toolkit": "^1.0.5",
+    "@sveltejs/kit": "^1.0.0-next.392",
+    "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "vite": "^3.0.2"
   }
 }
