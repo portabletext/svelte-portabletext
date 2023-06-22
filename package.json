@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.1",
-    "@sveltejs/adapter-auto": "^1.0.0-next.43",
+    "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.20.4",
     "@sveltejs/vite-plugin-svelte": "^2.4.1",
     "@testing-library/svelte": "^3.1.1",
@@ -46,6 +46,9 @@
   },
   "peerDependencies": {
     "svelte": ">=3.47.0 <5.0.0"
+  },
+  "overrides": {
+    "svelte": "^4.0.0"
   },
   "type": "module",
   "dependencies": {
