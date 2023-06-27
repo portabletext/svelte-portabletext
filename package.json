@@ -11,14 +11,24 @@
     "url": "https://github.com/portabletext/svelte-portabletext/issues"
   },
   "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/bar.js",
+      "svelte": "./dist/index.js"
+    }
+  },
   "scripts": {
     "dev": "svelte-kit dev",
     "build:site": "svelte-kit build",
-    "package": "svelte-kit package",
+    "package": "svelte-kit sync && svelte-package",
     "preview": "svelte-kit preview",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "prepublish": "npm run package && cd package",
+    "prepublish": "npm run package && cd dist",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
@@ -26,6 +36,7 @@
     "@portabletext/types": "^2.0.1",
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.20.4",
+    "@sveltejs/package": "^2.0.2",
     "@sveltejs/vite-plugin-svelte": "^2.4.1",
     "@testing-library/svelte": "^3.1.1",
     "@typescript-eslint/eslint-plugin": "^5.25.0",

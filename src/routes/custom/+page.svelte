@@ -1,15 +1,15 @@
 <script>
   import PortableText from '$lib/PortableText.svelte'
-  import Hero from '../customComponents/Hero.svelte'
-  import Code from '../customComponents/Code.svelte'
-  import Image from '../customComponents/Image.svelte'
-  import blocks from '../dummyData/custom'
-  import Greeter from '../customComponents/Greeter.svelte'
-  import Abbreviation from '../customComponents/Abbreviation.svelte'
-  import Fun from '../customComponents/Fun.svelte'
-  import Link from '../customComponents/Link.svelte'
-  import Footnote from '../customComponents/Footnote.svelte'
-  import SingleComponentBlock from '../customComponents/SingleComponentBlock.svelte'
+  import Hero from '../../customComponents/Hero.svelte'
+  import Code from '../../customComponents/Code.svelte'
+  import Image from '../../customComponents/Image.svelte'
+  import blocks from '../../dummyData/custom'
+  import Greeter from '../../customComponents/Greeter.svelte'
+  import Abbreviation from '../../customComponents/Abbreviation.svelte'
+  import Fun from '../../customComponents/Fun.svelte'
+  import Link from '../../customComponents/Link.svelte'
+  import Footnote from '../../customComponents/Footnote.svelte'
+  import SingleComponentBlock from '../../customComponents/SingleComponentBlock.svelte'
 
   $: footnotes = blocks.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {

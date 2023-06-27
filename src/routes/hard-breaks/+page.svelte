@@ -1,6 +1,6 @@
 <script>
   import PortableText from '$lib/PortableText.svelte'
-  import CustomHardBreak from '../customComponents/CustomHardBreak.svelte'
+  import CustomHardBreak from '../../customComponents/CustomHardBreak.svelte'
 </script>
 
 <PortableText
