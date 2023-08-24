@@ -1,6 +1,7 @@
 import type {NodeType} from './rendererTypes'
 
-const getTemplate = (type: string, prop?: string): string => `Unknown ${type}, specify a component for it in the \`components${prop ? '.' : ''}${prop}\` prop`
+const getTemplate = (type: string, prop?: string): string =>
+  `Unknown ${type}, specify a component for it in the \`components${prop ? '.' : ''}${prop}\` prop`
 
 export const getWarningMessage = (type: string, nodeType: NodeType): string => {
   switch (nodeType) {

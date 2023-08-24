@@ -7,7 +7,8 @@ import {NATIVE_STYLES} from './sharedData/styles'
 // https://github.com/sanity-io/sanity/tree/next/packages/%40sanity/portable-text-editor
 const blocks: InputValue = [
   ...Object.keys(NATIVE_STYLES).map(
-    (style, index) => ({
+    (style, index) =>
+      ({
         _key: `block-${3 + index}`,
         _type: 'block',
         children: [
@@ -137,7 +138,8 @@ const blocks: InputValue = [
         text: 'Paragraph 1 (individual formatting): '
       },
       ...Object.keys(NATIVE_MARKS).map(
-        (mark, idx) => ({
+        (mark, idx) =>
+          ({
             _key: `span-${2 + idx}`,
             _type: 'span',
             marks: [mark],
