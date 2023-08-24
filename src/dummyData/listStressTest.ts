@@ -119,7 +119,7 @@ const blocks: InputValue = [
                 _type: 'span',
                 marks: [mark],
                 text: mark
-              } as any)
+              }) as any
           )
         ],
         markDefs: [
@@ -132,7 +132,7 @@ const blocks: InputValue = [
         style: 'normal',
         level,
         listItem: 'bullet'
-      } as any)
+      }) as any
   ),
   {
     _key: 'block-3',
@@ -233,7 +233,7 @@ const blocks: InputValue = [
                 _type: 'span',
                 marks: [mark],
                 text: mark
-              } as any)
+              }) as any
           )
         ],
         markDefs: [
@@ -246,7 +246,7 @@ const blocks: InputValue = [
         style: 'normal',
         level,
         listItem: 'number'
-      } as any)
+      }) as any
   ),
   ...LIST_LEVELS.map(
     (level, i) =>
@@ -333,7 +333,7 @@ const blocks: InputValue = [
                 _type: 'span',
                 marks: [mark],
                 text: mark
-              } as any)
+              }) as any
           )
         ],
         markDefs: [
@@ -346,7 +346,7 @@ const blocks: InputValue = [
         style: 'normal',
         level,
         listItem: 'customList'
-      } as any)
+      }) as any
   )
 ]
 

@@ -21,7 +21,7 @@ const blocks: InputValue = [
         ],
         markDefs: [],
         style
-      } as any)
+      }) as any
   ),
   {
     _key: 'ol-0',
@@ -144,7 +144,7 @@ const blocks: InputValue = [
             _type: 'span',
             marks: [mark],
             text: mark
-          } as any)
+          }) as any
       )
     ],
     markDefs: [],
