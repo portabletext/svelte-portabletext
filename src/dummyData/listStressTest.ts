@@ -35,7 +35,8 @@ const blocks: InputValue = [
     style: 'h3'
   },
   ...LIST_LEVELS.map(
-    (level, i) => ({
+    (level, i) =>
+      ({
         _key: `ul-${1 + i}`,
         _type: 'block',
         children: [
@@ -112,7 +113,8 @@ const blocks: InputValue = [
             text: 'custom mark with all formatting (reversed)'
           },
           ...Object.keys(NATIVE_MARKS).map(
-            (mark, idx) => ({
+            (mark, idx) =>
+              ({
                 _key: `span-${13 + idx}`,
                 _type: 'span',
                 marks: [mark],
@@ -147,7 +149,8 @@ const blocks: InputValue = [
     style: 'h3'
   },
   ...LIST_LEVELS.map(
-    (level, i) => ({
+    (level, i) =>
+      ({
         _key: `ol-${1 + i}`,
         _type: 'block',
         children: [
@@ -224,7 +227,8 @@ const blocks: InputValue = [
             text: 'custom mark with all formatting (reversed)'
           },
           ...Object.keys(NATIVE_MARKS).map(
-            (mark, idx) => ({
+            (mark, idx) =>
+              ({
                 _key: `span-${13 + idx}`,
                 _type: 'span',
                 marks: [mark],
@@ -245,7 +249,8 @@ const blocks: InputValue = [
       } as any)
   ),
   ...LIST_LEVELS.map(
-    (level, i) => ({
+    (level, i) =>
+      ({
         _key: `custom-list-${1 + i}`,
         _type: 'block',
         children: [
@@ -322,7 +327,8 @@ const blocks: InputValue = [
             text: 'custom mark with all formatting (reversed)'
           },
           ...Object.keys(NATIVE_MARKS).map(
-            (mark, idx) => ({
+            (mark, idx) =>
+              ({
                 _key: `span-${13 + idx}`,
                 _type: 'span',
                 marks: [mark],
