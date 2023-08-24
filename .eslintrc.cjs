@@ -9,7 +9,17 @@ module.exports = {
   ],
   plugins: ['svelte3', '@typescript-eslint'],
   ignorePatterns: ['*.cjs'],
-  overrides: [{files: ['*.svelte'], processor: 'svelte3/svelte3'}],
+  overrides: [
+    {
+      files: ['*.svelte'],
+      processor: 'svelte3/svelte3',
+      rules: {
+        'no-console': 'off',
+        'no-undef': 'off',
+        'no-negated-condition': 'off'
+      }
+    }
+  ],
   settings: {
     'svelte3/typescript': () => require('typescript')
   },
@@ -23,6 +33,7 @@ module.exports = {
     node: true
   },
   rules: {
-    indent: 'off'
+    indent: 'off',
+    'max-len': 'off'
   }
 }

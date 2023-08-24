@@ -14,7 +14,7 @@
    * Svelte components used to render portable text.
    * This is an object with user-defined components merged with native ones.
    */
-  export let components: PortableTextComponents = undefined
+  export let components: PortableTextComponents
 
   /**
    * User-defined data context, as passed to the `<PortableText>` component.
