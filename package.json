@@ -34,7 +34,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@portabletext/toolkit": "^2.0.1"
+    "@portabletext/toolkit": "^2.0.8"
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.1",
