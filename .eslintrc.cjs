@@ -34,6 +34,7 @@ module.exports = {
   },
   rules: {
     indent: 'off',
-    'max-len': 'off'
+    'max-len': 'off',
+    'implicit-arrow-linebreak': 'off'
   }
 }
