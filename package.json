@@ -1,19 +1,17 @@
 {
   "name": "@portabletext/svelte",
   "version": "2.0.0",
-  "author": "Sanity <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
+  "bugs": {
+    "url": "https://github.com/portabletext/svelte-portabletext/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/portabletext/svelte-portabletext.git"
   },
-  "bugs": {
-    "url": "https://github.com/portabletext/svelte-portabletext/issues"
-  },
-  "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
-  "files": [
-    "dist"
-  ],
+  "license": "MIT",
+  "author": "Sanity <hello@sanity.io>",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,16 +19,22 @@
       "svelte": "./dist/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "svelte-kit dev",
     "build:site": "svelte-kit build",
+    "dev": "svelte-kit dev",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "lint": "eslint --ignore-path .gitignore .",
     "package": "svelte-kit sync && svelte-package",
     "preview": "svelte-kit preview",
-    "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "prepublish": "npm run package && cd dist",
     "test": "vitest",
     "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@portabletext/toolkit": "^2.0.1"
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.1",
@@ -59,15 +63,11 @@
   "peerDependencies": {
     "svelte": ">=3.47.0 <5.0.0"
   },
-  "overrides": {
-    "svelte": "^4.0.0"
-  },
-  "type": "module",
-  "dependencies": {
-    "@portabletext/toolkit": "^2.0.1"
-  },
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "overrides": {
+    "svelte": "^4.0.0"
   }
 }
