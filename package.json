@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "^5.25.0",
     "@vitest/ui": "latest",
     "eslint": "^8.15.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-config-sanity": "^6.0.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "jsdom": "^21.1.0",
