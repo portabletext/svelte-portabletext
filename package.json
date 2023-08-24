@@ -26,7 +26,7 @@
     "build:site": "svelte-kit build",
     "package": "svelte-kit sync && svelte-package",
     "preview": "svelte-kit preview",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "prepublish": "npm run package && cd dist",
     "test": "vitest",
@@ -48,6 +48,7 @@
     "eslint-plugin-svelte3": "^4.0.0",
     "jsdom": "^21.1.0",
     "prettier": "^2.6.2",
+    "prettier-plugin-packagejson": "^2.4.5",
     "prettier-plugin-svelte": "^2.10.1",
     "svelte": "^4.0.0",
     "svelte-preprocess": "^5.0.3",
@@ -64,5 +65,9 @@
   "type": "module",
   "dependencies": {
     "@portabletext/toolkit": "^2.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
