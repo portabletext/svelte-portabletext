@@ -10,7 +10,7 @@ import type {
   PortableTextListItemType,
   PortableTextMarkDefinition
 } from '@portabletext/types'
-import type {SvelteComponent, SvelteComponentTyped} from 'svelte'
+import type {SvelteComponent} from 'svelte'
 import type {
   InputValue,
   NormalizedBlocks,
@@ -167,7 +167,7 @@ export interface PortableTextSvelteComponents {
    * Component to use for rendering "hard breaks", eg `\n` inside of text spans
    * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
    */
-  hardBreak: SvelteComponentTyped<never> | typeof SvelteComponent | false
+  hardBreak: SvelteComponent<never> | typeof SvelteComponent<any> | false
 
   /* eslint-disable */
   /**
@@ -205,31 +205,31 @@ export type PortableTextComponents = Partial<PortableTextSvelteComponents>
 // Unfortunately Svelte components don't play nicely with Typescript,
 // so we need to `| any` all of these types
 type BlockComponent =
-  | SvelteComponentTyped<{
+  | SvelteComponent<{
       portableText: BlockComponentProps
     }>
-  | typeof SvelteComponent
+  | typeof SvelteComponent<any>
 
 type CustomBlockComponent =
-  | SvelteComponentTyped<{
+  | SvelteComponent<{
       portableText: CustomBlockComponentProps
     }>
-  | typeof SvelteComponent
+  | typeof SvelteComponent<any>
 
 type MarkComponent =
-  | SvelteComponentTyped<{
+  | SvelteComponent<{
       portableText: MarkComponentProps
     }>
-  | typeof SvelteComponent
+  | typeof SvelteComponent<any>
 
 type ListComponent =
-  | SvelteComponentTyped<{
+  | SvelteComponent<{
       portableText: ListComponentProps
     }>
-  | typeof SvelteComponent
+  | typeof SvelteComponent<any>
 
 type ListItemComponent =
-  | SvelteComponentTyped<{
+  | SvelteComponent<{
       portableText: ListItemComponentProps
     }>
-  | typeof SvelteComponent
+  | typeof SvelteComponent<any>

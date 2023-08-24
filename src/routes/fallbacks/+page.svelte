@@ -1,9 +1,9 @@
 <script>
   import PortableText from '$lib/PortableText.svelte'
-  import UnknownMark from '../customComponents/CustomUnknownMark.svelte'
-  import UnknownType from '../customComponents/CustomUnknownType.svelte'
+  import UnknownMark from '../../customComponents/CustomUnknownMark.svelte'
+  import UnknownType from '../../customComponents/CustomUnknownType.svelte'
 
-  import fallbacks from '../dummyData/fallbacks'
+  import fallbacks from '../../dummyData/fallbacks'
 </script>
 
 <PortableText

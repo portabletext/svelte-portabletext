@@ -8,16 +8,7 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
-    adapter: adapter(),
-    package: {
-      // Only include index.ts to the package.json definitions
-      exports: (filePath) => {
-        if (filePath.includes('index')) {
-          return true
-        }
-        return false
-      }
-    }
+    adapter: adapter()
   }
 }
 
