@@ -8,7 +8,7 @@ import PortableText from '../src/lib/PortableText.svelte'
 import allTests from './render-tests'
 
 for (const renderTest of allTests) {
-  test(renderTest.name, () => {
+  test(renderTest.name, async () => {
     const renderedByPackage = render(PortableText, {
       value: renderTest.value,
       components: renderTest.components
@@ -16,8 +16,8 @@ for (const renderTest of allTests) {
     cleanup()
     const expectedRender = render(renderTest.rendered).container.innerHTML
 
-    expect(format(renderedByPackage, {parser: 'html'})).toBe(
-      format(expectedRender, {parser: 'html'})
+    expect(await format(renderedByPackage, {parser: 'html'})).toBe(
+      await format(expectedRender, {parser: 'html'})
     )
   })
 }
