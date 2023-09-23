@@ -125,10 +125,11 @@ Example components from above:
 
   export let portableText: BlockComponentProps
 
-  $: ({index, blocks, value} = portableText)
-  $: ({style} = block)
+  $: ({indexInParent, global, value} = portableText)
+  $: ({ptBlocks} = global)
+  $: ({style} = value)
 
-  $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(blocks[index - 1]?.style)
+  $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(ptBlocks[indexInParent - 1]?.style)
 
   $: anchorId = `heading-${value._key}`
 </script>
