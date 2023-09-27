@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/portabletext/svelte-portabletext/compare/v2.1.2...v2.1.3) (2023-09-27)
+
+### Bug Fixes
+
+- add path to types ([35dc3a2](https://github.com/portabletext/svelte-portabletext/commit/35dc3a26e2f73abcf82d72f1e7b04cc59575ff35))
+
 ## [2.1.2](https://github.com/portabletext/svelte-portabletext/compare/v2.1.1...v2.1.2) (2023-09-27)
 
 ### Bug Fixes
