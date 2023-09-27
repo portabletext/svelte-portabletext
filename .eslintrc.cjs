@@ -35,6 +35,7 @@ module.exports = {
   rules: {
     indent: 'off',
     'max-len': 'off',
-    'implicit-arrow-linebreak': 'off'
+    'implicit-arrow-linebreak': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn'
   }
 }
