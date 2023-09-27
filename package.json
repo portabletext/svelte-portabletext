@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/svelte",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
   "bugs": {
     "url": "https://github.com/portabletext/svelte-portabletext/issues"

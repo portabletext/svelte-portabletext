@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/portabletext/svelte-portabletext/compare/v2.1.1...v2.1.2) (2023-09-27)
+
+### Bug Fixes
+
+- correct default export ([#57](https://github.com/portabletext/svelte-portabletext/issues/57)) ([c3d7b5e](https://github.com/portabletext/svelte-portabletext/commit/c3d7b5eda53b38d7f6923f0fe7c1f4fbee5063d6))
+
 ## [2.1.1](https://github.com/portabletext/svelte-portabletext/compare/v2.1.0...v2.1.1) (2023-08-25)
 
 ### Bug Fixes
