@@ -18,5 +18,6 @@
       "groupSlug": null,
       "semanticCommitType": "fix"
     }
-  ]
+  ],
+  "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"]
 }
