@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/portabletext/svelte-portabletext/compare/v2.1.4...v2.1.5) (2023-12-14)
+
+### Bug Fixes
+
+- package.json exports default condition should be the last one ([#77](https://github.com/portabletext/svelte-portabletext/issues/77)) ([97ced63](https://github.com/portabletext/svelte-portabletext/commit/97ced6339db7d44bc46742dda2e521a13717b4ba))
+
 ## [2.1.4](https://github.com/portabletext/svelte-portabletext/compare/v2.1.3...v2.1.4) (2023-10-20)
 
 ### Bug Fixes
