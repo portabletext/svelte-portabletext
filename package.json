@@ -55,7 +55,7 @@
   "devDependencies": {
     "@portabletext/types": "^2.0.8",
     "@sanity/semantic-release-preset": "^4.1.7",
-    "@sveltejs/adapter-auto": "^2.1.0",
+    "@sveltejs/adapter-auto": "^2.1.1",
     "@sveltejs/kit": "^1.30.4",
     "@sveltejs/package": "^2.2.2",
     "@sveltejs/vite-plugin-svelte": "^2.4.6",
