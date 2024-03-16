@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.8",
-    "@sanity/semantic-release-preset": "^4.1.4",
+    "@sanity/semantic-release-preset": "^4.1.7",
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.26.0",
     "@sveltejs/package": "^2.2.2",
