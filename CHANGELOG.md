@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/portabletext/svelte-portabletext/compare/v2.1.5...v2.1.6) (2024-03-16)
+
+### Bug Fixes
+
+- export InputValue from the package ([#84](https://github.com/portabletext/svelte-portabletext/issues/84)) ([504f797](https://github.com/portabletext/svelte-portabletext/commit/504f797295c1c15c3048da79e18eea213394aead))
+
 ## [2.1.5](https://github.com/portabletext/svelte-portabletext/compare/v2.1.4...v2.1.5) (2023-12-14)
 
 ### Bug Fixes
