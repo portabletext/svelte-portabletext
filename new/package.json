@@ -1,6 +1,16 @@
 {
-	"name": "new",
-	"version": "0.0.1",
+	"name": "@portabletext/svelte",
+	"version": "2.1.6",
+	"homepage": "https://github.com/portabletext/svelte-portabletext#readme",
+  "bugs": {
+    "url": "https://github.com/portabletext/svelte-portabletext/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/portabletext/svelte-portabletext.git"
+  },
+	"license": "MIT",
+	"author": "Sanity <hello@sanity.io>",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",

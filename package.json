@@ -1,25 +1,5 @@
 {
-  "name": "@portabletext/svelte",
-  "version": "2.1.6",
-  "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
-  "bugs": {
-    "url": "https://github.com/portabletext/svelte-portabletext/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/portabletext/svelte-portabletext.git"
-  },
-  "license": "MIT",
-  "author": "Sanity <hello@sanity.io>",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js",
-      "default": "./dist/index.js"
-    }
-  },
-  "types": "./dist/index.d.ts",
+  
   "files": [
     "dist"
   ],
