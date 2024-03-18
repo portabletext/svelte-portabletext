@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { MarkComponentProps } from '../rendererTypes.js';
+  import type {MarkComponentProps} from '../rendererTypes.js'
 
-	export let portableText: MarkComponentProps;
+  export let portableText: MarkComponentProps
 
-	$: ({ value } = portableText);
-	$: href = value?.href || value?.url || value?.link || value?.value;
+  $: ({value} = portableText)
+  $: href = value?.href || value?.url || value?.link || value?.value
 </script>
 
 {#if typeof href === 'string'}
-	<a {href}><slot /></a>
+  <a {href}><slot /></a>
 {:else}
-	<slot />
+  <slot />
 {/if}

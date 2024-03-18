@@ -10,13 +10,13 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 
 ```svelte
 <script>
-	import { PortableText } from '@portabletext/svelte';
+  import {PortableText} from '@portabletext/svelte'
 </script>
 
 <PortableText
-	value={[
-		// Portable Text array ...
-	]}
+  value={[
+    // Portable Text array ...
+  ]}
 />
 ```
 
@@ -28,42 +28,42 @@ You can use the `components` prop to determine how the renderer should process e
 
 ```svelte
 <PortableText
-	value={[
-		// Portable Text array ...
-	]}
-	components={{
-		types: {
-			// block-level components
-			callout: Callout,
-			// inline-level components
-			userInfo: UserInfo
-		},
-		marks: {
-			absUrl: AbsoluteURL,
-			// Overwrite default mark renderers
-			strong: CustomStrong
-		},
-		block: {
-			normal: CustomParagraph,
-			blockquote: Quote,
-			// Re-using the same component across multiple styles
-			h1: CustomHeading,
-			h2: CustomHeading,
-			h3: CustomHeading,
-			// Custom user-defined style
-			textCenter: CentralizedText
-		},
-		list: {
-			// Swap only the list parts you need
-			bullet: UnorderedListWrapper,
-			// Custom user-defined list type
-			checklist: ChecklistWrapper
-		},
-		listItem: {
-			bullet: ListItem,
-			checklist: ChecklistItem
-		}
-	}}
+  value={[
+    // Portable Text array ...
+  ]}
+  components={{
+    types: {
+      // block-level components
+      callout: Callout,
+      // inline-level components
+      userInfo: UserInfo
+    },
+    marks: {
+      absUrl: AbsoluteURL,
+      // Overwrite default mark renderers
+      strong: CustomStrong
+    },
+    block: {
+      normal: CustomParagraph,
+      blockquote: Quote,
+      // Re-using the same component across multiple styles
+      h1: CustomHeading,
+      h2: CustomHeading,
+      h3: CustomHeading,
+      // Custom user-defined style
+      textCenter: CentralizedText
+    },
+    list: {
+      // Swap only the list parts you need
+      bullet: UnorderedListWrapper,
+      // Custom user-defined list type
+      checklist: ChecklistWrapper
+    },
+    listItem: {
+      bullet: ListItem,
+      checklist: ChecklistItem
+    }
+  }}
 />
 ```
 
@@ -72,47 +72,47 @@ Example components from above:
 ```svelte
 <!-- UserInfo (custom block type) -->
 <script lang="ts">
-	import { session } from '$app/stores';
-	import type { CustomBlockComponentProps } from '@portabletext/svelte';
+  import {session} from '$app/stores'
+  import type {CustomBlockComponentProps} from '@portabletext/svelte'
 
-	// Property custom blocks receive from @portabletext/svelte when redered
-	export let portableText: CustomBlockComponentProps<{ bold?: boolean }>;
+  // Property custom blocks receive from @portabletext/svelte when redered
+  export let portableText: CustomBlockComponentProps<{bold?: boolean}>
 
-	$: userName = $session?.user?.name || 'person';
+  $: userName = $session?.user?.name || 'person'
 </script>
 
 {#if portableText.value.bold}
-	<strong>{userName}</strong>
+  <strong>{userName}</strong>
 {:else}
-	{userName}
+  {userName}
 {/if}
 ```
 
 ```svelte
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
-	import type { MarkComponentProps } from '@portabletext/svelte';
+  import type {MarkComponentProps} from '@portabletext/svelte'
 
-	// Property custom marks receive from @portabletext/svelte when redered
-	export let portableText: MarkComponentProps<{
-		url?: string;
-		newWindow?: boolean;
-	}>;
+  // Property custom marks receive from @portabletext/svelte when redered
+  export let portableText: MarkComponentProps<{
+    url?: string
+    newWindow?: boolean
+  }>
 
-	// Remember to make your variables reactive so that they can reflect prop changes
-	// See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
-	$: ({ value } = portableText);
-	$: newWindow = value.newWindow || false;
+  // Remember to make your variables reactive so that they can reflect prop changes
+  // See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
+  $: ({value} = portableText)
+  $: newWindow = value.newWindow || false
 </script>
 
 {#if value.url}
-	<a href={value.url} target={newWindow ? '_blank' : undefined}>
-		<!-- Marks receive children which you can render with Svelte's slots -->
-		<slot />
-	</a>
+  <a href={value.url} target={newWindow ? '_blank' : undefined}>
+    <!-- Marks receive children which you can render with Svelte's slots -->
+    <slot />
+  </a>
 {:else}
-	<!-- If no valid URL, render only the contents of the mark -->
-	<slot />
+  <!-- If no valid URL, render only the contents of the mark -->
+  <slot />
 {/if}
 ```
 
@@ -121,36 +121,34 @@ Example components from above:
 ```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
-	import type { BlockComponentProps } from '@portabletext/svelte';
+  import type {BlockComponentProps} from '@portabletext/svelte'
 
-	export let portableText: BlockComponentProps;
+  export let portableText: BlockComponentProps
 
-	$: ({ indexInParent, global, value } = portableText);
-	$: ({ ptBlocks } = global);
-	$: ({ style } = value);
+  $: ({indexInParent, global, value} = portableText)
+  $: ({ptBlocks} = global)
+  $: ({style} = value)
 
-	$: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(
-		ptBlocks[indexInParent - 1]?.style
-	);
+  $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(ptBlocks[indexInParent - 1]?.style)
 
-	$: anchorId = `heading-${value._key}`;
+  $: anchorId = `heading-${value._key}`
 </script>
 
 <!-- If preceded by heading, have a higher margin top -->
 <div class="relative {precededByHeading ? 'mt-10' : 'mt-4'}" id={anchorId}>
-	<a href="#{anchorId}">
-		<span class="sr-only">Link to this heading</span>
-		🔗
-	</a>
-	{#if style === 'h1'}
-		<h1 class="text-4xl font-black"><slot /></h1>
-	{:else if style === 'h2'}
-		<h2 class="text-3xl"><slot /></h2>
-	{:else if style === 'h3'}
-		<h3 class="text-xl"><slot /></h3>
-	{:else}
-		<h4 class="text-lg text-gray-600"><slot /></h4>
-	{/if}
+  <a href="#{anchorId}">
+    <span class="sr-only">Link to this heading</span>
+    🔗
+  </a>
+  {#if style === 'h1'}
+    <h1 class="text-4xl font-black"><slot /></h1>
+  {:else if style === 'h2'}
+    <h2 class="text-3xl"><slot /></h2>
+  {:else if style === 'h3'}
+    <h3 class="text-xl"><slot /></h3>
+  {:else}
+    <h4 class="text-lg text-gray-600"><slot /></h4>
+  {/if}
 </div>
 ```
 
@@ -276,11 +274,11 @@ For instance, to render an OpenGraph meta description for a page:
 
 ```svelte
 <script>
-	import { toPlainText } from '@portabletext/svelte';
+  import {toPlainText} from '@portabletext/svelte'
 </script>
 
 <svelte:head>
-	<meta name="og:description" value={toPlainText(myPortableTextData)} />
+  <meta name="og:description" value={toPlainText(myPortableTextData)} />
 </svelte:head>
 ```
 

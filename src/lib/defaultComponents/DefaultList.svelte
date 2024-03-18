@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { ListComponentProps } from '../rendererTypes.js';
+  import type {ListComponentProps} from '../rendererTypes.js'
 
-	export let portableText: ListComponentProps;
+  export let portableText: ListComponentProps
 
-	$: ({ value } = portableText);
+  $: ({value} = portableText)
 
-	$: ({ listItem } = value);
+  $: ({listItem} = value)
 </script>
 
 {#if listItem === 'number'}
-	<ol><slot /></ol>
+  <ol><slot /></ol>
 {:else}
-	<ul><slot /></ul>
+  <ul><slot /></ul>
 {/if}

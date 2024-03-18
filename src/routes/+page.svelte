@@ -1,6 +1,6 @@
 <script>
-	import PortableText from '$lib/PortableText.svelte';
-	import homepage from '../dummyData/homepage';
+  import PortableText from '$lib/PortableText.svelte'
+  import homepage from '../dummyData/homepage'
 </script>
 
 <PortableText value={homepage} />
