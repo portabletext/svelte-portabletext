@@ -12,10 +12,10 @@ This package makes usage of the [`svelte:element` tag introduced in 3.47.0](http
 
 ```js
 // Before
-import PortableText from '@portabletext/svelte'
+import PortableText from '@portabletext/svelte';
 
 // After (`^1.0.0`)
-import {PortableText} from '@portabletext/svelte'
+import { PortableText } from '@portabletext/svelte';
 ```
 
 ## `blocks` renamed to `value`
@@ -25,16 +25,16 @@ This component renders any Portable Text content or custom object (such as `code
 ```svelte
 <!-- From: -->
 <PortableText
-  blocks={[
-    /* ... */
-  ]}
+	blocks={[
+		/* ... */
+	]}
 />
 
 <!-- ✅ To: -->
 <PortableText
-  value={[
-    /* ... */
-  ]}
+	value={[
+		/* ... */
+	]}
 />
 ```
 
@@ -175,20 +175,20 @@ Previously, you'd use `BlockProps` and `MarkProps` for custom components in `typ
 
 ```svelte
 <script>
-  // From:
-  import {BlockProps, MarkProps} from '@portabletext/svelte'
+	// From:
+	import { BlockProps, MarkProps } from '@portabletext/svelte';
 
-  // ✅ To:
-  import {
-    BlockComponentProps,
-    CustomBlockComponentProps,
-    MarkComponentProps,
-    ListComponentProps,
-    ListItemComponentProps
-  } from '@portabletext/svelte'
+	// ✅ To:
+	import {
+		BlockComponentProps,
+		CustomBlockComponentProps,
+		MarkComponentProps,
+		ListComponentProps,
+		ListItemComponentProps
+	} from '@portabletext/svelte';
 
-  // Example usage:
-  export let portableText: CustomBlockComponentProps<{title: string; subtitle?: string}>
+	// Example usage:
+	export let portableText: CustomBlockComponentProps<{ title: string; subtitle?: string }>;
 </script>
 ```
 
@@ -196,13 +196,13 @@ Previously, you'd use `BlockProps` and `MarkProps` for custom components in `typ
 
 ```svelte
 <script>
-  // From:
-  $: ({context} = portableText)
+	// From:
+	$: ({ context } = portableText);
 
-  // ✅ To:
-  $: ({
-    global: {context}
-  } = portableText)
+	// ✅ To:
+	$: ({
+		global: { context }
+	} = portableText);
 </script>
 ```
 
@@ -214,9 +214,9 @@ Also extends to new `list` and `listItem` components.
 
 ```svelte
 <script>
-  // Marks, Blocks & CustomBlocks now receive `value` in portableText
-  export let portableText
-  $: ({value} = portableText)
+	// Marks, Blocks & CustomBlocks now receive `value` in portableText
+	export let portableText;
+	$: ({ value } = portableText);
 </script>
 ```
 
@@ -229,23 +229,23 @@ Marks keep receiving their parent block as a prop, but now under the `parentBloc
 ```svelte
 <!-- Example mark: internal link -->
 <script>
-  // From:
-  import {MarkProps} from '@portabletext/svelte'
+	// From:
+	import { MarkProps } from '@portabletext/svelte';
 
-  export let portableText: MarkProps<{linkedPageSlug: string}>
-  $: ({block} = portableText)
+	export let portableText: MarkProps<{ linkedPageSlug: string }>;
+	$: ({ block } = portableText);
 
-  // ✅ To:
-  import {MarkComponentProps} from '@portabletext/svelte'
+	// ✅ To:
+	import { MarkComponentProps } from '@portabletext/svelte';
 
-  export let portableText: MarkComponentProps<{linkedPageSlug: string}>
-  $: ({parentBlock} = portableText)
+	export let portableText: MarkComponentProps<{ linkedPageSlug: string }>;
+	$: ({ parentBlock } = portableText);
 
-  // Example usage:
-  $: siblingLinks = parentBlock.markDefs.filter(
-    (def) => def._type == 'internalLink' && def._key !== portableText.mark._key
-  )
-  $: isSoleLinkInBlock = siblingLinks.length <= 0
+	// Example usage:
+	$: siblingLinks = parentBlock.markDefs.filter(
+		(def) => def._type == 'internalLink' && def._key !== portableText.mark._key
+	);
+	$: isSoleLinkInBlock = siblingLinks.length <= 0;
 </script>
 ```
 
@@ -258,14 +258,14 @@ Useful when you need to use the mark's text content for accessibility, custom di
 ```svelte
 <!-- Example usage: link w/ custom accessibility title -->
 <script>
-  import {MarkComponentProps} from '@portabletext/svelte'
+	import { MarkComponentProps } from '@portabletext/svelte';
 
-  export let portableText: MarkComponentProps<{linkedPageSlug: string}>
-  $: ({value, plainTextContent} = portableText)
+	export let portableText: MarkComponentProps<{ linkedPageSlug: string }>;
+	$: ({ value, plainTextContent } = portableText);
 </script>
 
 <a href={value.href} title={`Open "${plainTextContent}"`}>
-  <slot />
+	<slot />
 </a>
 ```
 

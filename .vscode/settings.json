@@ -1,4 +1,4 @@
 {
-  "editor.formatOnSave": true,
-  "biome.enabled": false
+	"editor.formatOnSave": true,
+	"biome.enabled": false
 }
