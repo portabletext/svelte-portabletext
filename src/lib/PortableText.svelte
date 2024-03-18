@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { LIST_NEST_MODE_HTML, nestLists } from '@portabletext/toolkit';
-	import assertBlockKey from './assertBlockKey';
-	import defaultComponents from './defaultComponents/defaultComponents';
-	import { mergeComponents } from './defaultComponents/mergeComponents';
-	import type { InputValue, PortableTextSvelteContext } from './ptTypes';
-	import type { MissingComponentHandler, NodeType, PortableTextComponents } from './rendererTypes';
+	import assertBlockKey from './assertBlockKey.js';
+	import defaultComponents from './defaultComponents/defaultComponents.js';
+	import { mergeComponents } from './defaultComponents/mergeComponents.js';
+	import type { InputValue, PortableTextSvelteContext } from './ptTypes.js';
+	import type {
+		MissingComponentHandler,
+		NodeType,
+		PortableTextComponents
+	} from './rendererTypes.js';
 	import RenderNode from './RenderNode.svelte';
-	import { getWarningMessage, printWarning } from './warnings';
+	import { getWarningMessage, printWarning } from './warnings.js';
 
 	export let value: InputValue = [];
 

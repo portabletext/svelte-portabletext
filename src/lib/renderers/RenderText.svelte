@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ToolkitTextNode } from '@portabletext/toolkit';
-	import type { GlobalProps } from '../rendererTypes';
+	import type { GlobalProps } from '../rendererTypes.js';
 
 	export let global: GlobalProps;
 	$: ({ components } = global);

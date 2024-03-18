@@ -8,14 +8,14 @@
 		isPortableTextToolkitTextNode
 	} from '@portabletext/toolkit';
 	import type { PortableTextBlock } from '@portabletext/types';
-	import type { GenericNode } from './ptTypes';
+	import type { GenericNode } from './ptTypes.js';
 	import RenderBlock from './renderers/RenderBlock.svelte';
 	import RenderCustomBlock from './renderers/RenderCustomBlock.svelte';
 	import RenderList from './renderers/RenderList.svelte';
 	import RenderListItem from './renderers/RenderListItem.svelte';
 	import RenderSpan from './renderers/RenderSpan.svelte';
 	import RenderText from './renderers/RenderText.svelte';
-	import type { GlobalProps } from './rendererTypes';
+	import type { GlobalProps } from './rendererTypes.js';
 
 	export let global: GlobalProps;
 	export let options: {
