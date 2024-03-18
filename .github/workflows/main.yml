@@ -31,7 +31,7 @@ jobs:
           node-version: lts/*
       - run: npm ci
       - run: npm run lint
-      - run: npm run prepublish
+      - run: npm run prepublishOnly
 
   test:
     runs-on: ${{ matrix.platform }}
@@ -76,5 +76,6 @@ jobs:
       # Branches that will release new versions are defined in "release" in "package.json"
       - run: npx semantic-release
         env:
+          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

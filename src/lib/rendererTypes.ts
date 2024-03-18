@@ -167,6 +167,7 @@ export interface PortableTextSvelteComponents {
    * Component to use for rendering "hard breaks", eg `\n` inside of text spans
    * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   hardBreak: SvelteComponent<never> | typeof SvelteComponent<any> | false
 
   /* eslint-disable */
@@ -208,28 +209,33 @@ type BlockComponent =
   | SvelteComponent<{
       portableText: BlockComponentProps
     }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | typeof SvelteComponent<any>
 
 type CustomBlockComponent =
   | SvelteComponent<{
       portableText: CustomBlockComponentProps
     }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | typeof SvelteComponent<any>
 
 type MarkComponent =
   | SvelteComponent<{
       portableText: MarkComponentProps
     }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | typeof SvelteComponent<any>
 
 type ListComponent =
   | SvelteComponent<{
       portableText: ListComponentProps
     }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | typeof SvelteComponent<any>
 
 type ListItemComponent =
   | SvelteComponent<{
       portableText: ListItemComponentProps
     }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | typeof SvelteComponent<any>

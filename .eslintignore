@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+/dist
+
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Ignore problematic test files
+/tests/render-tests/050-custom-block-type.svelte
