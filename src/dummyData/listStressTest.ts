@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { InputValue } from '$lib/ptTypes';
 import { NATIVE_MARKS } from './sharedData/marks.js';
 import { LIST_LEVELS } from './sharedData/listLevels.js';

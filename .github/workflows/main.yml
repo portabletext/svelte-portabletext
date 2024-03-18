@@ -31,7 +31,7 @@ jobs:
           node-version: lts/*
       - run: npm ci
       - run: npm run lint
-      - run: npm run prepublish
+      - run: npm run prepublishOnly
 
   test:
     runs-on: ${{ matrix.platform }}

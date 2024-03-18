@@ -29,6 +29,7 @@ import test061 from './061-missing-mark-serializer.js';
 
 interface RenderTestFile {
 	value: InputValue;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	rendered: any;
 	name: string;
 	components?: PortableTextComponents;
