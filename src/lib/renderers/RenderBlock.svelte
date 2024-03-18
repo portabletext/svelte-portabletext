@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {PortableTextBlock} from '@portabletext/types'
-  import type {BlockComponentProps, GlobalProps} from '../rendererTypes.js'
+  import type {BlockComponentProps, GlobalProps} from '../rendererTypes'
 
   export let global: GlobalProps
   $: ({components} = global)

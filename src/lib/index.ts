@@ -11,7 +11,7 @@ export {default as DefaultListItem} from './defaultComponents/DefaultListItem.sv
 export {default as DefaultMark} from './defaultComponents/DefaultMark.svelte'
 
 // Types
-export type {InputValue} from './ptTypes.js'
+export type {InputValue} from './ptTypes'
 
 export type {
   BlockComponentProps,
@@ -20,4 +20,4 @@ export type {
   ListComponentProps,
   ListItemComponentProps,
   PortableTextComponents
-} from './rendererTypes.js'
+} from './rendererTypes'

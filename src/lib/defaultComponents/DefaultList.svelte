@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {ListComponentProps} from '../rendererTypes.js'
+  import type {ListComponentProps} from '../rendererTypes'
 
   export let portableText: ListComponentProps
 

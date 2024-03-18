@@ -16,7 +16,7 @@ import type {
   NormalizedBlocks,
   PortableTextMarkType,
   PortableTextSvelteContext
-} from './ptTypes.js'
+} from './ptTypes'
 
 export type NodeType = 'block' | 'mark' | 'blockStyle' | 'listStyle' | 'listItemStyle'
 

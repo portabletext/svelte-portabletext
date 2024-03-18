@@ -1,4 +1,4 @@
-import type {NodeType} from './rendererTypes.js'
+import type {NodeType} from './rendererTypes'
 
 const getTemplate = (type: string, prop?: string): string =>
   `Unknown ${type}, specify a component for it in the \`components${prop ? '.' : ''}${prop}\` prop`

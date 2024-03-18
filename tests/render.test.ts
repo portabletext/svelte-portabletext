@@ -5,7 +5,7 @@ import {format} from 'prettier'
 
 import PortableText from '../src/lib/PortableText.svelte'
 
-import allTests from './render-tests/index.js'
+import allTests from './render-tests'
 
 for (const renderTest of allTests) {
   test(renderTest.name, async () => {

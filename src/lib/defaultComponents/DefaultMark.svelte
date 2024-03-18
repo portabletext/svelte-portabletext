@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {MarkComponentProps} from '../rendererTypes.js'
+  import type {MarkComponentProps} from '../rendererTypes'
 
   export let portableText: MarkComponentProps
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {BlockComponentProps} from '../rendererTypes.js'
+  import type {BlockComponentProps} from '../rendererTypes'
 
   export let portableText: BlockComponentProps
 

@@ -2,7 +2,7 @@
   import {spanToPlainText} from '@portabletext/toolkit'
   import type {ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
   import type {PortableTextBlock} from '@portabletext/types'
-  import type {GlobalProps, MarkComponentProps} from '../rendererTypes.js'
+  import type {GlobalProps, MarkComponentProps} from '../rendererTypes'
 
   export let global: GlobalProps
   $: ({components} = global)
