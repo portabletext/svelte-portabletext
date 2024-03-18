@@ -3,7 +3,7 @@
 	import Hero from '../../customComponents/Hero.svelte';
 	import Code from '../../customComponents/Code.svelte';
 	import Image from '../../customComponents/Image.svelte';
-	import blocks from '../../dummyData/custom.js';
+	import blocks from '../../dummyData/custom';
 	import Greeter from '../../customComponents/Greeter.svelte';
 	import Abbreviation from '../../customComponents/Abbreviation.svelte';
 	import Fun from '../../customComponents/Fun.svelte';

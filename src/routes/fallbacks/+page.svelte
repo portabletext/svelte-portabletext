@@ -3,7 +3,7 @@
 	import UnknownMark from '../../customComponents/CustomUnknownMark.svelte';
 	import UnknownType from '../../customComponents/CustomUnknownType.svelte';
 
-	import fallbacks from '../../dummyData/fallbacks.js';
+	import fallbacks from '../../dummyData/fallbacks';
 </script>
 
 <PortableText

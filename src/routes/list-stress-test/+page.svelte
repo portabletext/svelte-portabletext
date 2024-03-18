@@ -2,7 +2,7 @@
 	import PortableText from '$lib/PortableText.svelte';
 	import CustomList from '../../customComponents/CustomList.svelte';
 	import CustomListItem from '../../customComponents/CustomListItem.svelte';
-	import blocks from '../../dummyData/listStressTest.js';
+	import blocks from '../../dummyData/listStressTest';
 </script>
 
 <PortableText
