@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.10](https://github.com/portabletext/svelte-portabletext/compare/v2.1.9...v2.1.10) (2024-04-05)
+
+### Bug Fixes
+
+- **deps:** update dependency @portabletext/toolkit to ^2.0.14 ([#117](https://github.com/portabletext/svelte-portabletext/issues/117)) ([dee4fc0](https://github.com/portabletext/svelte-portabletext/commit/dee4fc033b66706153186946bed3a3cb9dd8a491))
+
 ## [2.1.9](https://github.com/portabletext/svelte-portabletext/compare/v2.1.8...v2.1.9) (2024-04-05)
 
 ### Bug Fixes
