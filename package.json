@@ -53,7 +53,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
-    "@portabletext/toolkit": "^2.0.14"
+    "@portabletext/toolkit": "^2.0.15"
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.13",
