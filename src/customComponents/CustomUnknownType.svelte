@@ -1,7 +1,11 @@
 <script lang="ts">
   import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: CustomBlockComponentProps
+  interface Props {
+    portableText: CustomBlockComponentProps;
+  }
+
+  let { portableText }: Props = $props();
 </script>
 
 <div style="font-size: 0.8em;">

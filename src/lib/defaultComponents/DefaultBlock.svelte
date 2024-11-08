@@ -1,17 +1,22 @@
 <script lang="ts">
   import type {BlockComponentProps} from '../rendererTypes'
 
-  export let portableText: BlockComponentProps
+  interface Props {
+    portableText: BlockComponentProps;
+    children?: import('svelte').Snippet;
+  }
 
-  $: ({value} = portableText)
+  let { portableText, children }: Props = $props();
 
-  $: style = value.style || 'normal'
+  let {value} = $derived(portableText)
+
+  let style = $derived(value.style || 'normal')
 </script>
 
 {#if ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'].includes(style)}
-  <svelte:element this={style}><slot /></svelte:element>
+  <svelte:element this={style}>{@render children?.()}</svelte:element>
 {:else if style === 'normal'}
-  <p><slot /></p>
+  <p>{@render children?.()}</p>
 {:else}
-  <slot />
+  {@render children?.()}
 {/if}

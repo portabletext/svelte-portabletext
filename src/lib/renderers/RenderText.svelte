@@ -2,16 +2,19 @@
   import type {ToolkitTextNode} from '@portabletext/toolkit'
   import type {GlobalProps} from '../rendererTypes'
 
-  export let global: GlobalProps
-  $: ({components} = global)
+  interface Props {
+    global: GlobalProps
+    node: ToolkitTextNode
+  }
 
-  export let node: ToolkitTextNode
-  $: ({text} = node)
+  let {global, node}: Props = $props()
+  let {components} = $derived(global)
+  let {text} = $derived(node)
 </script>
 
 {#if text === '\n'}
   {#if typeof components.hardBreak === 'function'}
-    <svelte:component this={components.hardBreak} />
+    <components.hardBreak />
   {:else}
     {text}
   {/if}

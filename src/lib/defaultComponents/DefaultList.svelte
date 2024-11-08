@@ -1,15 +1,20 @@
 <script lang="ts">
   import type {ListComponentProps} from '../rendererTypes'
 
-  export let portableText: ListComponentProps
+  interface Props {
+    portableText: ListComponentProps;
+    children?: import('svelte').Snippet;
+  }
 
-  $: ({value} = portableText)
+  let { portableText, children }: Props = $props();
 
-  $: ({listItem} = value)
+  let {value} = $derived(portableText)
+
+  let {listItem} = $derived(value)
 </script>
 
 {#if listItem === 'number'}
-  <ol><slot /></ol>
+  <ol>{@render children?.()}</ol>
 {:else}
-  <ul><slot /></ul>
+  <ul>{@render children?.()}</ul>
 {/if}

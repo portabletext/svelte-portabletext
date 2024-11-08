@@ -1,38 +1,48 @@
 <script lang="ts">
+  import {run} from 'svelte/legacy'
+
   import type {ToolkitPortableTextListItem} from '@portabletext/toolkit'
-  import type {GlobalProps, ListItemComponentProps} from '../rendererTypes'
+  import type {BlockComponent, GlobalProps, ListItemComponentProps} from '../rendererTypes'
 
-  export let global: GlobalProps
-  $: ({components} = global)
-
-  export let indexInParent: number
-  export let node: ToolkitPortableTextListItem
-  $: ({style = 'normal'} = node)
-
-  $: listItemComponent =
-    typeof components.listItem === 'function' ? components.listItem : components.listItem[style]
-  $: if (!listItemComponent) {
-    global.missingComponentHandler(style, 'listItemStyle')
+  interface Props {
+    global: GlobalProps
+    indexInParent: number
+    node: ToolkitPortableTextListItem
+    children?: import('svelte').Snippet
   }
-  $: styleComponent = style !== 'normal' ? components.block[style] : undefined
 
+  let {global, indexInParent, node, children}: Props = $props()
+
+  let {components} = $derived(global)
+  let style = $derived(node.style ?? 'normal')
+  let listItemComponent = $derived(
+    typeof components.listItem === 'function' ? components.listItem : components.listItem[style]
+  )
+  run(() => {
+    if (!listItemComponent) {
+      global.missingComponentHandler?.(style, 'listItemStyle')
+    }
+  })
+  let StyleComponent = $derived<BlockComponent | undefined>(
+    style !== 'normal' ? (components.block as any)[style] : undefined
+  )
   // Using a function is the only way to use TS in Svelte reactive assignments
-  $: listItemProps = (() => {
-    return {
-      global,
-      value: node,
-      indexInParent
-    } as ListItemComponentProps
-  })()
+  let listItemProps = $derived(
+    (() => {
+      return {
+        global,
+        value: node,
+        indexInParent
+      } as ListItemComponentProps
+    })()
+  )
+
+  const ListItemComponent = $derived(listItemComponent || components.unknownListItem)
 </script>
 
-<svelte:component
-  this={listItemComponent || components.unknownListItem}
-  portableText={listItemProps}
->
-  {#if styleComponent}
-    <svelte:component
-      this={styleComponent}
+<ListItemComponent portableText={listItemProps}>
+  {#if StyleComponent}
+    <StyleComponent
       portableText={{
         // Different props for the block that will hold this list
         ...listItemProps,
@@ -43,9 +53,9 @@
         }
       }}
     >
-      <slot />
-    </svelte:component>
+      {@render children?.()}
+    </StyleComponent>
   {:else}
-    <slot />
+    {@render children?.()}
   {/if}
-</svelte:component>
+</ListItemComponent>

@@ -1,16 +1,20 @@
 <script lang="ts">
   import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: CustomBlockComponentProps<{
+  interface Props {
+    portableText: CustomBlockComponentProps<{
     image: {
       extension: string
       url: string
       aspectRatio: number
     }
     caption: string
-  }>
+  }>;
+  }
 
-  $: ({value} = portableText)
+  let { portableText }: Props = $props();
+
+  let {value} = $derived(portableText)
 </script>
 
 <figure>

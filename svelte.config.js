@@ -13,8 +13,8 @@ const config = {
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
     adapter: adapter()
   },
-  vitePlugin: {
-    hot: !process.env.VITEST
+  compilerOptions: {
+    runes: true
   }
 }
 

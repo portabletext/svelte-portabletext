@@ -10,7 +10,7 @@ import type {
   PortableTextListItemType,
   PortableTextMarkDefinition
 } from '@portabletext/types'
-import type {SvelteComponent} from 'svelte'
+import type {Component, Snippet} from 'svelte'
 import type {
   InputValue,
   NormalizedBlocks,
@@ -107,8 +107,13 @@ export type CustomStyles =
   | BlockComponent
 
 export type CustomMarks = Record<PortableTextMarkType, MarkComponent>
-
 export type CustomTypes = Record<string, CustomBlockComponent>
+export type CustomListTypes =
+  | Record<PortableTextListItemType, ListComponent | undefined>
+  | ListComponent
+export type CustomListItemTypes =
+  | Record<PortableTextListItemType, ListItemComponent | undefined>
+  | ListItemComponent
 
 export interface PortableTextSvelteComponents {
   /**
@@ -151,7 +156,7 @@ export interface PortableTextSvelteComponents {
    *
    * Can also be set to a single Svelte component, which would handle lists of _any_ type.
    */
-  list: Record<PortableTextListItemType, ListComponent | undefined> | ListComponent
+  list: CustomListTypes
 
   /**
    * Object of Svelte components used to render different list item styles.
@@ -161,14 +166,14 @@ export interface PortableTextSvelteComponents {
    *
    * Can also be set to a single Svelte component, which would handle list items of _any_ type.
    */
-  listItem: Record<PortableTextListItemType, ListItemComponent | undefined> | ListItemComponent
+  listItem: CustomListItemTypes
 
   /**
    * Component to use for rendering "hard breaks", eg `\n` inside of text spans
    * Will by default render a `<br />`. Pass `false` to render as-is (`\n`)
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  hardBreak: SvelteComponent<never> | typeof SvelteComponent<any> | false
+  hardBreak: Component<any> | false
 
   /* eslint-disable */
   /**
@@ -205,37 +210,42 @@ export type PortableTextComponents = Partial<PortableTextSvelteComponents>
 
 // Unfortunately Svelte components don't play nicely with Typescript,
 // so we need to `| any` all of these types
-type BlockComponent =
-  | SvelteComponent<{
+export type BlockComponent =
+  | Component<{
       portableText: BlockComponentProps
+      children?: Snippet
     }>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  | typeof SvelteComponent<any>
+  | Component<any>
 
-type CustomBlockComponent =
-  | SvelteComponent<{
+export type CustomBlockComponent =
+  | Component<{
       portableText: CustomBlockComponentProps
+      children?: Snippet
     }>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  | typeof SvelteComponent<any>
+  | Component<any>
 
-type MarkComponent =
-  | SvelteComponent<{
+export type MarkComponent =
+  | Component<{
       portableText: MarkComponentProps
+      children?: Snippet
     }>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  | typeof SvelteComponent<any>
+  | Component<any>
 
-type ListComponent =
-  | SvelteComponent<{
+export type ListComponent =
+  | Component<{
       portableText: ListComponentProps
+      children?: Snippet
     }>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  | typeof SvelteComponent<any>
+  | Component<any>
 
-type ListItemComponent =
-  | SvelteComponent<{
+export type ListItemComponent =
+  | Component<{
       portableText: ListItemComponentProps
+      children?: Snippet
     }>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  | typeof SvelteComponent<any>
+  | Component<any>
