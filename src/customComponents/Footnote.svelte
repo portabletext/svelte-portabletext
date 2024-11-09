@@ -8,23 +8,24 @@
     note: InputValue
   }
 
-  interface Props {
+  type Props = {
     portableText: MarkComponentProps<
-    FootnoteProps,
-    // Use the second argument to specify your context's type
-    {
-      footnotes: FootnoteProps[]
-    }
-  >;
-    children?: import('svelte').Snippet;
+      FootnoteProps,
+      // Use the second argument to specify your context's type
+      {
+        footnotes: FootnoteProps[]
+      }
+    >
+    children?: import('svelte').Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: Props = $props()
 
-  let number =
-    $derived(portableText.global.context.footnotes.findIndex(
+  let number = $derived(
+    portableText.global.context.footnotes.findIndex(
       (note) => note._key === portableText.value._key
-    ) + 1)
+    ) + 1
+  )
 </script>
 
 <span id="src-{portableText.value._key}">

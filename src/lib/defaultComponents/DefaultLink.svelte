@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {MarkComponentProps} from '../rendererTypes'
 
-  interface Props {
-    portableText: MarkComponentProps;
-    children?: import('svelte').Snippet;
+  type DefaultLinkProps = {
+    portableText: MarkComponentProps
+    children?: Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: DefaultLinkProps = $props()
 
   let {value} = $derived(portableText)
   let href = $derived(value?.href || value?.url || value?.link || value?.value)

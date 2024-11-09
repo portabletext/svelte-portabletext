@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {ListComponentProps} from '../rendererTypes'
 
-  interface Props {
-    portableText: ListComponentProps;
-    children?: import('svelte').Snippet;
+  type DefaultListProps = {
+    portableText: ListComponentProps
+    children?: Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: DefaultListProps = $props()
 
   let {value} = $derived(portableText)
 

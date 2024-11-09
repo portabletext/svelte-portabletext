@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {BlockComponentProps} from '$lib/rendererTypes'
 
-  interface Props {
-    portableText: BlockComponentProps;
-    children?: import('svelte').Snippet;
+  type Props = {
+    portableText: BlockComponentProps
+    children?: import('svelte').Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: Props = $props()
 
   let {value} = $derived(portableText)
   let {style = 'normal'} = $derived(value)

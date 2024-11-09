@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  interface Props {
+  type Props = {
     portableText: MarkComponentProps<{
       full: string
     }>

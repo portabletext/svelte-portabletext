@@ -2,12 +2,12 @@
   import type {ToolkitTextNode} from '@portabletext/toolkit'
   import type {GlobalProps} from '../rendererTypes'
 
-  interface Props {
+  type RenderTextProps = {
     global: GlobalProps
     node: ToolkitTextNode
   }
 
-  let {global, node}: Props = $props()
+  let {global, node}: RenderTextProps = $props()
   let {components} = $derived(global)
   let {text} = $derived(node)
 </script>

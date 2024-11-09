@@ -1,14 +1,13 @@
 <script lang="ts">
-  import {run} from 'svelte/legacy'
-
   import type {ToolkitPortableTextListItem} from '@portabletext/toolkit'
   import type {BlockComponent, GlobalProps, ListItemComponentProps} from '../rendererTypes'
+  import type {Snippet} from 'svelte'
 
-  interface Props {
+  type Props = {
     global: GlobalProps
     indexInParent: number
     node: ToolkitPortableTextListItem
-    children?: import('svelte').Snippet
+    children?: Snippet
   }
 
   let {global, indexInParent, node, children}: Props = $props()
@@ -18,7 +17,7 @@
   let listItemComponent = $derived(
     typeof components.listItem === 'function' ? components.listItem : components.listItem[style]
   )
-  run(() => {
+  $effect(() => {
     if (!listItemComponent) {
       global.missingComponentHandler?.(style, 'listItemStyle')
     }
@@ -26,18 +25,14 @@
   let StyleComponent = $derived<BlockComponent | undefined>(
     style !== 'normal' ? (components.block as any)[style] : undefined
   )
-  // Using a function is the only way to use TS in Svelte reactive assignments
-  let listItemProps = $derived(
-    (() => {
-      return {
-        global,
-        value: node,
-        indexInParent
-      } as ListItemComponentProps
-    })()
-  )
 
-  const ListItemComponent = $derived(listItemComponent || components.unknownListItem)
+  let listItemProps = $derived.by<ListItemComponentProps>(() => ({
+    global,
+    value: node,
+    indexInParent
+  }))
+
+  let ListItemComponent = $derived(listItemComponent || components.unknownListItem)
 </script>
 
 <ListItemComponent portableText={listItemProps}>

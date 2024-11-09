@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {ListComponentProps} from '$lib/rendererTypes'
 
-  interface Props {
-    portableText: ListComponentProps;
-    children?: import('svelte').Snippet;
+  type Props = {
+    portableText: ListComponentProps
+    children?: import('svelte').Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: Props = $props()
 
   let {value} = $derived(portableText)
 </script>

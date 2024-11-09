@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {BlockComponentProps} from '../rendererTypes'
 
-  interface Props {
-    portableText: BlockComponentProps;
-    children?: import('svelte').Snippet;
+  type DefaultBlockProps = {
+    portableText: BlockComponentProps
+    children?: Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: DefaultBlockProps = $props()
 
   let {value} = $derived(portableText)
 

@@ -8,7 +8,7 @@
   import RenderNode from './RenderNode.svelte'
   import {getWarningMessage, printWarning} from './warnings'
 
-  interface Props {
+  type PortableTextProps = {
     value?: InputValue
     /**
      * Svelte components used to render portable text.
@@ -29,7 +29,12 @@
     onMissingComponent?: MissingComponentHandler | boolean
   }
 
-  let {value = [], components, context = {}, onMissingComponent = true}: Props = $props()
+  let {
+    value = [],
+    components,
+    context = {},
+    onMissingComponent = true
+  }: PortableTextProps = $props()
 
   let mergedComponents = $derived(mergeComponents(defaultComponents, components))
   let keyedBlocks = $derived((Array.isArray(value) ? value : [value]).map(assertBlockKey))

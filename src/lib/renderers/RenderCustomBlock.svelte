@@ -1,10 +1,8 @@
 <script lang="ts">
-  import {run} from 'svelte/legacy'
-
   import type {ArbitraryTypedObject, PortableTextBlock} from '@portabletext/types'
   import type {CustomBlockComponentProps, GlobalProps} from '../rendererTypes'
 
-  interface Props {
+  type RenderCustomBlockProps = {
     global: GlobalProps
     node: ArbitraryTypedObject
     parentBlock?: PortableTextBlock
@@ -12,12 +10,19 @@
     isInline?: boolean
   }
 
-  let {global, node, parentBlock, indexInParent, isInline = false}: Props = $props()
+  let {
+    global,
+    node,
+    parentBlock,
+    indexInParent,
+    isInline = false
+  }: RenderCustomBlockProps = $props()
 
   let {components} = $derived(global)
   let {_type} = $derived(node)
   let customComponent = $derived(components.types[_type])
-  run(() => {
+
+  $effect(() => {
     if (!customComponent) {
       global.missingComponentHandler?.(_type, 'block')
     }
@@ -35,7 +40,7 @@
     })()
   )
 
-  const CustomComponent = $derived(customComponent || components.unknownType)
+  let CustomComponent = $derived(customComponent || components.unknownType)
 </script>
 
 <CustomComponent portableText={componentProps} />

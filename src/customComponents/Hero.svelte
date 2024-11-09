@@ -5,19 +5,19 @@
   import type {CustomBlockComponentProps} from '$lib/rendererTypes'
   import Link from './Link.svelte'
 
-  interface Props {
+  type Props = {
     portableText: CustomBlockComponentProps<{
-    title: string
-    subtitle: PortableTextBlock[]
-    image: {
-      extension: string
-      url: string
-      aspectRatio: number
-    }
-  }>;
+      title: string
+      subtitle: PortableTextBlock[]
+      image: {
+        extension: string
+        url: string
+        aspectRatio: number
+      }
+    }>
   }
 
-  let { portableText }: Props = $props();
+  let {portableText}: Props = $props()
 
   let {value} = $derived(portableText)
 </script>

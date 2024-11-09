@@ -1,12 +1,13 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {MarkComponentProps} from '../rendererTypes'
 
-  interface Props {
-    portableText: MarkComponentProps;
-    children?: import('svelte').Snippet;
+  type DefaultMarkProps = {
+    portableText: MarkComponentProps
+    children?: Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: DefaultMarkProps = $props()
 
   let {markType} = $derived(portableText)
 </script>

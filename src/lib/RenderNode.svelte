@@ -18,7 +18,7 @@
   import RenderText from './renderers/RenderText.svelte'
   import type {GlobalProps} from './rendererTypes'
 
-  interface Props {
+  type RenderNodeProps = {
     global: GlobalProps
     options: {
       indexInParent: number
@@ -28,7 +28,7 @@
     }
   }
 
-  let {global, options}: Props = $props()
+  let {global, options}: RenderNodeProps = $props()
   let {node, indexInParent, parentBlock, isInline} = $derived(options)
 </script>
 

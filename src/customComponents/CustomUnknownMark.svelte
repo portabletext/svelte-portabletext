@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  interface Props {
-    portableText: MarkComponentProps;
-    children?: import('svelte').Snippet;
+  type Props = {
+    portableText: MarkComponentProps
+    children?: import('svelte').Snippet
   }
 
-  let { portableText, children }: Props = $props();
+  let {portableText, children}: Props = $props()
 </script>
 
 <span>
