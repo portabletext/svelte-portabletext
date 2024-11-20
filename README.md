@@ -130,7 +130,7 @@ Example components from above:
 
 > 📌 **To keep in mind**: Svelte's SSR mode seems to have issues with whitespace (see [#3168](https://github.com/sveltejs/svelte/issues/3168)), where it does strip unnecessary space between components. Due to this, marks (formatting, links, etc.) some times are rendered incorrectly. We're tracking this in [#1](https://github.com/portabletext/svelte-portabletext/issues/1).
 
-```html
+```svelte
 <!-- CustomHeading (blockStyle) -->
 <script lang="ts">
   import type {BlockComponentProps} from '@portabletext/svelte'
