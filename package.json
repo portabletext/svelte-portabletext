@@ -26,6 +26,8 @@
     "!dist/**/*.spec.*"
   ],
   "scripts": {
+    "bench": "vitest bench --outputJson benchmarks.json",
+    "bench:compare": "vitest bench --compare benchmarks.json --outputJson benchmarks-comparison.json",
     "build": "vite build && npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
