@@ -11,7 +11,6 @@ import allTests from './render-tests'
 
 for (const renderTest of allTests) {
   test(renderTest.name, async () => {
-    expect(5).toBe(5)
     const renderedByPackage = render(PortableText, {
       value: renderTest.value,
       components: renderTest.components
