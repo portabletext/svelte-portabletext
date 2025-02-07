@@ -23,11 +23,11 @@
       global.missingComponentHandler?.(listItem, 'listStyle')
     }
   })
-  let listProps = $derived.by<ListComponentProps>(() => ({
+  let listProps = $derived<ListComponentProps>({
     global,
     value: node,
     indexInParent
-  }))
+  })
 
   let ListComponent = $derived(listComponent || components.unknownList)
 </script>
