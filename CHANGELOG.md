@@ -5,6 +5,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/portabletext/svelte-portabletext/compare/v2.1.12...v3.0.0) (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+- migrate to Svelte 5 (#145)
+
+### Features
+
+- migrate to Svelte 5 ([#145](https://github.com/portabletext/svelte-portabletext/issues/145)) ([6f17aaf](https://github.com/portabletext/svelte-portabletext/commit/6f17aaf46b1a2e82fb62c3cc4888394b370bef3b))
+
 ## [2.1.12](https://github.com/portabletext/svelte-portabletext/compare/v2.1.11...v2.1.12) (2025-02-06)
 
 ### Bug Fixes
