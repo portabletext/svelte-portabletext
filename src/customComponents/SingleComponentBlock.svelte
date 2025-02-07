@@ -8,7 +8,7 @@
 
   let {portableText, children}: Props = $props()
 
-  let style = $derived(portableText.value.style || 'normal');
+  let style = $derived(portableText.value.style || 'normal')
 </script>
 
 <div style:background="papayawhip">

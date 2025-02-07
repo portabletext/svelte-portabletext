@@ -12,11 +12,13 @@
   import SingleComponentBlock from '../../customComponents/SingleComponentBlock.svelte'
 
   let footnotes = $derived(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     blocks.reduce((notes: any[], curBlock) => {
       if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
         return notes
       }
       return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }, [] as any[])
   )
 </script>

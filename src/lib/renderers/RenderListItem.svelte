@@ -2,6 +2,7 @@
   import type {ToolkitPortableTextListItem} from '@portabletext/toolkit'
   import type {BlockComponent, GlobalProps, ListItemComponentProps} from '../rendererTypes'
   import type {Snippet} from 'svelte'
+  import type {PortableTextBlockStyle} from '@portabletext/types'
 
   type Props = {
     global: GlobalProps
@@ -13,7 +14,7 @@
   let {global, indexInParent, node, children}: Props = $props()
 
   let {components} = $derived(global)
-  let style = $derived(node.style ?? 'normal')
+  let style = $derived<PortableTextBlockStyle>(node.style ?? 'normal')
   let listItemComponent = $derived(
     typeof components.listItem === 'function' ? components.listItem : components.listItem[style]
   )
@@ -23,6 +24,7 @@
     }
   })
   let StyleComponent = $derived<BlockComponent | undefined>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     style !== 'normal' ? (components.block as any)[style] : undefined
   )
 
