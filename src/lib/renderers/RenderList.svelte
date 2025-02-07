@@ -23,7 +23,6 @@
       global.missingComponentHandler?.(listItem, 'listStyle')
     }
   })
-  // Using a function is the only way to use TS in Svelte reactive assignments
   let listProps = $derived.by<ListComponentProps>(() => ({
     global,
     value: node,
