@@ -26,11 +26,11 @@
     style !== 'normal' ? (components.block as any)[style] : undefined
   )
 
-  let listItemProps = $derived.by<ListItemComponentProps>(() => ({
+  let listItemProps = $derived<ListItemComponentProps>({
     global,
     value: node,
     indexInParent
-  }))
+  })
 
   let ListItemComponent = $derived(listItemComponent || components.unknownListItem)
 </script>
