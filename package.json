@@ -1,6 +1,6 @@
 {
   "name": "@portabletext/svelte",
-  "version": "2.1.11",
+  "version": "2.1.12",
   "homepage": "https://github.com/portabletext/svelte-portabletext#readme",
   "bugs": {
     "url": "https://github.com/portabletext/svelte-portabletext/issues"
@@ -53,7 +53,7 @@
     "extends": "@sanity/semantic-release-preset"
   },
   "dependencies": {
-    "@portabletext/toolkit": "^2.0.15"
+    "@portabletext/toolkit": "^2.0.17"
   },
   "devDependencies": {
     "@portabletext/types": "^2.0.13",
