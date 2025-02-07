@@ -9,9 +9,7 @@
 
   let {portableText, children}: DefaultBlockProps = $props()
 
-  let {value} = $derived(portableText)
-
-  let style = $derived(value.style || 'normal')
+  let style = $derived(portableText.value.style || 'normal');
 </script>
 
 {#if ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'].includes(style)}
