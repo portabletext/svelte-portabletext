@@ -6,7 +6,7 @@ Render [Portable Text](https://portabletext.org) block content with [Svelte](htt
 
 `npm i @portabletext/svelte -D`
 
-⚠️ Svelte 3.47.0 or higher is required.
+⚠️ Svelte 5.0.0 or higher is required.
 
 ```svelte
 <script>
@@ -75,10 +75,14 @@ Example components from above:
   import {session} from '$app/stores'
   import type {CustomBlockComponentProps} from '@portabletext/svelte'
 
-  // Property custom blocks receive from @portabletext/svelte when redered
-  export let portableText: CustomBlockComponentProps<{bold?: boolean}>
+  interface Props {
+    portableText: CustomBlockComponentProps<{bold?: boolean}>
+  }
 
-  $: userName = $session?.user?.name || 'person'
+  // Property custom blocks receive from @portabletext/svelte when rendered
+  let {portableText}: Props = $props()
+
+  let userName = $derived($session?.user?.name || 'person')
 </script>
 
 {#if portableText.value.bold}
@@ -92,27 +96,35 @@ Example components from above:
 <!-- AbsoluteURL (custom mark) -->
 <script lang="ts">
   import type {MarkComponentProps} from '@portabletext/svelte'
+  import {Snippet} from 'svelte'
 
-  // Property custom marks receive from @portabletext/svelte when redered
-  export let portableText: MarkComponentProps<{
-    url?: string
-    newWindow?: boolean
-  }>
+  interface Props {
+    portableText: MarkComponentProps<{
+      url?: string
+      newWindow?: boolean
+    }>
+    children: Snippet
+  }
 
-  // Remember to make your variables reactive so that they can reflect prop changes
-  // See: https://svelte.dev/docs#3_$_marks_a_statement_as_reactive
-  $: ({value} = portableText)
-  $: newWindow = value.newWindow || false
+  // Property custom marks receive from @portabletext/svelte when rendered
+  let {portableText, children}: Props = $props()
+
+  // Remember to make your variables reactive with runes (or $: if using legacy syntax)
+  // so that they can reflect prop changes
+  // See: https://svelte.dev/docs/svelte/$derived
+  // Or if using legacy syntax: https://svelte.dev/docs/svelte/legacy-reactive-assignments
+  let {value} = $derived(portableText)
+  let newWindow = $derived(value.newWindow || false)
 </script>
 
 {#if value.url}
   <a href={value.url} target={newWindow ? '_blank' : undefined}>
     <!-- Marks receive children which you can render with Svelte's slots -->
-    <slot />
+    {@render children()}
   </a>
 {:else}
   <!-- If no valid URL, render only the contents of the mark -->
-  <slot />
+  {@render children()}
 {/if}
 ```
 
@@ -123,15 +135,22 @@ Example components from above:
 <script lang="ts">
   import type {BlockComponentProps} from '@portabletext/svelte'
 
-  export let portableText: BlockComponentProps
+  interface Props {
+    portableText: BlockComponentProps
+    children: Snippet
+  }
 
-  $: ({indexInParent, global, value} = portableText)
-  $: ({ptBlocks} = global)
-  $: ({style} = value)
+  let {portableText, children}: Props = $props()
 
-  $: precededByHeading = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(ptBlocks[indexInParent - 1]?.style)
+  let {indexInParent, global, value} = $derived(portableText)
+  let {ptBlocks} = $derived(global)
+  let {style} = $derived(value)
 
-  $: anchorId = `heading-${value._key}`
+  const headings = ['h1', 'h2', 'h3', 'h4', 'h5']
+
+  let precededByHeading = $derived(headings.includes(ptBlocks[indexInParent - 1]?.style))
+
+  let anchorId = $derived(`heading-${value._key}`)
 </script>
 
 <!-- If preceded by heading, have a higher margin top -->
@@ -141,13 +160,21 @@ Example components from above:
     🔗
   </a>
   {#if style === 'h1'}
-    <h1 class="text-4xl font-black"><slot /></h1>
+    <h1 class="text-4xl font-black">
+      {@render children()}
+    </h1>
   {:else if style === 'h2'}
-    <h2 class="text-3xl"><slot /></h2>
+    <h2 class="text-3xl">
+      {@render children()}
+    </h2>
   {:else if style === 'h3'}
-    <h3 class="text-xl"><slot /></h3>
+    <h3 class="text-xl">
+      {@render children()}
+    </h3>
   {:else}
-    <h4 class="text-lg text-gray-600"><slot /></h4>
+    <h4 class="text-lg text-gray-600">
+      {@render children()}
+    </h4>
   {/if}
 </div>
 ```
@@ -167,15 +194,15 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <script>
   import Footnote from './Foonote.svelte'
 
-  export let value
+  let {value} = $props()
 
   // Get all footnotes from markDefs in top-level value
-  $: footnotes = value.reduce((notes, curBlock) => {
+  let footnotes = $derived(value.reduce((notes, curBlock) => {
     if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
       return notes
     }
     return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
-  }, [])
+  }, []))
 </script>
 
 <PortableText
@@ -212,27 +239,31 @@ Here's a complete example with a `footnote` annotation, where editors focus on w
 <!-- Footnote.svelte -->
 <script lang="ts">
   import type {MarkComponentProps} from '@portabletext/svelte'
+  import {Snippet} from 'svelte'
 
   interface FootnoteProps {
     _key: string
     note: PortableTextBlocks
   }
 
-  export let portableText: MarkComponentProps<
-    FootnoteProps,
-    // Use the second argument to specify your context's type
-    {
-      footnotes: FootnoteProps[]
-    }
-  >
+  interface Props {
+    portableText: MarkComponentProps<
+      FootnoteProps,
+      // Use the second argument to specify your context's type
+      { footnotes: FootnoteProps[] }>
+    children: Snippet
+  }
+
+  let {portableText, children}: Props = $props()
+  let {footnotes} = $derived(portableText.global.context)
 
   // From the context, let's figure out what's the position of this footnote
-  $: number =
-    portableText.global.context.footnotes.findIndex((note) => note._key === portableText.value._key) + 1
+  let number = $derived(footnotes.findIndex(note => note._key === portableText.value._key) + 1)
 </script>
 
 <span id="src-{portableText.value._key}">
-  <slot /><sup><a href={`#note-${portableText.value._key}`}>{number}</a></sup>
+  {@render children()}
+  <sup><a href={`#note-${portableText.value._key}`}>{number}</a></sup>
 </span>
 ```
 
@@ -251,7 +282,6 @@ import {PortableText} from '@portabletext/svelte'
 />
 
 // or, pass it a function:
-
 <PortableText
   value={[/* array of portable text blocks */]}
   onMissingComponent={(message, options) => {

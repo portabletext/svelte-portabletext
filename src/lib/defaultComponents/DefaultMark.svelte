@@ -1,31 +1,37 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {MarkComponentProps} from '../rendererTypes'
 
-  export let portableText: MarkComponentProps
+  type DefaultMarkProps = {
+    portableText: MarkComponentProps
+    children?: Snippet
+  }
 
-  $: ({markType} = portableText)
+  let {portableText, children}: DefaultMarkProps = $props()
+
+  let {markType} = $derived(portableText)
 </script>
 
 {#if markType === 'strong'}
   <strong>
-    <slot />
+    {@render children?.()}
   </strong>
 {:else if markType === 'em'}
   <em>
-    <slot />
+    {@render children?.()}
   </em>
 {:else if markType === 'code'}
   <code>
-    <slot />
+    {@render children?.()}
   </code>
 {:else if markType === 'underline'}
   <span style="text-decoration:underline;">
-    <slot />
+    {@render children?.()}
   </span>
 {:else if markType === 'strike-through'}
   <del>
-    <slot />
+    {@render children?.()}
   </del>
 {:else}
-  <slot />
+  {@render children?.()}
 {/if}

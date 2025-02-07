@@ -1,11 +1,16 @@
 <script lang="ts">
   import type {MarkComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: MarkComponentProps<{
-    full: string
-  }>
+  type Props = {
+    portableText: MarkComponentProps<{
+      full: string
+    }>
+    children?: import('svelte').Snippet
+  }
+
+  let {portableText, children}: Props = $props()
 </script>
 
 <abbr title={portableText.value.full}>
-  <slot />
+  {@render children?.()}
 </abbr>

@@ -2,11 +2,16 @@
 <script lang="ts">
   import type {MarkComponentProps} from '../../src/lib/rendererTypes'
 
-  export let portableText: MarkComponentProps<{thickness: number}>
+  type Props = {
+    portableText: MarkComponentProps<{thickness: number}>
+    children?: import('svelte').Snippet
+  }
 
-  $: ({thickness} = portableText.value)
+  let {portableText, children}: Props = $props()
+
+  let {thickness} = $derived(portableText.value)
 </script>
 
 <span style="border:{thickness}px solid;">
-  <slot />
+  {@render children?.()}
 </span>

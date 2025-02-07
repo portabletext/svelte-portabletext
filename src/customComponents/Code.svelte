@@ -1,12 +1,16 @@
 <script lang="ts">
   import type {CustomBlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: CustomBlockComponentProps<{
-    code: string
-    language: string
-  }>
+  type Props = {
+    portableText: CustomBlockComponentProps<{
+      code: string
+      language: string
+    }>
+  }
 
-  $: ({value} = portableText)
+  let {portableText}: Props = $props()
+
+  let {value} = $derived(portableText)
 </script>
 
 <pre>

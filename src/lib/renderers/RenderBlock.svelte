@@ -1,30 +1,39 @@
 <script lang="ts">
   import type {PortableTextBlock} from '@portabletext/types'
   import type {BlockComponentProps, GlobalProps} from '../rendererTypes'
+  import type {Snippet} from 'svelte'
 
-  export let global: GlobalProps
-  $: ({components} = global)
-
-  export let node: PortableTextBlock
-  export let indexInParent: number
-
-  $: ({style = 'normal'} = node)
-  $: blockComponent =
-    typeof components.block === 'function' ? components.block : components.block[style]
-  $: if (!blockComponent) {
-    global.missingComponentHandler(style, 'blockStyle')
+  type RenderBlockProps = {
+    global: GlobalProps
+    node: PortableTextBlock
+    indexInParent: number
+    children?: Snippet
   }
 
-  // Using a function is the only way to use TS in Svelte reactive assignments
-  $: blockProps = (() => {
+  let {global, node, indexInParent, children}: RenderBlockProps = $props()
+
+  let {components} = $derived(global)
+  let {style = 'normal'} = $derived(node)
+  let blockComponent = $derived(
+    typeof components.block === 'function' ? components.block : components.block[style]
+  )
+  $effect(() => {
+    if (!blockComponent) {
+      global.missingComponentHandler?.(style, 'blockStyle')
+    }
+  })
+
+  let blockProps = $derived.by(() => {
     return {
       global,
       indexInParent,
       value: node
     } as BlockComponentProps
-  })()
+  })
+
+  let BlockComponent = $derived(blockComponent || components.unknownBlockStyle)
 </script>
 
-<svelte:component this={blockComponent || components.unknownBlockStyle} portableText={blockProps}>
-  <slot />
-</svelte:component>
+<BlockComponent portableText={blockProps}>
+  {@render children?.()}
+</BlockComponent>

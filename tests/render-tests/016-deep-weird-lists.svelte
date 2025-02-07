@@ -13,7 +13,7 @@
   </li>
   <li>Item 3</li>
 </ol>
-<p />
+<p></p>
 <ul>
   <li>
     In

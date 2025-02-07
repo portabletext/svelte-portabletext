@@ -2,9 +2,13 @@
 <script lang="ts">
   import type {CustomBlockComponentProps} from '../../src/lib/rendererTypes'
 
-  export let portableText: CustomBlockComponentProps<{text?: string}>
+  type Props = {
+    portableText: CustomBlockComponentProps<{text?: string}>
+  }
 
-  $: ({text} = portableText.value || {})
+  let {portableText}: Props = $props()
+
+  let {text} = $derived(portableText.value || {})
 </script>
 
 <button>

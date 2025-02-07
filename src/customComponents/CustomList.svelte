@@ -1,12 +1,17 @@
 <script lang="ts">
   import type {ListComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: ListComponentProps
+  type Props = {
+    portableText: ListComponentProps
+    children?: import('svelte').Snippet
+  }
 
-  $: ({value} = portableText)
+  let {portableText, children}: Props = $props()
+
+  let {value} = $derived(portableText)
 </script>
 
 <ul style="list-style-type: a">
   I'm a list with {value.children.length} direct children.
-  <slot />
+  {@render children?.()}
 </ul>

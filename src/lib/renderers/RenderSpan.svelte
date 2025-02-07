@@ -3,32 +3,37 @@
   import type {ToolkitNestedPortableTextSpan} from '@portabletext/toolkit'
   import type {PortableTextBlock} from '@portabletext/types'
   import type {GlobalProps, MarkComponentProps} from '../rendererTypes'
+  import type {Snippet} from 'svelte'
 
-  export let global: GlobalProps
-  $: ({components} = global)
-
-  export let node: ToolkitNestedPortableTextSpan
-  export let parentBlock: PortableTextBlock
-
-  $: ({markType} = node)
-  $: markComponent = components.marks[markType]
-  $: if (!markComponent) {
-    global.missingComponentHandler(markType, 'mark')
+  type RenderSpanProps = {
+    global: GlobalProps
+    node: ToolkitNestedPortableTextSpan
+    parentBlock?: PortableTextBlock
+    children?: Snippet
   }
 
-  // Using a function is the only way to use TS in Svelte reactive assignments
-  $: markProps = (() => {
-    return {
-      global,
-      parentBlock,
-      markType,
-      value: node.markDef,
-      markKey: node.markKey,
-      plainTextContent: spanToPlainText(node)
-    } as MarkComponentProps
-  })()
+  let {global, node, parentBlock, children}: RenderSpanProps = $props()
+
+  let markComponent = $derived(global.components.marks[node.markType])
+  $effect(() => {
+    if (!markComponent) {
+      global.missingComponentHandler?.(node.markType, 'mark')
+    }
+  })
+
+  let markProps = $derived<MarkComponentProps>({
+    global,
+    parentBlock,
+    markType: node.markType,
+    // @ts-expect-error @TODO
+    value: node.markDef,
+    markKey: node.markKey,
+    plainTextContent: spanToPlainText(node)
+  })
+
+  let MarkComponent = $derived(markComponent || global.components.unknownMark)
 </script>
 
-<svelte:component this={markComponent || components.unknownMark} portableText={markProps}>
-  <slot />
-</svelte:component>
+<MarkComponent portableText={markProps}>
+  {@render children?.()}
+</MarkComponent>

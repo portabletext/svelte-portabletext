@@ -1,3 +1,7 @@
+<script>
+  let {children} = $props()
+</script>
+
 <svelte:head>
   <title>PortableText to Svelte</title>
 </svelte:head>
@@ -23,11 +27,11 @@
   </nav>
 
   <div style="flex: 1">
-    <slot />
+    {@render children?.()}
   </div>
 
   <footer style="text-align: center; margin-top: 10vh; margin-bottom: 10vh;">
-    <a href="https://sanity.io">
+    <a href="https://sanity.io" aria-label="sanity.io">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
         ><rect width="28" height="28" rx="3" fill="#F03E2F" /><path
           d="M8.62 7.25c0 2.41 1.52 3.84 4.54 4.6l3.21.73c2.87.64 4.61 2.25 4.61 4.87a4.91 4.91 0 01-1.07 3.15c0-2.61-1.37-4.02-4.69-4.87l-3.15-.7c-2.52-.57-4.47-1.89-4.47-4.73a4.89 4.89 0 011.02-3.05z"

@@ -1,14 +1,22 @@
 <script lang="ts">
+  import type {Snippet} from 'svelte'
   import type {MarkComponentProps} from '../rendererTypes'
 
-  export let portableText: MarkComponentProps
+  type DefaultLinkProps = {
+    portableText: MarkComponentProps
+    children?: Snippet
+  }
 
-  $: ({value} = portableText)
-  $: href = value?.href || value?.url || value?.link || value?.value
+  let {portableText, children}: DefaultLinkProps = $props()
+
+  let href = $derived.by(() => {
+    const {href, url, link, value} = portableText.value
+    return href || url || link || value
+  })
 </script>
 
 {#if typeof href === 'string'}
-  <a {href}><slot /></a>
+  <a {href}>{@render children?.()}</a>
 {:else}
-  <slot />
+  {@render children?.()}
 {/if}

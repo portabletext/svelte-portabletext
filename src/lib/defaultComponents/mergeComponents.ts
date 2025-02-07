@@ -1,4 +1,9 @@
-import type {PortableTextComponents, PortableTextSvelteComponents} from '$lib/rendererTypes'
+import type {
+  CustomMarks,
+  CustomTypes,
+  PortableTextComponents,
+  PortableTextSvelteComponents
+} from '$lib/rendererTypes'
 
 export function mergeComponents(
   parent: PortableTextSvelteComponents,
@@ -10,8 +15,8 @@ export function mergeComponents(
     block: mergeDeeply(parent, overrides, 'block'),
     list: mergeDeeply(parent, overrides, 'list'),
     listItem: mergeDeeply(parent, overrides, 'listItem'),
-    marks: mergeDeeply(parent, overrides, 'marks'),
-    types: mergeDeeply(parent, overrides, 'types')
+    marks: mergeDeeply(parent, overrides, 'marks') as CustomMarks,
+    types: mergeDeeply(parent, overrides, 'types') as CustomTypes
   }
 }
 

@@ -2,11 +2,16 @@
 <script lang="ts">
   import type {MarkComponentProps} from '../../src/lib/rendererTypes'
 
-  export let portableText: MarkComponentProps<{href: string}>
+  type Props = {
+    portableText: MarkComponentProps<{href: string}>
+    children?: import('svelte').Snippet
+  }
 
-  $: ({href} = portableText.value)
+  let {portableText, children}: Props = $props()
+
+  let {href} = $derived(portableText.value)
 </script>
 
 <a class="mahlink" {href}>
-  <slot />
+  {@render children?.()}
 </a>

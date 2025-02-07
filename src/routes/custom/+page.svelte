@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import PortableText from '$lib/PortableText.svelte'
   import Hero from '../../customComponents/Hero.svelte'
   import Code from '../../customComponents/Code.svelte'
@@ -11,12 +11,16 @@
   import Footnote from '../../customComponents/Footnote.svelte'
   import SingleComponentBlock from '../../customComponents/SingleComponentBlock.svelte'
 
-  $: footnotes = blocks.reduce((notes, curBlock) => {
-    if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
-      return notes
-    }
-    return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
-  }, [])
+  let footnotes = $derived(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    blocks.reduce((notes: any[], curBlock) => {
+      if (curBlock._type !== 'block' || !curBlock.markDefs?.length) {
+        return notes
+      }
+      return [...notes, ...curBlock.markDefs.filter((def) => def._type === 'footnote')]
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }, [] as any[])
+  )
 </script>
 
 <PortableText

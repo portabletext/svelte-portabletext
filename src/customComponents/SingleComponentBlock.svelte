@@ -1,31 +1,35 @@
 <script lang="ts">
   import type {BlockComponentProps} from '$lib/rendererTypes'
 
-  export let portableText: BlockComponentProps
+  type Props = {
+    portableText: BlockComponentProps
+    children?: import('svelte').Snippet
+  }
 
-  $: ({value} = portableText)
-  $: ({style = 'normal'} = value)
+  let {portableText, children}: Props = $props()
+
+  let style = $derived(portableText.value.style || 'normal')
 </script>
 
 <div style:background="papayawhip">
   <em style:color="#888">I was rendered from a single `components.block` Svelte component</em>
   {#if style === 'h1'}
-    <h1><slot /></h1>
+    <h1>{@render children?.()}</h1>
   {:else if style === 'h2'}
-    <h2><slot /></h2>
+    <h2>{@render children?.()}</h2>
   {:else if style === 'h3'}
-    <h3><slot /></h3>
+    <h3>{@render children?.()}</h3>
   {:else if style === 'h4'}
-    <h4><slot /></h4>
+    <h4>{@render children?.()}</h4>
   {:else if style === 'h5'}
-    <h5><slot /></h5>
+    <h5>{@render children?.()}</h5>
   {:else if style === 'h6'}
-    <h6><slot /></h6>
+    <h6>{@render children?.()}</h6>
   {:else if style === 'blockquote'}
-    <blockquote><slot /></blockquote>
+    <blockquote>{@render children?.()}</blockquote>
   {:else if style === 'normal'}
-    <p><slot /></p>
+    <p>{@render children?.()}</p>
   {:else}
-    <slot />
+    {@render children?.()}
   {/if}
 </div>
