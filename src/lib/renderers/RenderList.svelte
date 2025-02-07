@@ -12,15 +12,13 @@
 
   let {global, indexInParent, node, children}: RenderListProps = $props()
 
-  let {components} = $derived(global)
-  let {listItem} = $derived(node)
-  let handler = $derived(
-    typeof components.list === 'function' ? components.list : components.list[listItem]
-  )
-  let listComponent = $derived(handler)
+  let listComponent = $derived.by(() => {
+    const {list} = global.components
+    return typeof list === 'function' ? list : list[node.listItem]
+  })
   $effect(() => {
     if (!listComponent) {
-      global.missingComponentHandler?.(listItem, 'listStyle')
+      global.missingComponentHandler?.(node.listItem, 'listStyle')
     }
   })
   let listProps = $derived<ListComponentProps>({
