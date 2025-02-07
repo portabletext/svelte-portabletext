@@ -14,24 +14,22 @@
 
   let {global, node, parentBlock, children}: RenderSpanProps = $props()
 
-  let {components} = $derived(global)
-  let {markType} = $derived(node)
-  let markComponent = $derived(components.marks[markType])
+  let markComponent = $derived(global.components.marks[node.markType])
   $effect(() => {
     if (!markComponent) {
-      global.missingComponentHandler?.(markType, 'mark')
+      global.missingComponentHandler?.(node.markType, 'mark')
     }
   })
 
-  let markProps = $derived.by<MarkComponentProps>(() => ({
+  let markProps = $derived<MarkComponentProps>({
     global,
     parentBlock,
-    markType,
+    markType: node.markType,
     // @ts-expect-error @TODO
     value: node.markDef,
     markKey: node.markKey,
     plainTextContent: spanToPlainText(node)
-  }))
+  })
 
   let MarkComponent = $derived(markComponent || components.unknownMark)
 </script>
