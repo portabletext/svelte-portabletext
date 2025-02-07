@@ -9,8 +9,10 @@
 
   let {portableText, children}: DefaultLinkProps = $props()
 
-  let {value} = $derived(portableText)
-  let href = $derived(value?.href || value?.url || value?.link || value?.value)
+  let href = $derived.by(() => {
+    const {href, url, link, value} = portableText.value
+    return href || url || link || value
+  })
 </script>
 
 {#if typeof href === 'string'}
