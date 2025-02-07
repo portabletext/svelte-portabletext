@@ -27,7 +27,7 @@
     indexInParent
   })
 
-  let ListComponent = $derived(listComponent || components.unknownList)
+  let ListComponent = $derived(listComponent || global.components.unknownList)
 </script>
 
 <ListComponent portableText={listProps}>

@@ -31,7 +31,7 @@
     plainTextContent: spanToPlainText(node)
   })
 
-  let MarkComponent = $derived(markComponent || components.unknownMark)
+  let MarkComponent = $derived(markComponent || global.components.unknownMark)
 </script>
 
 <MarkComponent portableText={markProps}>
