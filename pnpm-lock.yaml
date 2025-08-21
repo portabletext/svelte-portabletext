@@ -19,8 +19,8 @@ importers:
         specifier: ^2.29.6
         version: 2.29.6
       '@portabletext/types':
-        specifier: ^2.0.13
-        version: 2.0.14
+        specifier: ^2.0.15
+        version: 2.0.15
       '@sveltejs/adapter-auto':
         specifier: ^3.2.1
         version: 3.3.1(@sveltejs/kit@2.36.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.38.2)(vite@5.4.19))(svelte@5.38.2)(vite@5.4.19))
@@ -417,8 +417,8 @@ packages:
     resolution: {integrity: sha512-m3v2WwKQTNNk5BFZlUuPuCW0Zi6iDSpwrium4Ej5L2FHDXhFuwAyEMPXDrvwPvqjES/oJzcwmdKLMhYa44T9BQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
 
-  '@portabletext/types@2.0.14':
-    resolution: {integrity: sha512-LnAanK3vkn30gMqtGv5QoR0QT3fioOgqh1SBIiquAbtBcoETxhdvCfEMnv5CAuFiZMFLyRIgfpjWyIIVA2yOjQ==}
+  '@portabletext/types@2.0.15':
+    resolution: {integrity: sha512-2e6i2gSQsrA/5OL5Gm4/9bxB9MNO73Fa47zj+0mT93xkoQUCGCWX5fZh1YBJ86hszaRYlqvqG08oULxvvPPp/Q==}
     engines: {node: ^14.13.1 || >=16.0.0 || >=18.0.0}
 
   '@rollup/rollup-android-arm-eabi@4.47.1':
@@ -2323,9 +2323,9 @@ snapshots:
 
   '@portabletext/toolkit@2.0.18':
     dependencies:
-      '@portabletext/types': 2.0.14
+      '@portabletext/types': 2.0.15
 
-  '@portabletext/types@2.0.14': {}
+  '@portabletext/types@2.0.15': {}
 
   '@rollup/rollup-android-arm-eabi@4.47.1':
     optional: true

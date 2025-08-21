@@ -44,7 +44,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.6",
-    "@portabletext/types": "^2.0.13",
+    "@portabletext/types": "^2.0.15",
     "@sveltejs/adapter-auto": "^3.2.1",
     "@sveltejs/kit": "^2.8.0",
     "@sveltejs/package": "^2.3.1",
