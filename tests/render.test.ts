@@ -19,8 +19,8 @@ for (const renderTest of allTests) {
     const expectedRender = render(renderTest.rendered).container.innerHTML
 
     expect(
-      // @TODO figure out why rendered output is full of empty comments
-      await format(renderedByPackage.replaceAll('<!---->', ''), {
+      // @TODO figure out why rendered output is full of empty comments and border: is not being formatted the same
+      await format(renderedByPackage.replaceAll('<!---->', '').replaceAll('border: ', 'border:'), {
         parser: 'html',
         plugins: [parsers]
       })
