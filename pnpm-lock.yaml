@@ -55,7 +55,7 @@ importers:
         specifier: ^2.45.1
         version: 2.46.1(eslint@8.57.1)(svelte@5.38.2)
       jsdom:
-        specifier: ^25.0.0
+        specifier: ^25.0.1
         version: 25.0.1
       prettier:
         specifier: ^3.2.5
