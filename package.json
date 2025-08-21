@@ -58,7 +58,7 @@
     "eslint-plugin-svelte": "^2.45.1",
     "jsdom": "^25.0.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-packagejson": "^2.5.0",
+    "prettier-plugin-packagejson": "^2.5.19",
     "prettier-plugin-svelte": "^3.2.6",
     "publint": "^0.2.8",
     "svelte": "^5.0.0",
