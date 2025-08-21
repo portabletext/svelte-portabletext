@@ -1,5 +1,11 @@
 # @portabletext/svelte
 
+## 3.0.1
+
+### Patch Changes
+
+- [`d2776ae`](https://github.com/portabletext/svelte-portabletext/commit/d2776ae9dba31e7f58ccd5cafeb6497c6603fba3) Thanks [@stipsan](https://github.com/stipsan)! - update @portabletext/toolkit to ^2.0.18
+
 ## [3.0.0](https://github.com/portabletext/svelte-portabletext/compare/v2.1.12...v3.0.0) (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
