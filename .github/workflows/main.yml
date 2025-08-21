@@ -25,13 +25,14 @@ jobs:
     name: Lint & Build
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: lts/*
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run prepublishOnly
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm prepublishOnly
 
   test:
     runs-on: ${{ matrix.platform }}
@@ -46,36 +47,10 @@ jobs:
             node-version: current
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
-
-  release:
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-    name: 'Semantic release'
-    needs: [build, test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          # Need to fetch entire commit history to
-          # analyze every commit since last release
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          cache: npm
-          node-version: lts/*
-      - run: npm ci
-      # Branches that will release new versions are defined in "release" in "package.json"
-      - run: npx semantic-release
-        env:
-          NPM_CONFIG_PROVENANCE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      - run: pnpm install
+      - run: pnpm test

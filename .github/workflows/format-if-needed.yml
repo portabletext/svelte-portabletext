@@ -18,12 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: lts/*
-      - run: npm install --ignore-scripts
-      - run: npm run format
+      - run: pnpm install
+      - run: pnpm format
       - run: git restore .github/workflows
       - uses: actions/create-github-app-token@v1
         id: generate-token
@@ -33,7 +34,7 @@ jobs:
       - uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # v6
         with:
           author: github-actions <41898282+github-actions[bot]@users.noreply.github.com>
-          body: I ran `npm run format` 🧑‍💻
+          body: I ran `pnpm format` 🧑‍💻
           branch: actions/format
           commit-message: 'chore(format): 🤖 ✨'
           delete-branch: true

@@ -35,29 +35,16 @@
     "package": "svelte-kit sync && svelte-package && publint",
     "prepublishOnly": "npm run package",
     "preview": "vite preview",
+    "release": "changeset publish",
     "test": "vitest"
   },
-  "release": {
-    "branches": [
-      "+([0-9])?(.{+([0-9]),x}).x",
-      "main",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ],
-    "extends": "@sanity/semantic-release-preset"
-  },
   "dependencies": {
-    "@portabletext/toolkit": "^2.0.17"
+    "@portabletext/toolkit": "^2.0.18"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.6",
     "@portabletext/types": "^2.0.13",
-    "@sanity/semantic-release-preset": "^4.1.7",
     "@sveltejs/adapter-auto": "^3.2.1",
     "@sveltejs/kit": "^2.8.0",
     "@sveltejs/package": "^2.3.1",
@@ -74,7 +61,6 @@
     "prettier-plugin-packagejson": "^2.5.0",
     "prettier-plugin-svelte": "^3.2.6",
     "publint": "^0.2.8",
-    "semantic-release": "^23.1.1",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "tslib": "^2.6.2",
@@ -85,6 +71,7 @@
   "peerDependencies": {
     "svelte": "^5.0.0"
   },
+  "packageManager": "pnpm@10.15.0",
   "publishConfig": {
     "access": "public"
   }
