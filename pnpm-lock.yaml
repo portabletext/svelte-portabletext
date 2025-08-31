@@ -64,7 +64,7 @@ importers:
         specifier: ^2.5.0
         version: 2.5.19(prettier@3.6.2)
       prettier-plugin-svelte:
-        specifier: ^3.2.6
+        specifier: ^3.4.0
         version: 3.4.0(prettier@3.6.2)(svelte@5.38.2)
       publint:
         specifier: ^0.2.8
