@@ -82,7 +82,7 @@ importers:
         specifier: ^5.5.0
         version: 5.9.2
       vite:
-        specifier: ^5.4.4
+        specifier: ^5.4.19
         version: 5.4.19
       vitest:
         specifier: ^2.1.4
