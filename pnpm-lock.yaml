@@ -61,7 +61,7 @@ importers:
         specifier: ^3.2.5
         version: 3.6.2
       prettier-plugin-packagejson:
-        specifier: ^2.5.0
+        specifier: ^2.5.19
         version: 2.5.19(prettier@3.6.2)
       prettier-plugin-svelte:
         specifier: ^3.2.6
