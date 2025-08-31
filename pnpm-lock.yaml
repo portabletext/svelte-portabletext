@@ -85,7 +85,7 @@ importers:
         specifier: ^5.4.4
         version: 5.4.19
       vitest:
-        specifier: ^2.1.4
+        specifier: ^2.1.9
         version: 2.1.9(jsdom@25.0.1)
 
 packages:
