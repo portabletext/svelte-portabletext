@@ -39,7 +39,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@portabletext/toolkit": "^2.0.18"
+    "@portabletext/toolkit": "^3.0.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",
