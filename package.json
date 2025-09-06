@@ -46,7 +46,7 @@
     "@changesets/cli": "^2.29.6",
     "@portabletext/types": "^2.0.13",
     "@sveltejs/adapter-auto": "^3.2.1",
-    "@sveltejs/kit": "^2.8.0",
+    "@sveltejs/kit": "^2.37.1",
     "@sveltejs/package": "^2.3.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@testing-library/svelte": "^5.2.4",
