@@ -25,6 +25,7 @@ import test026 from './026-inline-block-with-text'
 import test027 from './027-styled-list-items'
 import test052 from './052-custom-marks'
 import test053 from './053-override-default-marks'
+import test065 from './065-skipped-list-levels'
 import test061 from './061-missing-mark-serializer'
 
 interface RenderTestFile {
@@ -60,5 +61,6 @@ export default [
   test027,
   test052,
   test053,
-  test061
+  test061,
+  test065
 ] as RenderTestFile[]
