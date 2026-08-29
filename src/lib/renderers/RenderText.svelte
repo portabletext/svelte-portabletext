@@ -10,11 +10,12 @@
   let {global, node}: RenderTextProps = $props()
   let {components} = $derived(global)
   let {text} = $derived(node)
+  let HardBreak = $derived(components.hardBreak)
 </script>
 
 {#if text === '\n'}
-  {#if typeof components.hardBreak === 'function'}
-    <components.hardBreak />
+  {#if HardBreak}
+    <HardBreak />
   {:else}
     {text}
   {/if}
