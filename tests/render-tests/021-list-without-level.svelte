@@ -63,9 +63,9 @@
   Permission to publish, exhibit, or otherwise use collection materials is granted on a case by case
   basis in accordance with MIT policy, restrictions that may have been placed on materials by donors
   or depositors, and copyright law. To request permission to publish, exhibit, or otherwise use
-  collection materials, contact the Archivist. <strong
-    >When permission is granted by MIT, patrons must comply with all guidelines provided by ACT for
+  collection materials, contact the Archivist. <strong>
+    When permission is granted by MIT, patrons must comply with all guidelines provided by ACT for
     citations, credits, and copyright statements. Exclusive rights to examine or publish material
-    will not be granted.</strong
-  >
+    will not be granted.
+  </strong>
 </p>

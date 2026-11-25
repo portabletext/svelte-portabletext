@@ -1,4 +1,4 @@
-import type {InputValue} from '$lib/ptTypes'
+import type {InputValue} from '../lib/ptTypes'
 
 // This data was written by hand.
 // In a real-world scenario it'd be generated from the PortableText Editor.

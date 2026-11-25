@@ -1,5 +1,5 @@
 <script>
-  import PortableText from '$lib/PortableText.svelte'
+  import PortableText from '../../lib/PortableText.svelte'
   import UnknownMark from '../../customComponents/CustomUnknownMark.svelte'
   import UnknownType from '../../customComponents/CustomUnknownType.svelte'
 

@@ -74,18 +74,21 @@ export interface CustomBlockComponentProps<
   parentBlock?: PortableTextBlock
 }
 
-export interface BlockComponentProps<ContextType = PortableTextSvelteContext>
-  extends CommonComponentProps<ContextType> {
+export interface BlockComponentProps<
+  ContextType = PortableTextSvelteContext
+> extends CommonComponentProps<ContextType> {
   value: PortableTextBlock
 }
 
-export interface ListItemComponentProps<ContextType = PortableTextSvelteContext>
-  extends CommonComponentProps<ContextType> {
+export interface ListItemComponentProps<
+  ContextType = PortableTextSvelteContext
+> extends CommonComponentProps<ContextType> {
   value: ToolkitPortableTextListItem
 }
 
-export interface ListComponentProps<ContextType = PortableTextSvelteContext>
-  extends CommonComponentProps<ContextType> {
+export interface ListComponentProps<
+  ContextType = PortableTextSvelteContext
+> extends CommonComponentProps<ContextType> {
   value: ToolkitPortableTextList
 }
 
@@ -95,25 +98,23 @@ export interface ListComponentProps<ContextType = PortableTextSvelteContext>
 export interface MarkComponentProps<
   MarkType = PortableTextMarkDefinition,
   ContextType = PortableTextSvelteContext
-> extends CommonComponentProps<ContextType>,
+>
+  extends
+    CommonComponentProps<ContextType>,
     Pick<ToolkitNestedPortableTextSpan, 'markKey' | 'markType'>,
     Pick<CustomBlockComponentProps, 'parentBlock'> {
   plainTextContent: string
   value: MarkType extends string ? undefined : MarkType
 }
 
-export type CustomStyles =
-  | Record<PortableTextBlockStyle, BlockComponent | undefined>
-  | BlockComponent
+export type CustomStyles = Partial<Record<PortableTextBlockStyle, BlockComponent>> | BlockComponent
 
 export type CustomMarks = Record<PortableTextMarkType, MarkComponent>
 export type CustomTypes = Record<string, CustomBlockComponent>
 export type CustomListTypes =
-  | Record<PortableTextListItemType, ListComponent | undefined>
-  | ListComponent
+  Partial<Record<PortableTextListItemType, ListComponent>> | ListComponent
 export type CustomListItemTypes =
-  | Record<PortableTextListItemType, ListItemComponent | undefined>
-  | ListItemComponent
+  Partial<Record<PortableTextListItemType, ListItemComponent>> | ListItemComponent
 
 export interface PortableTextSvelteComponents {
   /**
@@ -175,7 +176,6 @@ export interface PortableTextSvelteComponents {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   hardBreak: Component<any> | false
 
-  /* eslint-disable */
   /**
    * Override the default component for blocks of unknown type, if ignoreUnknownTypes is set to false.
    */
@@ -203,7 +203,6 @@ export interface PortableTextSvelteComponents {
    * in the `components.listItem` prop. Only used if `components.listItem` is an object.
    */
   unknownListItem: ListItemComponent
-  /* eslint-enable */
 }
 
 export type PortableTextComponents = Partial<PortableTextSvelteComponents>

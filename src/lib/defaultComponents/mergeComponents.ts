@@ -3,7 +3,7 @@ import type {
   CustomTypes,
   PortableTextComponents,
   PortableTextSvelteComponents
-} from '$lib/rendererTypes'
+} from '../rendererTypes'
 
 export function mergeComponents(
   parent: PortableTextSvelteComponents,

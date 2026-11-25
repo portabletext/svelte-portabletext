@@ -1,5 +1,5 @@
 <script>
-  import PortableText from '$lib/PortableText.svelte'
+  import PortableText from '../../lib/PortableText.svelte'
   import blocksLists from '../../dummyData/basicBlocks'
 </script>
 

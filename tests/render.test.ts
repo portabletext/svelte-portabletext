@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {cleanup, render} from '@testing-library/svelte/svelte5'
 import {format} from 'prettier'
 import parsers from 'prettier/parser-html'

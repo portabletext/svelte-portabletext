@@ -1,8 +1,8 @@
 <script lang="ts">
   import type {PortableTextBlock} from '@portabletext/types'
-  import PortableText from '$lib/PortableText.svelte'
+  import PortableText from '../lib/PortableText.svelte'
 
-  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '../lib/rendererTypes'
   import Link from './Link.svelte'
 
   type Props = {
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <img src={value.image.url} alt={' '} />
+  <img src={value.image.url} alt=" " />
 </section>
 
 <style>
