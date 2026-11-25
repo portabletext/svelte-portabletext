@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {CustomBlockComponentProps} from '$lib/rendererTypes'
+  import type {CustomBlockComponentProps} from '../lib/rendererTypes'
 
   type Props = {
     portableText: CustomBlockComponentProps

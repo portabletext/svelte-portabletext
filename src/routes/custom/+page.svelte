@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PortableText from '$lib/PortableText.svelte'
+  import PortableText from '../../lib/PortableText.svelte'
   import Hero from '../../customComponents/Hero.svelte'
   import Code from '../../customComponents/Code.svelte'
   import Image from '../../customComponents/Image.svelte'

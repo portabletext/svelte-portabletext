@@ -6,17 +6,10 @@ export interface PortableTextSvelteContext {
 }
 
 export declare type PortableTextMarkType =
-  | 'strong'
-  | 'em'
-  | 'strike-through'
-  | 'underline'
-  | 'code'
-  | string
+  'strong' | 'em' | 'strike-through' | 'underline' | 'code' | string
 
 export type InputValue =
-  | PortableTextBlock
-  | ArbitraryTypedObject
-  | (PortableTextBlock | ArbitraryTypedObject)[]
+  PortableTextBlock | ArbitraryTypedObject | (PortableTextBlock | ArbitraryTypedObject)[]
 
 export type NormalizedBlocks = ReturnType<typeof nestLists>
 

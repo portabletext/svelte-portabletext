@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {InputValue} from '$lib/ptTypes'
+  import type {InputValue} from '../lib/ptTypes'
 
-  import type {MarkComponentProps} from '$lib/rendererTypes'
+  import type {MarkComponentProps} from '../lib/rendererTypes'
 
   interface FootnoteProps {
     _key: string

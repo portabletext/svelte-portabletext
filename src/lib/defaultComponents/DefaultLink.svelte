@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {uriLooksSafe} from '@portabletext/toolkit'
   import type {Snippet} from 'svelte'
   import type {MarkComponentProps} from '../rendererTypes'
 
@@ -15,7 +16,7 @@
   })
 </script>
 
-{#if typeof href === 'string'}
+{#if typeof href === 'string' && uriLooksSafe(href)}
   <a {href}>{@render children?.()}</a>
 {:else}
   {@render children?.()}

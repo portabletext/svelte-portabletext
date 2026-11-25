@@ -24,18 +24,10 @@ This component renders any Portable Text content or custom object (such as `code
 
 ```svelte
 <!-- From: -->
-<PortableText
-  blocks={[
-    /* ... */
-  ]}
-/>
+<PortableText blocks={[/* ... */]} />
 
 <!-- ✅ To: -->
-<PortableText
-  value={[
-    /* ... */
-  ]}
-/>
+<PortableText value={[/* ... */]} />
 ```
 
 ## `serializers` renamed to `components`
