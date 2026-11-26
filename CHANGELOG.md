@@ -1,5 +1,11 @@
 # @portabletext/svelte
 
+## 4.0.1
+
+### Patch Changes
+
+- [#199](https://github.com/portabletext/svelte-portabletext/pull/199) [`a120ea6`](https://github.com/portabletext/svelte-portabletext/commit/a120ea6d2a00cf950751bad8114bfd9acf5bf6b2) Thanks [@stipsan](https://github.com/stipsan)! - Render links with unsafe hrefs, such as `javascript:` URLs, as plain text instead of anchors
+
 ## 4.0.0
 
 ### Major Changes
